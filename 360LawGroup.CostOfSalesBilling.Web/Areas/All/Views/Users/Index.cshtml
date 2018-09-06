@@ -1,0 +1,163 @@
+﻿@{
+    ViewBag.Title = "Manage " + Request["selectedRole"];
+
+}
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <div class="col-md-9">
+            <h3>
+                @Request["selectedRole"] List
+            </h3>
+        </div>
+        <div class="heading-elements text-right col-md-3">
+            @if (@Request["selectedRole"] != RoleExtension.SuperAdmin)
+            {
+                <a href="@Url.Action("Create", new { selectedRole = Request["selectedRole"] })" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess" class="pull-left-sm btn btn-default">
+                    <i class="glyphicon glyphicon-plus-sign"></i>
+                    &nbsp;@Request["selectedRole"]
+                </a>
+            }
+            <ul class="icons-list pull-right">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+        <div id="search_filter_user" class="search-filter">
+            <div class="form-group">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <span class="input-group-addon">Search</span>
+                                @Html.TextBox("SearchValue", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="btnsearch2" type="button" class="btn btn-success btn-sm">Search</button>
+                            <button id="btnreset" type="button" class="btn btn-warning btn-sm">Reset</button>
+                            <button id="btnsearch" type="button" class="hide btn btn-success btn-sm">Search</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="table-responsive">
+                <table id="usergrid" data-sort-name="FirstName" data-sort-order="asc"
+                       data-toggle="table"
+                       data-url="@(ViewBag.ApiUrl+ "api/all/users/getall")?roleId=@Request["selectedRole"]"
+                       data-queryparams="getSearchParam"
+                       data-pagination="true" class="table"
+                       data-searchselector="#search_filter_user"
+                       cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th data-field="FullName" data-align="center" data-sortable="true">Name</th>
+                            <th data-field="Email" data-align="center" data-sortable="true">Email</th>
+                            @if (@Request["selectedRole"] == RoleExtension.Admin || @Request["selectedRole"] == RoleExtension.ClientUser)
+                            {
+                                <th data-field="UserStatus" data-align="center" data-sortable="true">User Status</th>
+                                if (Request["selectedRole"] == RoleExtension.Admin)
+                                {
+                                    <th data-field="AspNetUser1FullName" data-align="center" data-sortable="true">Consultant</th>
+                                }
+                            }
+                            @if (@Request["selectedRole"] == RoleExtension.Consultant)
+                            {
+                                <th data-field="ConsultantName" data-align="center" data-sortable="true">Consultant Company</th>
+                                <th data-field="AreaofLaw" data-align="center" data-sortable="true">Area of Law</th>
+                                <th data-field="JurisdictionsCovered" data-align="center" data-sortable="true">Jurisdictions Covered</th>
+                            }
+                            @if (@Request["selectedRole"] == RoleExtension.ClientUser)
+                            {
+                                <th data-field="ClientFullName" data-align="center" data-sortable="true">Client</th>
+                            }
+                            <th data-align="center" data-width="5%" data-field="Id" data-formatter="useredit">Edit</th>
+                            <th data-align="center" data-width="5%" data-field="Id" data-formatter="userdelete">Delete</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnsearch2').on('click', function () {
+                if ($.trim($("#SearchValue").val()) == "") {
+                    AlertNotify("Validations!", "Please enter search text", "bg-warning")
+                    return;
+                }
+                if (typeof $('#usergrid').attr('data-toggle') === 'undefined') {
+                    $('#usergrid').attr('data-toggle', 'table');
+                    BindBtTable('body');
+                } else {
+                    $('#search_filter_user #btnsearch').click();
+                }
+                $('#usergrid').removeClass('hide');
+            });
+        });
+        function setpwdlinkformatter(value) {
+            return '<a class="btn btn-sm btn-warning" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" href="' +
+                BASEPATH +
+                '/users/SetPassword/' +
+                value +
+                '">Change</a>';
+        }
+
+        function useredit(value) {
+            if (value !== "@ViewBag.UserId" && value !== "@Guid.Empty")
+            return '<a href="@Url.Action("Edit")?selectedRole=@Request["selectedRole"]&id=' +
+                    value + '" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess" class="btn btn-info btn-sm"><i class="glyphicon glyphicon-pencil"></i></a>';
+            else
+                return "<a class='btn btn-info btn-sm' disabled='disabled' href='javascript:void(0);'><i class='glyphicon glyphicon-pencil'></i></a>";
+        }
+
+        function userdelete(value) {
+            if (value !== "@ViewBag.UserId" && value !== "@Guid.Empty")
+                return "<a class='btn btn-sm btn-danger' onclick='deleteUser(\"" +
+                    value +
+                    "\");' href='javascript:void(0);'><i class='glyphicon glyphicon-trash'></i></a>";
+            else
+                return "<a class='btn btn-sm btn-danger' disabled='disabled' href='javascript:void(0);'><i class='glyphicon glyphicon-trash'></i></a>";
+        }
+        //function Location_Name(value) {
+        //    return value.toString();
+        //}
+        function userStatus(value) {
+            if (value != "") {
+                return "<span>" + value + "</span>";
+            }
+        }
+        function deleteUser(id) {
+            bootbox.confirm({
+                title: "Delete Confirmation",
+                message: "Are you sure you want to delete?",
+                callback: function (status) {
+                    if (status) {
+                        apiCall("common/users/delete?id=" + id,
+                            "get",
+                            {},
+                            function (data) {
+                                if (data.StatusCode === 200) {
+                                    bootbox.alert({
+                                        title: "Success",
+                                        message: data.Messages,
+                                        callback: function () {
+                                            $("[data-toggle='table']").bootstrapTable('refresh', { pageNumber: 1 });
+                                        }
+                                    });
+                                } else {
+                                    bootbox.alert({ title: "Error", message: data.Messages });
+                                }
+                            });
+                    }
+                }
+            });
+        }
+    </script>
+}

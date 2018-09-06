@@ -1,0 +1,103 @@
+﻿@{
+    ViewBag.Title = "Manage Client";
+
+}
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <div class="col-md-9">
+            <h3>
+                Clients
+            </h3>
+        </div>
+        <div class="heading-elements text-right col-md-3">
+            <a href="@Url.Action("Create")" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess" class="pull-left-sm btn btn-default">
+                <i class="glyphicon glyphicon-plus-sign"></i>
+                &nbsp;Client
+            </a>
+            <ul class="icons-list pull-right">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+        <div id="search_filter" class="search-filter">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Search</span>
+                            @Html.TextBox("SearchValue", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="btnsearch" type="button" class="btn btn-success btn-sm">Search</button>
+                        <button id="btnreset" type="button" class="btn btn-warning btn-sm">Reset</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="table-responsive">
+            <table id="grid" data-sort-name="FirstName" data-sort-order="asc"
+                   data-toggle="table"
+                   data-url="@(ViewBag.ApiUrl+ "api/all/client/getall")"
+                   data-queryparams="getSearchParam"
+                   data-searchselector="#search_filter"
+                   data-pagination="true" class="table"
+                   cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th data-field="Company" data-sortable="true">
+                            Company
+                        </th>
+                        <th data-field="FullName" data-sortable="true">
+                            Full Name
+                        </th>
+                        <th data-field="Email" data-sortable="true">
+                            E-mail Address
+                        </th>
+
+                        <th data-field="JobTitle" data-sortable="true">Job Title</th>
+
+                        <th data-field="BusinessPhone" data-sortable="true">Business Phone</th>  
+                        <th data-url="Common/Clients/Show" data-align="center" data-sortable="true" data-field="Id" data-formatter="clientshow">Client Details</th>
+                        <th data-url="Common/Clients/Edit" data-align="center" data-width="5%" data-field="Id" data-formatter="tbl_Edit_Popup">Edit</th>
+                        <th data-url="api/all/client/delete" data-align="center" data-width="5%" data-field="Id" data-formatter="tbl_Delete">Delete</th>
+
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnsearch2').on('click', function () {                
+                if ($.trim($("#SearchValue").val()) == "") {
+                    AlertNotify("Validations!", "Please enter search text", "bg-warning")
+                    return;
+                }
+                if (typeof $('#grid').attr('data-toggle') === 'undefined') {
+                    $('#grid').attr('data-toggle', 'table');
+                    BindBtTable('body');
+                } else {
+                    $('#search_filter #btnsearch').click();
+                }
+                $('#grid').removeClass('hide');
+            });
+        });      
+
+        function clientshow(value) {
+            if (value !== "@ViewBag.UserId" && value !== "@Guid.Empty")
+            return '<a href="@Url.Action("Show")?id=' +
+                    value + '" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess">View</a>';
+        }
+
+        
+    </script>
+}

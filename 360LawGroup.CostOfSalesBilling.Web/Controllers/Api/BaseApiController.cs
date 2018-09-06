@@ -1,19 +1,18 @@
-﻿using System.Linq;
-using _360LawGroup.CostOfSalesBilling.Data;
+﻿using _360LawGroup.CostOfSalesBilling.Data;
 using _360LawGroup.CostOfSalesBilling.Models;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin.Security;
+using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 
-namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
+namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api
 {
-    using System.Net.Http;
-    using System.Web.Http;
-    using Microsoft.AspNet.Identity.Owin;
-    using Microsoft.Owin.Security;
-    using System;
-    using System.Configuration;
-    using _360LawGroup.CostOfSalesBilling.Utilities;
-    using System.Linq.Expressions;
-
     [CustExceptionFilter]
     public class BaseApiController : ApiController
     {
@@ -22,7 +21,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
         private ApplicationUserManager _userManager;
 
         public UnitOfWorkCore Uow { get; set; }
-        
+
         public int TimeZoneInterval
         {
             get

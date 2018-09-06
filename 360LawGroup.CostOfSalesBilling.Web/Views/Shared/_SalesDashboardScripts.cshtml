@@ -1,16 +1,16 @@
 ﻿<script type="text/x-jquery-tmpl" id="detail-template">
     <div class="pull-left ml-20 mr-10">
-        <a href="@Url.Action("Editor","Appointments",new { Area="Common"})?memberUserId=${MemberUserId}" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess" class="btn bg-grey">
+        <a href="@Url.Action("Editor","Appointments",new { Area="All"})?memberUserId=${MemberUserId}" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess" class="btn bg-grey">
             <i class="glyphicon glyphicon-plus-sign"></i> Appointment
         </a>
     </div>
     <div class="pull-left mr-10">
-        <a href="@Url.Action("Editor","InquiryTrails",new { Area="Common"})?id=${Id}" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess" class="btn bg-grey">
+        <a href="@Url.Action("Editor","InquiryTrails",new { Area="All"})?id=${Id}" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess" class="btn bg-grey">
             <i class="glyphicon glyphicon-plus-sign"></i> Trial
         </a>
     </div>
     <div class="pull-left mr-10">
-        <a href="@Url.Action("Editor","UserPackages",new { Area="Common"})?memberUserId=${MemberUserId}" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess" class="btn bg-grey">
+        <a href="@Url.Action("Editor","UserPackages",new { Area="All"})?memberUserId=${MemberUserId}" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess" class="btn bg-grey">
             <i class="glyphicon glyphicon-plus-sign"></i> Plan/Package
         </a>
     </div>
@@ -86,7 +86,7 @@
 
     });
     function Viewinfo(value, row) {
-        return "<a href='@Url.Action("Index", "MemberInfo",new{ Area="Common" })?memberUserId=" + row.MemberUserId + "' data-placement='right' data-toggle='popover' data-container='body' title='" + GetHoverHtml(row) +"'>" + row.AspNetUser2FullName + "</a>";
+        return "<a href='@Url.Action("Index", "MemberInfo",new{ Area= "All" })?memberUserId=" + row.MemberUserId + "' data-placement='right' data-toggle='popover' data-container='body' title='" + GetHoverHtml(row) +"'>" + row.AspNetUser2FullName + "</a>";
     }    
 
     function GetHoverHtml(row) {

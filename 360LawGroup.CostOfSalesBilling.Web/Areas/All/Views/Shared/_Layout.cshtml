@@ -1,0 +1,72 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section navbar{
+    @RenderSection("topnavbar", false)
+}
+@section sidebar{
+    <div class="sidebar sidebar-main">
+        <div class="sidebar-content">
+
+            @*@Html.Partial("_UserState")*@
+            <div class="sidebar-category sidebar-category-visible">
+                @*<div class="category-title h6">
+                        <span>Navigation</span>
+                        <ul class="icons-list">
+                            <li><a href="#" data-action="collapse"></a></li>
+                        </ul>
+                    </div>*@
+                <div class="category-content no-padding">
+                    <ul class="navigation navigation-main navigation-accordion">
+                        <!-- Main -->
+                        @{
+                            var roles = RoleExtension.GetRoleAccessList(ViewBag.Role as string);
+                        }
+                        @if (Html.UserIsInRole(RoleExtension.ClientUser))
+                        {
+                            <li><a href="@Url.Action("Index", "Home", new { Area = "ClientUser" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                        }
+                        @if (Html.UserIsInRole(RoleExtension.Admin))
+                        {
+                            <li><a href="@Url.Action("Index", "Home", new { Area = "Admin" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                        }
+                        @if (Html.UserIsInRole(RoleExtension.Consultant))
+                        {
+                            <li><a href="@Url.Action("Index", "Home", new { Area = "Consultant" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                        }
+
+                        @if (Html.UserIsInRole(RoleExtension.SuperAdmin))
+                        {
+                            <li><a href="@Url.Action("Index", "Home", new { Area = "SuperAdmin" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                            <li>
+                                <a href="javascript:;"><i class="icon-users4"></i> <span>User Management</span></a>
+                                <ul>
+                                    @if (roles.Any())
+                                    {
+                                        foreach (var role in roles)
+                                        {
+                                            <li><a href="@Url.Action("Index", "Users", new { Area = "All", selectedRole = role })"><span>@role</span></a></li>
+                                        }
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        @if (Html.UserIsInRole(RoleExtension.SuperAdmin) || Html.UserIsInRole(RoleExtension.Admin))
+                        {
+                            <li><a href="@Url.Action("Index", "Clients", new { Area = "All"})"><i class="fa fa-street-view"></i> <span>Manage Client</span></a></li>
+                            <li><a href="@Url.Action("ClientRenewals", "Clients", new { Area = "All"})"><i class="fa fa-calendar"></i> <span>Client Renewals</span></a></li>
+                            <li><a href="@Url.Action("Index", "Matters", new { Area = "All"})"><i class="fa fa-folder-open"></i> <span>Manage Matters</span></a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@RenderBody()
+@section css{
+    @RenderSection("styles", required: false)
+}
+@section js{
+    @RenderSection("scripts", required: false)
+}

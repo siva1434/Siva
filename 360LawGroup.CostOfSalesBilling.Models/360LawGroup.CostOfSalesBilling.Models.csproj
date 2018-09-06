@@ -131,6 +131,7 @@
     <Compile Include="Common\GenericResponse.cs" />
     <Compile Include="Common\IdentityModels.cs" />
     <Compile Include="Common\Token.cs" />
+    <Compile Include="EventObject.cs" />
     <Compile Include="MatterViewModel.cs" />
     <Compile Include="NotificationModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

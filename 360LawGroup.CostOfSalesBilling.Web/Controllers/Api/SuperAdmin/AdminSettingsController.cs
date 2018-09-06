@@ -1,5 +1,4 @@
-﻿using _360LawGroup.CostOfSalesBilling.Web.Helper;
-using _360LawGroup.CostOfSalesBilling.Data.Common;
+﻿using _360LawGroup.CostOfSalesBilling.Data.Common;
 using _360LawGroup.CostOfSalesBilling.Models;
 using _360LawGroup.CostOfSalesBilling.Utilities;
 using System;
@@ -9,7 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 
-namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers.SuperAdmin
+namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.SuperAdmin
 {
     [ApiAuth(RoleExtension.SuperAdmin)]
     [RoutePrefix("api/superadmin/adminsettings")]

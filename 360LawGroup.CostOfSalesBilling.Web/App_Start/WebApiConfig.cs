@@ -33,7 +33,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web {
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "360api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }

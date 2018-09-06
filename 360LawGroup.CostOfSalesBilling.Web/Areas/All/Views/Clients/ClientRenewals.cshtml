@@ -1,0 +1,53 @@
+﻿@model _360LawGroup.CostOfSalesBilling.Models.ClientViewModel
+@{
+    ViewBag.Title = "Client Renewal Dates";
+}
+@section styles{
+    <link href="~/assets/css/Forms/studio-schedule.css" rel="stylesheet" />
+}
+
+<div class="content StudioSchedule">
+    <div class="col-md-12 TableScrollSet">
+        <div class="col-md-12">
+            <div id="clientrenewalcal">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts{
+    @Scripts.Render("~/bundles/fullcalendar")
+    <script type="text/javascript">
+            $(document).ready(function () {
+                $('#clientrenewalcal').fullCalendar({
+                header: {
+                    left: 'prev,next',
+                    center: 'title',
+                    right: 'month,agendaWeek,agendaDay'
+                    },
+                    defaultView: 'month',
+                    eventSources: {
+                        url: "@ViewBag.ApiUrl/common/client/getclientrenewalslist",
+                    type: 'GET',
+                    cache: false,
+                    beforeSend: function (xhr) {
+                        setHeader(xhr);
+                    },
+                    error: function () { alert('something broke with data...'); }
+                },
+
+                    eventClick: function (calEvent, jsEvent, view) {                       
+                    $.get("@Url.Action("ClientRenewalsDetails", "Clients", new { Area = "All" })?id=" + calEvent.id ).done(function (html) {
+                        $("#popupmodals").html(html);
+                    });
+                }
+                });
+               
+            });
+
+
+
+
+    </script>
+}

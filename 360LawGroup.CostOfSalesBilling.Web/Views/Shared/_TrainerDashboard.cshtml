@@ -86,7 +86,7 @@
         <div class="panel-body">
             <div id="btdiv_products" data-sort-name="Name" data-sort-order="asc"
                  data-toggle="btdiv"
-                 data-url="@(ViewBag.ApiUrl+ "api/common/inquiry/getallfollowups")"
+                 data-url="@(ViewBag.ApiUrl+ "api/common/common/inquiry/getallfollowups")"
                  data-queryparams="getSearchParam"
                  data-searchselector="#search_filter_followup"
                  data-no-found-text="No follow ups."
@@ -113,19 +113,19 @@
                                     <tr>
                                         <td>
                                             {{if FollowUps[$index].FUType=="@FollowUpType.Enquiry"}}
-                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="Common" })?memberUserId=${FollowUps[$index].InquiryMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].InquiryAspNetUser2FullName}</a>
+                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="All" })?memberUserId=${FollowUps[$index].InquiryMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].InquiryAspNetUser2FullName}</a>
                                             {{/if}}
                                             {{if FollowUps[$index].FUType=="@FollowUpType.Trail"}}
-                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="Common" })?memberUserId=${FollowUps[$index].InquiryTrailMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].InquiryTrailAspNetUser2FullName}</a>
+                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="All" })?memberUserId=${FollowUps[$index].InquiryTrailMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].InquiryTrailAspNetUser2FullName}</a>
                                             {{/if}}
                                             {{if FollowUps[$index].FUType=="@FollowUpType.AppointmentPayment"}}
-                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="Common" })?memberUserId=${FollowUps[$index].AppointmentMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].AppointmentAspNetUser2FullName}</a>
+                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="All" })?memberUserId=${FollowUps[$index].AppointmentMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].AppointmentAspNetUser2FullName}</a>
                                             {{/if}}
                                             {{if FollowUps[$index].FUType=="@FollowUpType.MembershipRequired"}}
-                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="Common" })?memberUserId=${FollowUps[$index].AppointmentMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].InquiryTrailAspNetUser2FullName}</a>
+                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="All" })?memberUserId=${FollowUps[$index].AppointmentMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].InquiryTrailAspNetUser2FullName}</a>
                                             {{/if}}
                                             {{if FollowUps[$index].FUType=="@FollowUpType.ProductPlanPayment"}}
-                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="Common" })?memberUserId=${FollowUps[$index].UserPackageMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].UserPackageAspNetUser2FullName}</a>
+                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="All" })?memberUserId=${FollowUps[$index].UserPackageMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].UserPackageAspNetUser2FullName}</a>
                                             {{/if}}
                                         </td>
                                         <td class="text-right">

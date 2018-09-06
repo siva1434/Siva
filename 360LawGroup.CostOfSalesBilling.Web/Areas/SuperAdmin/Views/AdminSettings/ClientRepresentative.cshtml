@@ -19,7 +19,7 @@
                 <div class="col-md-12">
                     @Html.RequiredLabelFor(m => m.MemberUserId, new { @class = "control-label col-md-4" })
                     <div class="col-md-8">
-                        @Html.DropDownListFor(m => m.MemberUserId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/getallmembers", @data_placeholder = "Member Name", @multiple = "multiple" })
+                        @Html.DropDownListFor(m => m.MemberUserId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/common/getallmembers", @data_placeholder = "Member Name", @multiple = "multiple" })
                         @Html.ValidationMessageFor(model => model.MemberUserId)
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                     <div class="form-group">
                         @Html.RequiredLabelFor(m => m.ClientRepresentativeUserId, new { @class = "control-label col-md-4" })
                         <div class="col-md-8">
-                            @Html.DropDownListFor(m => m.ClientRepresentativeUserId, new SelectList(new List<string>()), "Select Client Representative", new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/getallsalesteam", @placeholder = "Select Client Representative User", @data_value = Model.ClientRepresentativeUserId })
+                            @Html.DropDownListFor(m => m.ClientRepresentativeUserId, new SelectList(new List<string>()), "Select Client Representative", new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/common/getallsalesteam", @placeholder = "Select Client Representative User", @data_value = Model.ClientRepresentativeUserId })
                             @Html.ValidationMessageFor(model => model.ClientRepresentativeUserId)
                         </div>
                     </div>
