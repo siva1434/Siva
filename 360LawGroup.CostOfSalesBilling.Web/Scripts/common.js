@@ -405,9 +405,6 @@ function setHeader(xhr) {
     if (typeof AuthHeader !== "undefined" && AuthHeader !== null && AuthHeader !== "") {
         xhr.setRequestHeader("Authorization", AuthHeader);
     }
-    //if (typeof CurrentLocation !== "undefined" && CurrentLocation !== null && CurrentLocation !== "") {
-    //    xhr.setRequestHeader("CurrentLocation", CurrentLocation);
-    //}
 }
 
 function apiCall(url, methodType, data, successCallback, errorCallback, async) {

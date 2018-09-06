@@ -7,6 +7,7 @@ using _360LawGroup.CostOfSalesBilling.Web.Signalr;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using _360LawGroup.CostOfSalesBilling.Utilities;
+using System.Web.Mvc.Html;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
 {
@@ -14,20 +15,52 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
     {
         public string BaseUrl => $"{Request.Url.Scheme}://{Request.Url.Authority}{Url.Content("~")}";
 
-        public ClaimsPrincipal CurrentUser => User as ClaimsPrincipal;
+        public bool IsLoggedIn
+        {
+            get { return UserProfile != null; }
+        }
+
+        private Token currentUser = null;
+        public Token CurrentUser
+        {
+            get
+            {
+                if (currentUser == null)
+                {
+                    var loginCookies = WebCookie.Get("WebLogin");
+                    if (loginCookies != null)
+                    {
+                        currentUser = JsonConvert.DeserializeObject<Token>(loginCookies);
+                    }
+                }
+                return currentUser;
+            }
+        }
+
+        private UserViewModel userProfile = null;
+        public UserViewModel UserProfile
+        {
+            get
+            {
+                if (CurrentUser != null && userProfile == null)
+                {
+                    userProfile = JsonConvert.DeserializeObject<UserViewModel>(CurrentUser.profile);
+                }
+                return userProfile;
+            }
+        }
 
         public int TimeZoneInterval
         {
             get
             {
-                return 330; //IST 
+                return -240; //IST 
             }
         }
 
         public bool IsValidRole(string role)
         {
-            var token = JsonConvert.DeserializeObject<Token>(CurrentUser.FindFirst("Token").Value);
-            var profile = JsonConvert.DeserializeObject<UserViewModel>(token.profile);
+            var profile = userProfile;
             return RoleExtension.IsValidRole(profile.RoleId, role);
         }
 
@@ -37,10 +70,10 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
             ViewBag.ApiUrl = ConfigurationManager.AppSettings["API_URL"];
             ViewBag.BasePath = BaseUrl;
 
-            if (CurrentUser != null && CurrentUser.Identity.IsAuthenticated)
+            if (CurrentUser != null && IsLoggedIn)
             {
-                var token = JsonConvert.DeserializeObject<Token>(CurrentUser.FindFirst("Token").Value);
-                var profile = JsonConvert.DeserializeObject<UserViewModel>(token.profile);
+                var token = currentUser;
+                var profile = userProfile;
                 ViewBag.Username = profile.UserName;
                 ViewBag.UserToken = $"{token.token_type} {token.access_token}";
                 ViewBag.UserId = profile.Id;
@@ -49,10 +82,6 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
                     ViewBag.FullName = ViewBag.FullName + " " + profile.LastName.Substring(0, 1) + ".";
                 ViewBag.Role = profile.RoleId;
                 ViewBag.UserProfile = profile;
-                if (CurrentUser.HasClaim(x => x.Type == "CurrentLocation"))
-                    ViewBag.CurrentLocation = CurrentUser.FindFirst("CurrentLocation").Value;
-                else
-                    ViewBag.CurrentLocation = null;
             }
             else
             {
@@ -61,9 +90,6 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
                 ViewBag.UserId = null;
                 ViewBag.FullName = null;
                 ViewBag.Role = null;
-                ViewBag.LocationIds = null;
-                ViewBag.LocationNames = null;
-                ViewBag.CurrentLocation = null;
                 ViewBag.UserProfile = new UserViewModel();
             }
             ViewBag.TimeZoneInterval = TimeZoneInterval;
@@ -86,6 +112,11 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
         public ActionResult PopupMsg(string title, string msg, bool notify = false)
         {
             return PartialView("PopupMsg", new[] { title, msg, notify.ToString().ToLower() });
+        }
+
+        public bool UserIsInRole(string role)
+        {
+            return HtmlHelperExt.UserIsInRole(role);
         }
     }
 }

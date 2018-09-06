@@ -9,10 +9,10 @@ using _360LawGroup.CostOfSalesBilling.Data;
 
 namespace _360LawGroup.CostOfSalesBilling.Web
 {
-    public class AppAuthAttribute : AuthorizeAttribute
+    public class ApiAuthAttribute : AuthorizeAttribute
     {
 
-        public AppAuthAttribute(params string[] roles)
+        public ApiAuthAttribute(params string[] roles)
         {
             this.Roles = string.Join(",", roles);
         }

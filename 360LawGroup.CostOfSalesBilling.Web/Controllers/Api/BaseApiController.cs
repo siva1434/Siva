@@ -22,22 +22,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
         private ApplicationUserManager _userManager;
 
         public UnitOfWorkCore Uow { get; set; }
-
-        public long CurrentLocation
-        {
-            get
-            {
-                long locationId = 0;
-                if (Request.Headers.Any(x => x.Key == "CurrentLocation"))
-                {
-                    var currLoc = Request.Headers.FirstOrDefault(x => x.Key == "CurrentLocation").Value as string[];
-                    if (currLoc.Any())
-                        long.TryParse(currLoc[0], out locationId);
-                }
-                return locationId;
-            }
-        }
-
+        
         public int TimeZoneInterval
         {
             get
@@ -123,6 +108,11 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
             return Guid.Empty;
         }
 
+        public bool UserIsInRole(string role)
+        {
+            return User.IsInRole(role);
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -140,6 +130,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
             }
 
             base.Dispose(disposing);
+
         }
     }
 }

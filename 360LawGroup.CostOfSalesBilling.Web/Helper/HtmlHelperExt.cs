@@ -1,4 +1,7 @@
-﻿using _360LawGroup.CostOfSalesBilling.Utilities;
+﻿using _360LawGroup.CostOfSalesBilling.Models;
+using _360LawGroup.CostOfSalesBilling.Utilities;
+using _360LawGroup.CostOfSalesBilling.Web;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -325,5 +328,26 @@ namespace System.Web.Mvc.Html
             return list;
         }
         */
+
+        public static bool UserIsInRole(this HtmlHelper htmlHelper, string role)
+        {
+            var valid = false;
+            if (!string.IsNullOrEmpty(role))
+            {
+                var loginCookies = WebCookie.Get("WebLogin");
+                if (loginCookies != null)
+                {
+                    var currentUser = JsonConvert.DeserializeObject<Token>(loginCookies);
+                    var userProfile = JsonConvert.DeserializeObject<UserViewModel>(currentUser.profile); ;
+                    valid = role == userProfile.RoleId;
+                }
+            }
+            return valid;
+        }
+
+        public static bool UserIsInRole(string role)
+        {
+            return UserIsInRole(null, role);
+        }
     }
 }

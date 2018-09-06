@@ -25,14 +25,14 @@ using Newtonsoft.Json;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
 {
-    [RoutePrefix("account")]
+    [RoutePrefix("api/account")]
     public class AccountController : BaseApiController
     {
         /// <summary>
         /// Get Current Loggedin user information
         /// </summary>
         /// <returns>Response with Data: UserInfo</returns>
-        [AppAuth]
+        [ApiAuth]
         [Route("userinfo")]
         public GenericResponse<UserViewModel> GetUserInfo()
         {
@@ -337,7 +337,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
             return status;
         }
 
-        [AppAuth]
+        [ApiAuth]
         [HttpPost]
         [Route("changepassword")]
         public DefaultResponse ChangePassword(ChangePasswordBindingModel model)
@@ -360,7 +360,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
             return status;
         }
 
-        [AppAuth]
+        [ApiAuth]
         [HttpPost]
         [Route("updateprofile")]
         public GenericResponse<UpdateProfileModel> UpdateProfile(UpdateProfileModel model)

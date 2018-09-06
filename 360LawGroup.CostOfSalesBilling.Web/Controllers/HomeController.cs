@@ -15,13 +15,13 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
         // GET: Home
         public ActionResult Index()
         {
-            if (User.IsInRole(RoleExtension.SuperAdmin))
+            if (UserIsInRole(RoleExtension.SuperAdmin))
                 return RedirectToAction("Index", "Home", new { Area = "SuperAdmin" });
-            else if (User.IsInRole(RoleExtension.Admin))
+            else if (UserIsInRole(RoleExtension.Admin))
                 return RedirectToAction("Index", "Home", new { Area = "Admin" });
-            else if (User.IsInRole(RoleExtension.Consultant))
+            else if (UserIsInRole(RoleExtension.Consultant))
                 return RedirectToAction("Index", "Home", new { Area = "Consultant" });
-            else if (User.IsInRole(RoleExtension.ClientUser))
+            else if (UserIsInRole(RoleExtension.ClientUser))
                 return RedirectToAction("Index", "Home", new { Area = "ClientUser" });
 
             else

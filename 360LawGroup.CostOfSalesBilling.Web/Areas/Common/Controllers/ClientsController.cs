@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Areas.Common.Controllers
 {
+    [WebAuth]
     public class ClientsController : BaseController
     {
         // GET: Common/Clients
@@ -43,7 +44,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.Common.Controllers
             else
             {
                 ViewBag.Title = "Edit client";
-                var status = ApiHelper.Get<ClientViewModel>("common/client/getbyid", id);
+                var status = ApiHelper.Get<ClientViewModel>("api/common/client/getbyid", id);
                 if (status.StatusCode == HttpStatusCode.OK)
                 {
                     model = status.Data;
@@ -52,7 +53,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.Common.Controllers
                 else
                     return Content("");
             }
-            var subscriptionbasislist = ApiHelper.GetWithParam<AdminSettingsViewModel>("common/getsettingbyname", "name", "CLIENT_SUBSCRIPTION_BASIS");
+            var subscriptionbasislist = ApiHelper.GetWithParam<AdminSettingsViewModel>("api/common/getsettingbyname", "name", "CLIENT_SUBSCRIPTION_BASIS");
             if (subscriptionbasislist.StatusCode == HttpStatusCode.OK)
                 ViewBag.SubscrptionBasisList = subscriptionbasislist.Data.ParamValue.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             else
@@ -66,7 +67,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.Common.Controllers
         public ActionResult Show(string id)
         {
             var model = new ClientViewModel();
-            var status = ApiHelper.Get<ClientViewModel>("common/client/getbyid", id);
+            var status = ApiHelper.Get<ClientViewModel>("api/common/client/getbyid", id);
             if (status.StatusCode == HttpStatusCode.OK)
             {
                 model.Id = status.Data.Id;
@@ -104,7 +105,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.Common.Controllers
             var model = new ClientViewModel();
             if (!string.IsNullOrEmpty(id))
             {
-                var status = ApiHelper.Get<ClientViewModel>("common/client/getbyid", id);
+                var status = ApiHelper.Get<ClientViewModel>("api/common/client/getbyid", id);
 
                 if (status.StatusCode == HttpStatusCode.OK)
                 {

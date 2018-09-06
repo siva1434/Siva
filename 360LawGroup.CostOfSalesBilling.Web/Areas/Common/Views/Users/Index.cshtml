@@ -46,7 +46,7 @@
             <div class="table-responsive">
                 <table id="usergrid" data-sort-name="FirstName" data-sort-order="asc"
                        data-toggle="table"
-                       data-url="@(ViewBag.ApiUrl+ "Common/users/getall")?roleId=@Request["selectedRole"]"
+                       data-url="@(ViewBag.ApiUrl+ "api/Common/users/getall")?roleId=@Request["selectedRole"]"
                        data-queryparams="getSearchParam"
                        data-pagination="true" class="table"
                        data-searchselector="#search_filter_user"

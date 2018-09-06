@@ -16,18 +16,20 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Helper
         {
             var myHttpClient = new HttpClient();
             string token = null;
-            var user = HttpContext.Current.User as ClaimsPrincipal;
-            if (user?.Identity != null && user.Identity.IsAuthenticated)
+            var loginCookies = WebCookie.Get("WebLogin");
+            if (loginCookies != null)
             {
-                var acctoken = JsonConvert.DeserializeObject<Token>(user.FindFirst("Token").Value);
-                token = $"{acctoken.token_type} {acctoken.access_token}";
+                var currentUser = JsonConvert.DeserializeObject<Token>(loginCookies);
+                if (currentUser != null)
+                {
+                    token = $"{currentUser.token_type} {currentUser.access_token}";
+                }
             }
 
             myHttpClient.BaseAddress = new Uri(ConfigurationManager.AppSettings["API_URL"]);
             if (!string.IsNullOrEmpty(token))
             {
-                myHttpClient.DefaultRequestHeaders.Add("Authorization", token);
-                //myHttpClient.DefaultRequestHeaders.Add("CurrentLocation", user.FindFirst("CurrentLocation").Value);
+                myHttpClient.DefaultRequestHeaders.Add("Authorization", token);                
             }
             return myHttpClient;
         }
@@ -54,7 +56,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Helper
             using (var httpClient = GetHttpClient())
             {
                 httpClient.DefaultRequestHeaders.Add("Authorization", token);
-                var result = httpClient.GetAsync("account/userinfo").Result;
+                var result = httpClient.GetAsync("api/account/userinfo").Result;
                 var resultContent = result.Content.ReadAsStringAsync().Result;
                 return JsonConvert.DeserializeObject<GenericResponse<UserViewModel>>(resultContent);
             }
@@ -92,7 +94,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Helper
         {
             using (var httpClient = GetHttpClient())
             {
-                var response = httpClient.GetAsync("common/getnotification?notificationId=" + notificationId).Result;
+                var response = httpClient.GetAsync("api/common/getnotification?notificationId=" + notificationId).Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return JsonConvert.DeserializeObject<NotificationModel>(response.Content.ReadAsStringAsync().Result);
@@ -105,7 +107,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Helper
         {
             using (var httpClient = GetHttpClient())
             {
-                var response = httpClient.GetAsync($"common/notifyinit?title={title}&message={message}&notificationType={(int)notificationType}&notificationState={(int)notificationState}&userId={userId}&toUserId={toUserId}").Result;
+                var response = httpClient.GetAsync($"api/common/notifyinit?title={title}&message={message}&notificationType={(int)notificationType}&notificationState={(int)notificationState}&userId={userId}&toUserId={toUserId}").Result;
                 if (response.IsSuccessStatusCode)
                 {
                     return JsonConvert.DeserializeObject<Guid>(response.Content.ReadAsStringAsync().Result);

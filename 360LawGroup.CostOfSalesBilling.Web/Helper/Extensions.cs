@@ -4,8 +4,10 @@ using System.Web.Mvc;
 using _360LawGroup.CostOfSalesBilling.Models;
 using System;
 using System.Web.Http;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
-namespace _360LawGroup.CostOfSalesBilling.Web.Helper
+namespace _360LawGroup.CostOfSalesBilling.Web
 {
     public static class Extensions
     {

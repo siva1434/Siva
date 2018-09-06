@@ -1193,7 +1193,7 @@ function BindBtDiv(selector) {
                     return params;
                 }
             },
-            ajaxOptions: { headers: { "Authorization": AuthHeader, "CurrentLocation": CurrentLocation } }
+            ajaxOptions: { headers: { "Authorization": AuthHeader  } }
         });
     });
 }

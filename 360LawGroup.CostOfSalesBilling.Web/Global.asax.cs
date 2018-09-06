@@ -10,6 +10,8 @@ using Newtonsoft.Json;
 using System.Globalization;
 using System.Threading;
 using System.Web.Http;
+using _360LawGroup.CostOfSalesBilling.Data;
+using System.Data.Entity;
 
 namespace _360LawGroup.CostOfSalesBilling.Web
 {
@@ -17,15 +19,20 @@ namespace _360LawGroup.CostOfSalesBilling.Web
     {
         protected void Application_Start()
         {
+            AutoMapperConfig.Init();
             AreaRegistration.RegisterAllAreas();
+            RouteTable.Routes.Ignore("{resource}.axd/{*pathInfo}");
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+            GlobalConfiguration.Configuration.SuppressHostPrincipal();
+            DbConfiguration.SetConfiguration(new RetryConfiguration());
             GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings = new JsonSerializerSettings
             {
                 DateFormatHandling = DateFormatHandling.IsoDateFormat,
                 DateTimeZoneHandling = DateTimeZoneHandling.Unspecified,
-                Culture = CultureInfo.GetCultureInfo("en-IN")
+                Culture = CultureInfo.GetCultureInfo("en-US")
             };
         }
 

@@ -13,8 +13,8 @@ using System.Web.Http;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers.Common
 {
-    [AppAuth]
-    [RoutePrefix("common/client")]
+    [ApiAuth]
+    [RoutePrefix("api/common/client")]
     public class ClientsController : BaseApiController
     {
         [Route("getall"), HttpPost]

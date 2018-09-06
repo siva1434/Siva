@@ -47,7 +47,6 @@ namespace _360LawGroup.CostOfSalesBilling.Utilities
                     return (new string[] { ClientUser});
                 case ClientUser:
                     return (new string[] { });
-
                 default:
                     throw new ArgumentOutOfRangeException(nameof(role), role, null);
             }

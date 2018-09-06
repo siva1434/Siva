@@ -20,7 +20,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
-            if (CurrentUser != null && CurrentUser.Identity.IsAuthenticated)
+            if (CurrentUser != null && IsLoggedIn)
             {
                 return RedirectToAction("Index", "Home", new { Area = "" });
             }
@@ -28,29 +28,10 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
             return View();
         }
 
-        private void GenerateIdentity(Token token, bool rememberMe = false, long? branchId = null)
+        private void GenerateIdentity(Token token, bool rememberMe = false)
         {
-            var profile = JsonConvert.DeserializeObject<UserViewModel>(token.profile);
-            var options = new AuthenticationProperties
-            {
-                AllowRefresh = true,
-                IsPersistent = rememberMe,
-                ExpiresUtc = DateTime.UtcNow.AddSeconds(long.Parse(token.expires_in))
-            };
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, profile.Id),
-                new Claim(ClaimTypes.Name, profile.UserName),
-                new Claim(ClaimTypes.Email, profile.Email),
-                new Claim("Remember", rememberMe.ToString()),
-                new Claim("Token", JsonConvert.SerializeObject(token))
-            };
-            if (!string.IsNullOrEmpty(profile.Gender))
-                claims.Add(new Claim(ClaimTypes.Gender, profile.Gender));
-            claims.AddRange(profile.RoleId.Split(',').Select(r => new Claim(ClaimTypes.Role, r)));
-
-            var identity = new ClaimsIdentity(claims, "ApplicationCookie");
-            Request.GetOwinContext().Authentication.SignIn(options, identity);
+            token.remember = rememberMe;
+            WebCookie.Set("WebLogin", JsonConvert.SerializeObject(token));
         }
 
         [AllowAnonymous, HttpPost]
@@ -144,17 +125,17 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
             return View();
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, WebAuth]
         public ActionResult ChangePassword()
         {
             return PartialView();
         }
 
-        [HttpGet, Authorize]
+        [HttpGet, WebAuth]
         public ActionResult UpdateProfile()
         {
-            var token = JsonConvert.DeserializeObject<Token>(CurrentUser.FindFirst("Token").Value);
-            var profile = JsonConvert.DeserializeObject<UserViewModel>(token.profile);
+            var token = CurrentUser;
+            var profile = UserProfile;
             var model = new UpdateProfileModel
             {
                 FirstName = profile.FirstName,
@@ -166,34 +147,22 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
             return PartialView(model);
         }
 
-        [HttpPost, Authorize]
+        [HttpPost, WebAuth]
         public void SetUpdatedProfile(UpdateProfileModel model)
         {
-            var token = JsonConvert.DeserializeObject<Token>(CurrentUser.FindFirst("Token").Value);
-            var profile = JsonConvert.DeserializeObject<UserViewModel>(token.profile);
+            var token = CurrentUser;
+            var profile = UserProfile;
             profile.FirstName = model.FirstName;
             profile.MiddleName = model.MiddleName;
             profile.LastName = model.LastName;
             profile.PhoneNumber = model.PhoneNumber;
             token.profile = JsonConvert.SerializeObject(profile);
-            var remember = false;
-            var rememberClaim = CurrentUser.Claims.FirstOrDefault(x => x.Type == "Remember");
-            if (rememberClaim != null)
-                remember = Convert.ToBoolean(rememberClaim.Value);
+            //var remember = false;
+            //var rememberClaim = CurrentUser.remember;
+            //if (rememberClaim != null)
+              //  remember = Convert.ToBoolean(rememberClaim.Value);
             Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
-            GenerateIdentity(token, remember);
-        }
-
-        [HttpGet, Authorize]
-        public void UpdateBranch(long branchId)
-        {
-            var token = JsonConvert.DeserializeObject<Token>(CurrentUser.FindFirst("Token").Value);
-            var remember = false;
-            var rememberClaim = CurrentUser.Claims.FirstOrDefault(x => x.Type == "Remember");
-            if (rememberClaim != null)
-                remember = Convert.ToBoolean(rememberClaim.Value);
-            Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
-            GenerateIdentity(token, remember, branchId);
+            GenerateIdentity(token, CurrentUser.remember);
         }
     }
 }

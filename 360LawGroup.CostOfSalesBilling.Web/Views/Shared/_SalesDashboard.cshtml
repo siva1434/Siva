@@ -31,7 +31,7 @@
                 <div class="table-responsive">
                     <table id="salesgrid" data-sort-name="FollowUpDate" data-sort-order="desc"
                            @*data-toggle="table"*@
-                           data-url="@(ViewBag.ApiUrl+ "Common/inquiry/getall")"
+                           data-url="@(ViewBag.ApiUrl+ "api/Common/inquiry/getall")"
                            data-queryparams="getSearchParam"
                            data-pagination="true" class="table hide"
                            data-searchselector="#search_filter_enquiry"
@@ -66,7 +66,7 @@
             <div id="search_filter_bday"></div>
             <div id="btdiv_Bdays" data-sort-name="Name" data-sort-order="asc"
                  data-toggle="btdiv"
-                 data-url="@(ViewBag.ApiUrl+ "Dashboard/getupcomingbdays")"
+                 data-url="@(ViewBag.ApiUrl+ "api/Dashboard/getupcomingbdays")"
                  data-queryparams="getSearchParam"
                  data-searchselector="#search_filter_bday"
                  data-no-found-text=""
@@ -126,7 +126,7 @@
         <div class="panel-body">
             <div id="btdiv_products" data-sort-name="Name" data-sort-order="asc"
                  data-toggle="btdiv"
-                 data-url="@(ViewBag.ApiUrl+ "common/inquiry/getallfollowups")"
+                 data-url="@(ViewBag.ApiUrl+ "api/common/inquiry/getallfollowups")"
                  data-queryparams="getSearchParam"
                  data-searchselector="#search_filter_followup"
                  data-no-found-text="No follow ups."

@@ -22,20 +22,20 @@
                         @{
                             var roles = RoleExtension.GetRoleAccessList(ViewBag.Role as string);
                         }
-                        @if (User.IsInRole(RoleExtension.ClientUser))
+                        @if (Html.UserIsInRole(RoleExtension.ClientUser))
                         {
                             <li><a href="@Url.Action("Index", "Home", new { Area = "ClientUser" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                         }
-                        @if (User.IsInRole(RoleExtension.Admin))
+                        @if (Html.UserIsInRole(RoleExtension.Admin))
                         {
                             <li><a href="@Url.Action("Index", "Home", new { Area = "Admin" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                         }
-                        @if (User.IsInRole(RoleExtension.Consultant))
+                        @if (Html.UserIsInRole(RoleExtension.Consultant))
                         {
                             <li><a href="@Url.Action("Index", "Home", new { Area = "Consultant" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                         }
 
-                        @if (User.IsInRole(RoleExtension.SuperAdmin))
+                        @if (Html.UserIsInRole(RoleExtension.SuperAdmin))
                         {
                             <li><a href="@Url.Action("Index", "Home", new { Area = "SuperAdmin" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                             <li>
@@ -43,30 +43,19 @@
                                 <ul>
                                     @if (roles.Any())
                                     {
-                                        <li class="dropdown dropdown-submenu">
-                                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="icon-users4"></i> <span>Users</span></a>
-                                            <ul class="dropdown dropdown-submenu">
-                                                @foreach (var role in roles)
-                                                {
-                                                    <li><a href="@Url.Action("Index", "Users", new { Area = "Common", selectedRole = role })"><span>@role</span></a></li>
-                                                }
-                                            </ul>
-                                        </li>
+                                        foreach (var role in roles)
+                                        {
+                                            <li><a href="@Url.Action("Index", "Users", new { Area = "Common", selectedRole = role })"><span>@role</span></a></li>
+                                        }
                                     }
-
-                                    @*<li><a href="@Url.Action("Create", "Users", new { Area = "Common" })">Create User</a></li>*@
-                                    @*<li><a href="@Url.Action("Index", "Users", new {Area = "Common"})">Users List</a></li>*@
                                 </ul>
                             </li>
-                            <li>
-                                <a href="@Url.Action("Index", "Clients", new { Area = "Common"})"><i class="icon-magazine"></i> <span>Manage Client</span></a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("ClientRenewals", "Clients", new { Area = "Common"})"><i class="icon-magazine"></i> <span>Client Renewals</span></a>
-                            </li>
-                            <li>
-                                <a href="@Url.Action("Index", "Matters", new { Area = "Common"})"><i class="icon-magazine"></i> <span>Manage Matters</span></a>
-                            </li>
+                        }
+                        @if (Html.UserIsInRole(RoleExtension.SuperAdmin) || Html.UserIsInRole(RoleExtension.Admin))
+                        {
+                            <li><a href="@Url.Action("Index", "Clients", new { Area = "Common"})"><i class="fa fa-street-view"></i> <span>Manage Client</span></a></li>
+                            <li><a href="@Url.Action("ClientRenewals", "Clients", new { Area = "Common"})"><i class="fa fa-calendar"></i> <span>Client Renewals</span></a></li>
+                            <li><a href="@Url.Action("Index", "Matters", new { Area = "Common"})"><i class="fa fa-folder-open"></i> <span>Manage Matters</span></a></li>
                         }
                     </ul>
                 </div>

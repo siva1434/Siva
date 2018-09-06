@@ -1,0 +1,170 @@
+﻿@model _360LawGroup.CostOfSalesBilling.Models.MatterViewModel
+@{
+    var overseascountrylist = ViewBag.overseascountrylist as List<string>;
+    var areaoflaw = ViewBag.AreaOfList as List<string>;
+}
+<div id="AddEditModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" style="min-width:85%;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    @if (Model.Id == Guid.Empty)
+                    {
+                        <span>Create Matter</span>
+                    }
+                    else
+                    {
+                        <span>Edit Matter</span>
+
+                    }
+                </h4>
+            </div>
+            @using (Ajax.BeginForm("", "", null,
+            new AjaxOptions
+            {
+                HttpMethod = "POST",
+                Url = ViewBag.ApiUrl + "common/Matter/" + (Model.Id == Guid.Empty ? "create" : "edit"),
+                OnSuccess = "ClientDataSuccess",
+                OnFailure = "Failed"
+            }, new { @class = "form-horizontal", role = "form" }
+             ))
+            {
+                @Html.HiddenFor(y => y.Id)
+                @Html.ValidationMessageFor(model => model.Id)
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.RequiredLabelFor(m => m.MatterName, new { @class = "control-label text-bold" })
+                            @Html.TextBoxFor(model => model.MatterName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.MatterName)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.RequiredLabelFor(m => m.ClientId, new { @class = "control-label text-bold" })
+                            @Html.DropDownListFor(m => m.ClientId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "common/getallclient", @placeholder = "Select Client", @data_value = Model.ClientId })
+                            @Html.ValidationMessageFor(model => model.ClientId)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.RequiredLabelFor(m => m.WorkRateId, new { @class = "control-label text-bold" })
+                            @Html.DropDownListFor(m => m.WorkRateId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "common/getallworkrate", @placeholder = "Select WorkRate", @data_value = Model.WorkRateId })
+                            @Html.ValidationMessageFor(model => model.WorkRateId)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.LabelFor(m => m.Date, new { @class = "control-label text-bold" })
+                            @Html.TextBoxFor(model => model.Date, "{0:dd-MM-yyyy}", new { @class = "form-control Dateofcal", @data_value = Model.Date })
+                            @Html.ValidationMessageFor(model => model.Date)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.RequiredLabelFor(m => m.ConsultantId, new { @class = "control-label text-bold" })
+                            @Html.DropDownListFor(m => m.ConsultantId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "common/getallconsultant", @placeholder = "Select Consultant", @data_value = Model.ConsultantId })
+                            @Html.ValidationMessageFor(model => model.ConsultantId)
+                        </div>
+                        <div class="col-md-4">
+                            @{
+                                string v = (!string.IsNullOrEmpty(Model.OverseasCountry) ? Newtonsoft.Json.JsonConvert.SerializeObject(Model.OverseasCountry.Split(',')) : default(string));
+                            }
+                            @Html.RequiredLabelFor(m => m.OverseasCountry, new { @class = "control-label text-bold" })                            
+                            @Html.DropDownListFor(m => m.OverseasCountry, new SelectList(overseascountrylist), new { @class = "form-control target-value", @data_tags = "true", @data_value = v, @data_keyboard = "false" })
+                            @Html.ValidationMessageFor(model => model.OverseasCountry)                            
+                            <a href="#" class="text-danger" title="Add a new option" onclick="AddOverseasCountryList()">
+                                <i class="fa fa-plus-circle"></i> Add a new option
+                            </a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            @Html.RequiredLabelFor(m => m.Status, new { @class = "control-label text-bold" })
+                            @Html.DropDownListFor(model => model.Status,
+                                     new List<SelectListItem>
+                                     {
+                                       new SelectListItem { Text="Active", Value="Active"},
+                                       new SelectListItem { Text="Completed", Value="Completed"},
+                                       new SelectListItem{Text="Pending",Value="Pending"}
+                                     }
+                                     , new { @class = "form-control", @data_keyboard = "false", @data_value = Model.Status}
+                                     )
+                            @Html.ValidationMessageFor(model => model.Status)
+                        </div>
+                        <div class="col-md-4">
+                            @{
+                                string x = (!string.IsNullOrEmpty(Model.AreaofLaw) ? Newtonsoft.Json.JsonConvert.SerializeObject(Model.AreaofLaw.Split(',')) : default(string));
+                            }
+                            @Html.RequiredLabelFor(m => m.AreaofLaw, new { @class = "control-label text-bold" })
+                            @Html.DropDownListFor(m => m.AreaofLaw, new SelectList(areaoflaw), new { @class = "form-control target-value", @data_tags = "true", @data_value = x, @data_keyboard = "false" })
+                            @Html.ValidationMessageFor(model => model.OverseasCountry)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.RequiredLabelFor(m => m.OverseasChargeRate, new { @class = "control-label text-bold" })
+                            @Html.TextBoxFor(model => model.OverseasChargeRate, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.OverseasChargeRate)
+                        </div>
+                    </div>
+                    <div class="form-group">                        
+                        <div class="col-md-4">
+                            @Html.RequiredLabelFor(m => m.Box, new { @class = "control-label text-bold" })
+                            @Html.TextBoxFor(model => model.Box, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Box)
+                        </div>                       
+                        <div class="col-md-4">
+                            @Html.RequiredLabelFor(m => m.ClientMatterContact, new { @class = "control-label text-bold" })
+                            @Html.TextBoxFor(model => model.ClientMatterContact, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ClientMatterContact)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.RequiredLabelFor(m => m.ClientMatter_ContactEmail, new { @class = "control-label text-bold" })
+                            @Html.TextBoxFor(model => model.ClientMatter_ContactEmail, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.ClientMatter_ContactEmail)
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add</button>
+                    <button type="submit" class="btn btn-default" data-dismiss="modal">Back to Manage Matters</button>
+
+                </div>                    
+              }
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.Dateofcal').datePicker({
+            min: true
+
+        });
+        $('.Dateofcal').attr("readonly", true);
+        ShowModal("#AddEditModal", function () {
+        });
+    });
+
+    function AddOverseasCountryList() {        
+           bootbox.prompt({
+                title: "Enter Country", callback: function (value) {
+                    if (value !== null) {
+                        if ($.trim(value) === "") {
+                            AlertNotify("Overseas Country", "Please enter country.", "bg-danger");                            
+                        } else {
+                            debugger
+                            var val = $(value).add('.target-value');
+                        }
+                    }
+                }
+            })
+        }
+
+    function ClientDataSuccess(data) {
+        if (data.StatusCode === 200) {
+            AlertNotify("Success", data.Messages, "bg-success");
+            setTimeout(function () {
+                window.location.reload();
+            }, 800);
+
+        } else {
+            PopupDataSuccess(data);
+        }
+    }
+</script>
+

@@ -5,6 +5,8 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using _360LawGroup.CostOfSalesBilling.Models;
 using _360LawGroup.CostOfSalesBilling.Web.Providers;
+using System.Security.Claims;
+using Microsoft.Owin.Security;
 
 namespace _360LawGroup.CostOfSalesBilling.Web
 {
@@ -32,7 +34,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web
             manager.UserValidator = new UserValidator<ApplicationUser>(manager)
             {
                 AllowOnlyAlphanumericUserNames = false,
-                RequireUniqueEmail = false               
+                RequireUniqueEmail = false
             };
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
@@ -50,6 +52,6 @@ namespace _360LawGroup.CostOfSalesBilling.Web
                 manager.UserTokenProvider = new DataProtectorTokenProvider<ApplicationUser>(dataProtectionProvider.Create("ASP.NET Identity"));
             }
             return manager;
-        }
+        }        
     }
 }

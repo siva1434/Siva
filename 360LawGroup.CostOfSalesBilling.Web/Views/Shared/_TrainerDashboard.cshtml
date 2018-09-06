@@ -33,7 +33,7 @@
                 <div class="table-responsive">
                     <table id="trainergrid" data-sort-name="FollowUpDate" data-sort-order="desc"
                            @*data-toggle="table"*@
-                           data-url="@(ViewBag.ApiUrl+ "trainer/inductioncommon/getallmembershipinductionmember")"
+                           data-url="@(ViewBag.ApiUrl+ "api/trainer/inductioncommon/getallmembershipinductionmember")"
                            data-queryparams="getSearchParam"
                            data-pagination="true" class="table hide"
                            data-searchselector="#search_filter_induction"
@@ -86,7 +86,7 @@
         <div class="panel-body">
             <div id="btdiv_products" data-sort-name="Name" data-sort-order="asc"
                  data-toggle="btdiv"
-                 data-url="@(ViewBag.ApiUrl+ "common/inquiry/getallfollowups")"
+                 data-url="@(ViewBag.ApiUrl+ "api/common/inquiry/getallfollowups")"
                  data-queryparams="getSearchParam"
                  data-searchselector="#search_filter_followup"
                  data-no-found-text="No follow ups."

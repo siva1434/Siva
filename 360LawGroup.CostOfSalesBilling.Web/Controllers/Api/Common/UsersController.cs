@@ -13,8 +13,8 @@ using Microsoft.AspNet.Identity;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers.Common
 {
-    [AppAuth]
-    [RoutePrefix("common/users")]
+    [ApiAuth]
+    [RoutePrefix("api/common/users")]
     public class UsersController : BaseApiController
     {
         [Route("getall"), HttpPost]
@@ -139,17 +139,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers.Common
                     ModelState.AddModelError("RoleId", $"You don't have rights to create {model.RoleId} from here.");
                     isError = true;
                 }
-                else if (Uow.UserRepository.GetQuery(x => x.Id != model.Id && x.Email.Equals(model.Email, StringComparison.OrdinalIgnoreCase) && x.AspNetRoles.Any(i => i.Id == RoleExtension.Admin)).Any())
-                {
-                    ModelState.AddModelError("Email", "Email '" + model.Email + "' is already taken.");
-                    isError = true;
-                }
-                else if (Uow.UserRepository.GetQuery(x => x.Id != model.Id && x.Email.Equals(model.Email, StringComparison.OrdinalIgnoreCase) && x.AspNetRoles.Any(i => i.Id == RoleExtension.Consultant)).Any())
-                {
-                    ModelState.AddModelError("Email", "Email '" + model.Email + "' is already taken.");
-                    isError = true;
-                }
-                else if (Uow.UserRepository.GetQuery(x => x.Id != model.Id && x.Email.Equals(model.Email, StringComparison.OrdinalIgnoreCase) && x.AspNetRoles.Any(i => i.Id == RoleExtension.ClientUser)).Any())
+                else if (Uow.UserRepository.GetQuery(x => x.Id != model.Id && x.Email.Equals(model.Email, StringComparison.OrdinalIgnoreCase)).Any())
                 {
                     ModelState.AddModelError("Email", "Email '" + model.Email + "' is already taken.");
                     isError = true;
@@ -158,7 +148,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers.Common
                 {
                     var user = model.To<ApplicationUser>(-TimeZoneInterval);
                     user.Id = Guid.NewGuid().ToString();
-                    user.UserName = model.FirstName.ToLower();
+                    user.UserName = model.Email; //for login 
                     user.CreatedBy = LoggedInUser.Id;
                     user.CreatedOn = DateTime.UtcNow;
                     user.FirstName = model.FirstName;
@@ -314,7 +304,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers.Common
         {
             var userRoles = Uow.RoleRepository.GetQuery().AsEnumerable().Select(x =>
                    new KeyValuePair<string, string>(x.Id, x.Name)).ToList();
-            if (!User.IsInRole(RoleExtension.SuperAdmin))
+            if (!UserIsInRole(RoleExtension.SuperAdmin))
                 userRoles.RemoveAll(x => x.Key == RoleExtension.SuperAdmin);
             return new GenericResponse<List<KeyValuePair<string, string>>>
             {

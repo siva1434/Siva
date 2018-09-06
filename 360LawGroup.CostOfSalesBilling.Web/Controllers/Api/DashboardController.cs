@@ -19,12 +19,12 @@ using _360LawGroup.CostOfSalesBilling.Web.Helper;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
 {
-    [AppAuth]
-    [RoutePrefix("dashboard")]
+    [ApiAuth]
+    [RoutePrefix("api/dashboard")]
     public class DashboardController : BaseApiController
     {
         [HttpGet, Route("apiui")]
-        [AppAuth(RoleExtension.SuperAdmin/*,RoleExtension.Consultant,RoleExtension.ClientUser*/)]
+        [ApiAuth(RoleExtension.SuperAdmin/*,RoleExtension.Consultant,RoleExtension.ClientUser*/)]
         public DefaultResponse SwaggerUi()
         {
             var status = new DefaultResponse();
@@ -56,23 +56,23 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
         {
             var status = new GenericResponse<CounterViewModel>();
             var invoice = Uow.InvoiceRepository.GetQuery(x => !x.IsDeleted && x.IsActive && x.LocationId == CurrentLocation);
-            if (User.IsInRole(RoleExtension.SalesTeam))
+            if (UserIsInRole(RoleExtension.SalesTeam))
             {
                 invoice = invoice.Where(x => x.CreatedBy == LoggedInUser.Id);
             }
             var appoinment = Uow.AppointmentRepository.GetQuery(x => !x.IsDeleted && x.LocationId == CurrentLocation);
-            if (User.IsInRole(RoleExtension.SalesTeam))
+            if (UserIsInRole(RoleExtension.SalesTeam))
             {
                 appoinment = appoinment.Where(x => x.CreatedBy == LoggedInUser.Id);
             }
             var enquryhndlby = Uow.InquiryRepository.GetQuery(x => x.IsActive && !x.IsDeleted && x.LocationId == CurrentLocation);
-            if (User.IsInRole(RoleExtension.SalesTeam))
+            if (UserIsInRole(RoleExtension.SalesTeam))
             {
                 enquryhndlby = enquryhndlby.Where(x => x.SalesPersonId == LoggedInUser.Id);
             }
             var clientrepres = Uow.MemberInfoRepository.GetQuery(x => x.IsActive && !x.IsDeleted &&
              x.AspNetUser3 != null && x.AspNetUser3.Locations2.Any(y => y.Id == CurrentLocation));
-            if (User.IsInRole(RoleExtension.SalesTeam))
+            if (UserIsInRole(RoleExtension.SalesTeam))
             {
                 clientrepres = clientrepres.Where(x => x.ClientRepresentativeUserId == LoggedInUser.Id);
             }

@@ -10,6 +10,7 @@ using System.Web.Mvc;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Areas.SuperAdmin.Controllers
 {
+    [WebAuth]
     public class AdminSettingsController : BaseController
     {
         // GET: SuperAdmin/AdminSettings

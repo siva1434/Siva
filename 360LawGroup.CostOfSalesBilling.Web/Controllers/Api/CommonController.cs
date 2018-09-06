@@ -14,7 +14,7 @@ using _360LawGroup.CostOfSalesBilling.Web.Helper;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
 {
-    [RoutePrefix("common")]
+    [RoutePrefix("api/common")]
     public class CommonController : BaseApiController
     {
         [AllowAnonymous, HttpGet, Route("getnotification")]
@@ -29,7 +29,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
             return Guid.Empty;// CreateNotification(title, message, notificationType, notificationState, userId, toUserId);
         }
 
-        [Authorize, HttpGet, Route("getnotifications")]
+        [ApiAuth, HttpGet, Route("getnotifications")]
         public dynamic GetNotifications(int offset)
         {
             /*var userId = LoggedInUser.Id;
@@ -39,7 +39,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
             return new { offset, limit = 5, total = 0, rows = new List<dynamic>() };
         }
 
-        [Authorize, HttpGet, Route("removenotification")]
+        [ApiAuth, HttpGet, Route("removenotification")]
         public bool RemoveNotification(Guid notificationId)
         {
             /*var userId = LoggedInUser.Id;
@@ -56,7 +56,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
             //}
         }
 
-        [Authorize, HttpGet, Route("clearnotifications")]
+        [ApiAuth, HttpGet, Route("clearnotifications")]
         public bool ClearNotifications()
         {
             /*var userId = LoggedInUser.Id;
@@ -76,7 +76,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
             //}
         }
 
-        [AppAuth, HttpGet, Route("getallconsultant")]
+        [ApiAuth, HttpGet, Route("getallconsultant")]
         public GenericResponse<List<KeyValuePair<string, string>>> GetAllConsultant()
         {
             var list = Uow.UserRepository.GetQuery(x => !x.IsDeleted && x.AspNetRoles.Any(i => i.Id == RoleExtension.Consultant)).AsEnumerable().Select(x =>
@@ -87,11 +87,23 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
                 Data = list
             };
         }
-        [AppAuth, HttpGet, Route("getallclient")]
+        [ApiAuth, HttpGet, Route("getallclient")]
         public GenericResponse<List<KeyValuePair<Guid, string>>> GetAllClient()
         {
             var list = Uow.ClientRepository.GetQuery(x => !x.IsDeleted).AsEnumerable().Select(x =>
                             new KeyValuePair<Guid, string>(x.Id, x.FirstName + " " + x.LastName +" "+ (x.IsActive ? "" : " (DEACTIVE)"))).ToList();
+            return new GenericResponse<List<KeyValuePair<Guid, string>>>
+            {
+                StatusCode = HttpStatusCode.OK,
+                Data = list
+            };
+        }
+
+        [ApiAuth, HttpGet, Route("getallworkrate")]
+        public GenericResponse<List<KeyValuePair<Guid, string>>> GetAllWorkRate()
+        {
+            var list = Uow.WorkRateRepository.GetQuery().AsEnumerable().Select(x =>
+                            new KeyValuePair<Guid, string>(x.Id,x.RateType)).ToList();
             return new GenericResponse<List<KeyValuePair<Guid, string>>>
             {
                 StatusCode = HttpStatusCode.OK,
@@ -132,7 +144,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers
             return status;
         }
 
-        [AppAuth, HttpGet, Route("getsettingbyname")]
+        [ApiAuth, HttpGet, Route("getsettingbyname")]
         public GenericResponse<AdminSettingsViewModel> GetSettingsByName(string name)
         {
             var ParamList = Uow.AdminSettingsRepository.GetQuery<AdminSettingsViewModel>(x =>

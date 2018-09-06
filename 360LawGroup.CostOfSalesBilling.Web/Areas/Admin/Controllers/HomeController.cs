@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Areas.Admin.Controllers
 {
-    [AppAuth(RoleExtension.Admin)]
+    [WebAuth(RoleExtension.Admin)]
     public class HomeController : BaseController
     {
         // GET: Admin/Home

@@ -90,14 +90,14 @@
                         @{
                             var roles = RoleExtension.GetRoleAccessList(ViewBag.Role as string);
                         }
-                        @if (User.IsInRole(RoleExtension.SuperAdmin))
+                        @if (Html.UserIsInRole(RoleExtension.SuperAdmin))
                         {
                             <li class="dropdown dropdown-submenu">
                                 <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                                     <i class="glyphicon glyphicon-cog"></i> Settings
                                 </a>
                                 <ul class="dropdown-menu dropdown-custom">
-                                    @if (User.IsInRole(RoleExtension.SuperAdmin))
+                                    @if (Html.UserIsInRole(RoleExtension.SuperAdmin))
                                     {
                                         <li class="dropdown dropdown-submenu">
                                             <a href="javascript:;"><i class="glyphicon glyphicon-cog"></i> Settings</a>
@@ -163,35 +163,9 @@
         var AuthHeader = "@ViewBag.UserToken";
         var ApiUrl = "@ViewBag.ApiUrl";
         var BASEPATH = "@ViewBag.BasePath";
-        var CurrentLocation = "@ViewBag.CurrentLocation" == "0" ? "" : "@ViewBag.CurrentLocation";
-        var IsSuperAdmin = "@User.IsInRole(RoleExtension.SuperAdmin).ToString().ToLower()";
+        var IsSuperAdmin = "@Html.UserIsInRole(RoleExtension.SuperAdmin).ToString().ToLower()";
     </script>
-    @Scripts.Render("~/bundles/jquery", "~/bundles/validations", "~/assets/js/plugins/tinymce/bundle", "~/bundles/plugins")
-    <script tyep="text/javascript">
-        $(document).ready(function () {
-            apiCall("account/userinfo", "get", {}, function (data) {
-                if (data.StatusCode != 200) {
-                    isSuccess(data);
-                }
-            })
-            $("select#CurrentLocation1").on("change", function () {
-                if ($(this).val() == "") {
-                    var firstValue = $(this).find("option:first").attr("value");
-                    if (firstValue == "") {
-                        firstValue = $(this).find("option:first").next().attr("value");
-                    }
-                    if (firstValue != "" && typeof firstValue !== "undefined") {
-                        $(this).val(firstValue).change();
-                    }
-                }
-                if ($(this).val() != CurrentLocation) {
-                    $.get("@Url.Action("UpdateBranch", "Account", new {Area=""})?branchId=" + $(this).val()).done(function () {
-                        window.location.reload();
-                    });
-                }
-            });
-        })
-    </script>
+    @Scripts.Render("~/bundles/jquery", "~/bundles/validations", "~/assets/js/plugins/tinymce/bundle", "~/bundles/plugins")    
     <div id="popupmodals"></div>
     @RenderSection("js", required: false)
 </body>

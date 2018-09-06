@@ -11,5 +11,7 @@
         public string error { get; set; }
 
         public string role { get; set; }
+
+        public bool remember { get; set; }
     }
 }

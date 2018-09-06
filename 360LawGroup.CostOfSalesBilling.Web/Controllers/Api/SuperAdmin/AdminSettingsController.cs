@@ -11,8 +11,8 @@ using System.Web.Http;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Api.Controllers.SuperAdmin
 {
-    [AppAuth(RoleExtension.SuperAdmin)]
-    [RoutePrefix("superadmin/adminsettings")]
+    [ApiAuth(RoleExtension.SuperAdmin)]
+    [RoutePrefix("api/superadmin/adminsettings")]
     public class AdminSettingsController : BaseApiController
     {
         [Route("getall"), HttpPost]
