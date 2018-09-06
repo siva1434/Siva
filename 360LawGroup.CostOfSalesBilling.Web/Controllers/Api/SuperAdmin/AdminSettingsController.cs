@@ -43,5 +43,25 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.SuperAdmin
             status.SetCustomMessages(HttpStatusCode.OK, "Settings saved successfully.");
             return status;
         }
+
+        //[Route("addadminsettings"), HttpGet]
+        //public DefaultResponse AddAdminSettings(string paramName, string paramValue)
+        //{
+        //    var status = new DefaultResponse(HttpStatusCode.OK, "Admin Settings Updated");
+        //    var instance = Uow.AdminSettingsRepository.GetQuery(x => x.ParamName == paramName).FirstOrDefault();
+        //    if (instance == null)
+        //    {
+        //        status.SetCustomMessages(HttpStatusCode.NotFound, "Errors Not Found");
+        //        return status;
+        //    }
+        //    instance.ParamValue = paramValue;
+        //    Uow.AdminSettingsRepository.Update(instance);
+        //    if (Uow.Save(this) == 0)
+        //    {
+        //        status.SetErrorMessages(this);
+        //    }
+        //    status.SetCustomMessages(HttpStatusCode.OK, "Settings saved successfully.");
+        //    return status;
+        //}
     }
 }

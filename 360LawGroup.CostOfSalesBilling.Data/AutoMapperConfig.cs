@@ -52,21 +52,21 @@ namespace _360LawGroup.CostOfSalesBilling.Data
 
                 cfg.CreateMap<Client, ClientViewModel>(MemberList.None)
                 .ForMember(x => x.MatterWorkHours, y => y.MapFrom(z => z.Matters.Sum(i => i.ConsultantHours.Sum(c => c.WorkHours))))
-                .ForMember(x => x.SubscriptionCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => ((i.WorkRateId == 1) ? (i.WorkHours * i.Consultant.SubscriptionHourlyRate) : 0))))
+                .ForMember(x => x.SubscriptionCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => ((i.WorkRateId == 1) ? (i.WorkHours * i.AspNetUser2.SubscriptionHourlyRate) : 0))))
                 .ForMember(x => x.MemberHours, y => y.MapFrom(z => z.ConsultantHours.Sum(i => i.MemberHours)))
-                .ForMember(x => x.MemberCosts, y => y.MapFrom(z => z.ConsultantHours.Sum(i => ((i.WorkRateId == 2) ? (i.WorkHours * i.Consultant.MemberHourlyRate) : 0))))
+                .ForMember(x => x.MemberCosts, y => y.MapFrom(z => z.ConsultantHours.Sum(i => ((i.WorkRateId == 2) ? (i.WorkHours * i.AspNetUser2.MemberHourlyRate) : 0))))
                 .ForMember(x => x.PrivateClientHours, y => y.MapFrom(z => z.ConsultantHours.Sum(i => i.PrivateClientHours)))
                 .ForMember(x => x.PrivateClientCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 3 ? i.WorkHours : 0))))
                 .ForMember(x => x.LitigationHours, y => y.MapFrom(z => z.ConsultantHours.Sum(i => i.LitigationHours)))
-                .ForMember(x => x.LitigationCosts, y => y.MapFrom(z => z.ConsultantHours.Sum(i => ((i.WorkRateId == 4) ? (i.WorkHours * i.Consultant.LitigationHourlyRate) : 0))))
+                .ForMember(x => x.LitigationCosts, y => y.MapFrom(z => z.ConsultantHours.Sum(i => ((i.WorkRateId == 4) ? (i.WorkHours * i.AspNetUser2.LitigationHourlyRate) : 0))))
                 .ForMember(x => x.RegulatedHours, y => y.MapFrom(z => z.ConsultantHours.Sum(i => i.RegulatedHours)))
-                .ForMember(x => x.RegulatedCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => ((i.WorkRateId == 5) ? (i.WorkHours * i.Consultant.RegulatedHourlyRate) : 0))))
+                .ForMember(x => x.RegulatedCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => ((i.WorkRateId == 5) ? (i.WorkHours * i.AspNetUser2.RegulatedHourlyRate) : 0))))
                 .ForMember(x => x.OverseasHours, y => y.MapFrom(z => z.ConsultantHours.Sum(i => i.OverseasHours)))
-                .ForMember(x => x.OverseasCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => ((i.WorkRateId == 6) ? (i.WorkHours * i.Consultant.OverseasHourlyRate) : 0))))
+                .ForMember(x => x.OverseasCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => ((i.WorkRateId == 6) ? (i.WorkHours * i.AspNetUser2.OverseasHourlyRate) : 0))))
                 .ForMember(x => x.OverseasCharge, y => y.MapFrom(z => z.Matters.Sum(i => (i.WorkRate.RateId == 6 ? (i.ConsultantHours.Sum(c => c.WorkHours) * i.OverseasChargeRate) : 0))))
                 .ForMember(x => x.Matters_CurrentMonth, y => y.MapFrom(z => z.Matters.Where(i => i.CurrentMonth).Count()))
                 .ForMember(x => x.Matters_Total, y => y.MapFrom(z => z.Matters.Count()))
-                .ForMember(x => x.SubscriptionFeeMinusCosts, y => y.MapFrom(z => (z.MonthlySubscription - (z.ConsultantHours.Sum(i => ((i.WorkRateId == 1) ? (i.WorkHours * i.Consultant.SubscriptionHourlyRate) : 0))))))
+                .ForMember(x => x.SubscriptionFeeMinusCosts, y => y.MapFrom(z => (z.MonthlySubscription - (z.ConsultantHours.Sum(i => ((i.WorkRateId == 1) ? (i.WorkHours * i.AspNetUser2.SubscriptionHourlyRate) : 0))))))
                 .ForMember(x => x.MemberCharge, y => y.MapFrom(z => (z.ConsultantHours.Sum(i => i.MemberHours + z.MemberChargeRate))))
                 .ForMember(x => x.PrivateClientCharge, y => y.MapFrom(z => (z.ConsultantHours.Sum(i => i.PrivateClientHours) + z.PrivateClientChargeRate)))
                 .ForMember(x => x.LitigationCharge, y => y.MapFrom(z => (z.LitigationChargeRate) * (z.ConsultantHours.Sum(i => i.LitigationHours))))
@@ -75,25 +75,25 @@ namespace _360LawGroup.CostOfSalesBilling.Data
 
                 cfg.CreateMap<ConsultantHour, ConsultantHourViewModel>(MemberList.None)
                 .ForMember(x => x.MatterWorkPeriod, y => y.MapFrom(z => z.Matter.MatterName + "-" + z.Month + " " + z.Year))
-                .ForMember(x => x.Matter_Consultant_WorkPeriod, y => y.MapFrom(z => z.Matter.MatterName + "[" + z.Consultant.ConsultantName + "]-" + z.Month + " " + z.Year))
+                .ForMember(x => x.Matter_Consultant_WorkPeriod, y => y.MapFrom(z => z.Matter.MatterName + "[" + z.AspNetUser2.ConsultantName + "]-" + z.Month + " " + z.Year))
                 //.ForMember(x => x.WorkRateText, y => y.MapFrom(z => z.Matter.WorkRate))
-                .ForMember(x => x.SubscriptionCost, y => y.MapFrom(z => (z.WorkRateId == 1) ? (z.WorkHours * z.Consultant.SubscriptionHourlyRate) : 0))
-                .ForMember(x => x.MemberCost, y => y.MapFrom(z => (z.WorkRateId == 2) ? (z.WorkHours * z.Consultant.MemberHourlyRate) : 0))
+                .ForMember(x => x.SubscriptionCost, y => y.MapFrom(z => (z.WorkRateId == 1) ? (z.WorkHours * z.AspNetUser2.SubscriptionHourlyRate) : 0))
+                .ForMember(x => x.MemberCost, y => y.MapFrom(z => (z.WorkRateId == 2) ? (z.WorkHours * z.AspNetUser2.MemberHourlyRate) : 0))
                 .ForMember(x => x.PrivateClientCost, y => y.MapFrom(z => z.WorkRateId == 3 ? z.WorkHours : 0))
-                .ForMember(x => x.LitigationCost, y => y.MapFrom(z => (z.WorkRateId == 4) ? (z.WorkHours * z.Consultant.LitigationHourlyRate) : 0))
-                .ForMember(x => x.RegulatedCost, y => y.MapFrom(z => (z.WorkRateId == 5) ? (z.WorkHours * z.Consultant.RegulatedHourlyRate) : 0))
-                .ForMember(x => x.OverseasCost, y => y.MapFrom(z => (z.WorkRateId == 6) ? (z.WorkHours * z.Consultant.OverseasHourlyRate) : 0))
-                .ForMember(x => x.TotalCost_inclSub, y => y.MapFrom(z => (((z.WorkRateId == 1) ? (z.WorkHours * z.Consultant.SubscriptionHourlyRate) : 0) +
-                             ((z.WorkRateId == 2) ? (z.WorkHours * z.Consultant.MemberHourlyRate) : 0) +
+                .ForMember(x => x.LitigationCost, y => y.MapFrom(z => (z.WorkRateId == 4) ? (z.WorkHours * z.AspNetUser2.LitigationHourlyRate) : 0))
+                .ForMember(x => x.RegulatedCost, y => y.MapFrom(z => (z.WorkRateId == 5) ? (z.WorkHours * z.AspNetUser2.RegulatedHourlyRate) : 0))
+                .ForMember(x => x.OverseasCost, y => y.MapFrom(z => (z.WorkRateId == 6) ? (z.WorkHours * z.AspNetUser2.OverseasHourlyRate) : 0))
+                .ForMember(x => x.TotalCost_inclSub, y => y.MapFrom(z => (((z.WorkRateId == 1) ? (z.WorkHours * z.AspNetUser2.SubscriptionHourlyRate) : 0) +
+                             ((z.WorkRateId == 2) ? (z.WorkHours * z.AspNetUser2.MemberHourlyRate) : 0) +
                              ((z.WorkRateId == 3) ? (z.WorkHours) : 0) +
-                             ((z.WorkRateId == 4) ? (z.WorkHours * z.Consultant.LitigationHourlyRate) : 0) +
-                             ((z.WorkRateId == 5) ? (z.WorkHours * z.Consultant.RegulatedHourlyRate) : 0) +
-                             ((z.WorkRateId == 6) ? (z.WorkHours * z.Consultant.OverseasHourlyRate) : 0))))
-                .ForMember(x => x.TotalCost_exclSub, y => y.MapFrom(z => ((z.WorkRateId == 2) ? (z.WorkHours * z.Consultant.MemberHourlyRate) : 0) +
+                             ((z.WorkRateId == 4) ? (z.WorkHours * z.AspNetUser2.LitigationHourlyRate) : 0) +
+                             ((z.WorkRateId == 5) ? (z.WorkHours * z.AspNetUser2.RegulatedHourlyRate) : 0) +
+                             ((z.WorkRateId == 6) ? (z.WorkHours * z.AspNetUser2.OverseasHourlyRate) : 0))))
+                .ForMember(x => x.TotalCost_exclSub, y => y.MapFrom(z => ((z.WorkRateId == 2) ? (z.WorkHours * z.AspNetUser2.MemberHourlyRate) : 0) +
                              ((z.WorkRateId == 3) ? z.WorkHours : 0) +
-                             ((z.WorkRateId == 4) ? (z.WorkHours * z.Consultant.LitigationHourlyRate) : 0) +
-                             ((z.WorkRateId == 5) ? (z.WorkHours * z.Consultant.RegulatedHourlyRate) : 0) +
-                             ((z.WorkRateId == 6) ? (z.WorkHours * z.Consultant.OverseasHourlyRate) : 0)))
+                             ((z.WorkRateId == 4) ? (z.WorkHours * z.AspNetUser2.LitigationHourlyRate) : 0) +
+                             ((z.WorkRateId == 5) ? (z.WorkHours * z.AspNetUser2.RegulatedHourlyRate) : 0) +
+                             ((z.WorkRateId == 6) ? (z.WorkHours * z.AspNetUser2.OverseasHourlyRate) : 0)))
                 .ForMember(x => x.ClientWorkPeriod, y => y.MapFrom(z => z.Matter.Client.Company + "-" + z.Month + " " + z.Year))
                 .ForMember(x => x.WorkRateText, y => y.MapFrom(z => z.Matter.WorkRate.RateType));
                 cfg.CreateMap<ConsultantHourViewModel, ConsultantHour>(MemberList.None);
@@ -102,27 +102,27 @@ namespace _360LawGroup.CostOfSalesBilling.Data
                 .ForMember(x => x.WorkRateText, y => y.MapFrom(z => z.WorkRate.RateType))
                 .ForMember(x => x.ClientText, y => y.MapFrom(z => z.Client.Company))
                 .ForMember(x => x.WorkHours, y => y.MapFrom(z => z.ConsultantHours.Sum(i => i.WorkHours)))
-                .ForMember(x => x.SubscriptionCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 1) ? (i.WorkHours * i.Consultant.SubscriptionHourlyRate) : 0)))
-                .ForMember(x => x.MemberCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 2) ? (i.WorkHours * i.Consultant.MemberHourlyRate) : 0)))
+                .ForMember(x => x.SubscriptionCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 1) ? (i.WorkHours * i.AspNetUser2.SubscriptionHourlyRate) : 0)))
+                .ForMember(x => x.MemberCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 2) ? (i.WorkHours * i.AspNetUser2.MemberHourlyRate) : 0)))
                 .ForMember(x => x.PrivateClientCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 3 ? i.WorkHours : 0))))
                 .ForMember(x => x.PrivateClientCharge, y => y.MapFrom(z => z.WorkRate.RateId == 3 ? (z.ConsultantHours.Sum(i => i.WorkHours) * z.Client.PrivateClientChargeRate) : 0))
-                .ForMember(x => x.LitigationCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 4) ? (i.WorkHours * i.Consultant.LitigationHourlyRate) : 0)))
+                .ForMember(x => x.LitigationCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 4) ? (i.WorkHours * i.AspNetUser2.LitigationHourlyRate) : 0)))
                 .ForMember(x => x.LitigationCharge, y => y.MapFrom(z => z.WorkRate.RateId == 4 ? (z.ConsultantHours.Sum(i => i.WorkHours) * z.Client.LitigationChargeRate) : 0))
-                .ForMember(x => x.RegulatedCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 5) ? (i.WorkHours * i.Consultant.RegulatedHourlyRate) : 0)))
+                .ForMember(x => x.RegulatedCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 5) ? (i.WorkHours * i.AspNetUser2.RegulatedHourlyRate) : 0)))
                 .ForMember(x => x.RegulatedCharge, y => y.MapFrom(z => z.WorkRate.RateId == 5 ? (z.ConsultantHours.Sum(i => i.WorkHours) * z.Client.RegulatedChargeRate) : 0))
-                .ForMember(x => x.OverseasCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 6) ? (i.WorkHours * i.Consultant.OverseasHourlyRate) : 0)))
+                .ForMember(x => x.OverseasCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 6) ? (i.WorkHours * i.AspNetUser2.OverseasHourlyRate) : 0)))
                 .ForMember(x => x.OverseasCharge, y => y.MapFrom(z => z.WorkRate.RateId == 6 ? (z.ConsultantHours.Sum(i => i.WorkHours) * z.OverseasChargeRate) : 0))
-                .ForMember(x => x.CheckCost_inclSub, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (((i.WorkRateId == 1) ? (i.WorkHours * i.Consultant.SubscriptionHourlyRate) : 0) +
-                                    ((i.WorkRateId == 2) ? (i.WorkHours * i.Consultant.MemberHourlyRate) : 0) +
+                .ForMember(x => x.CheckCost_inclSub, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (((i.WorkRateId == 1) ? (i.WorkHours * i.AspNetUser2.SubscriptionHourlyRate) : 0) +
+                                    ((i.WorkRateId == 2) ? (i.WorkHours * i.AspNetUser2.MemberHourlyRate) : 0) +
                                     ((i.WorkRateId == 3) ? (i.WorkHours) : 0) +
-                                    ((i.WorkRateId == 4) ? (i.WorkHours * i.Consultant.LitigationHourlyRate) : 0) +
-                                    ((i.WorkRateId == 5) ? (i.WorkHours * i.Consultant.RegulatedHourlyRate) : 0) +
-                                    ((i.WorkRateId == 6) ? (i.WorkHours * i.Consultant.OverseasHourlyRate) : 0)))))
-                .ForMember(x => x.CheckCost_exclSub, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (((i.WorkRateId == 2) ? (i.WorkHours * i.Consultant.MemberHourlyRate) : 0) +
+                                    ((i.WorkRateId == 4) ? (i.WorkHours * i.AspNetUser2.LitigationHourlyRate) : 0) +
+                                    ((i.WorkRateId == 5) ? (i.WorkHours * i.AspNetUser2.RegulatedHourlyRate) : 0) +
+                                    ((i.WorkRateId == 6) ? (i.WorkHours * i.AspNetUser2.OverseasHourlyRate) : 0)))))
+                .ForMember(x => x.CheckCost_exclSub, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (((i.WorkRateId == 2) ? (i.WorkHours * i.AspNetUser2.MemberHourlyRate) : 0) +
                                     ((i.WorkRateId == 3) ? i.WorkHours : 0) +
-                                    ((i.WorkRateId == 4) ? (i.WorkHours * i.Consultant.LitigationHourlyRate) : 0) +
-                                    ((i.WorkRateId == 5) ? (i.WorkHours * i.Consultant.RegulatedHourlyRate) : 0) +
-                                    ((i.WorkRateId == 6) ? (i.WorkHours * i.Consultant.OverseasHourlyRate) : 0)))))
+                                    ((i.WorkRateId == 4) ? (i.WorkHours * i.AspNetUser2.LitigationHourlyRate) : 0) +
+                                    ((i.WorkRateId == 5) ? (i.WorkHours * i.AspNetUser2.RegulatedHourlyRate) : 0) +
+                                    ((i.WorkRateId == 6) ? (i.WorkHours * i.AspNetUser2.OverseasHourlyRate) : 0)))))
                 .ForMember(x => x.DisbursementAmount, y => y.MapFrom(z => z.ConsultantHours.Sum(i => i.DisbursementAmount)));
                 cfg.CreateMap<MatterViewModel, Matter>(MemberList.None);
             });

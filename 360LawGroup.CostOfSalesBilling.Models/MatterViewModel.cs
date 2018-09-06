@@ -8,10 +8,8 @@ using System.Threading.Tasks;
 
 namespace _360LawGroup.CostOfSalesBilling.Models
 {
-    public class MatterViewModel
-    {
-        public Guid Id { get; set; }
-
+    public class MatterViewModel : BaseViewModel<Guid>
+    {    
         [Required(ErrorMessage = (Common.RequiredMsg))]
         [Display(Name = "Matter")]
         public string MatterName { get; set; }
@@ -21,8 +19,12 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         public Guid ClientId { get; set; }
 
         [Required(ErrorMessage = (Common.RequiredMsg))]
+        [Display(Name = "Consultant")]
+        public string ConsultantId { get; set; }
+
+        [Required(ErrorMessage = (Common.RequiredMsg))]
         [Display(Name = "Work Rate")]
-        public Guid WorkRateId { get; set; }
+        public Guid WorkRateId { get; set; }        
 
         [Display(Name = "Work Rate Choice")]
         public string WorkRateChoice { get; set; }

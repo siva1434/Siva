@@ -19,13 +19,14 @@ namespace _360LawGroup.CostOfSalesBilling.Data
         {
             this.ConsultantCosts = new HashSet<ConsultantCost>();
             this.ConsultantHours = new HashSet<ConsultantHour>();
-            this.Consultants = new HashSet<Consultant>();
+            this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
         public System.Guid Id { get; set; }
         public string MatterName { get; set; }
         public System.Guid ClientId { get; set; }
         public System.Guid WorkRateId { get; set; }
+        public string ConsultantId { get; set; }
         public string WorkRateChoice { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public bool CurrentMonth { get; set; }
@@ -42,7 +43,16 @@ namespace _360LawGroup.CostOfSalesBilling.Data
         public string ClientMatter_ContactEmail { get; set; }
         public Nullable<int> MonNum { get; set; }
         public string MonthName { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
+        public string CreatedBy { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser AspNetUser1 { get; set; }
+        public virtual AspNetUser AspNetUser2 { get; set; }
         public virtual Client Client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ConsultantCost> ConsultantCosts { get; set; }
@@ -50,6 +60,6 @@ namespace _360LawGroup.CostOfSalesBilling.Data
         public virtual ICollection<ConsultantHour> ConsultantHours { get; set; }
         public virtual WorkRate WorkRate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Consultant> Consultants { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
     }
 }

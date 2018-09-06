@@ -148,7 +148,15 @@
                             AlertNotify("Overseas Country", "Please enter country.", "bg-danger");                            
                         } else {
                             debugger
-                            var val = $(value).add('.target-value');
+                            $.ajax({
+                                type: "GET",
+                                url: "api/superadmin/adminsettings/saveadminsettings",
+                                data: JSON.stringify(value),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                success: function () {                                  
+                                },                               
+                            });  
                         }
                     }
                 }
