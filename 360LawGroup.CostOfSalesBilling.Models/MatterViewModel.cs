@@ -24,10 +24,7 @@ namespace _360LawGroup.CostOfSalesBilling.Models
 
         [Required(ErrorMessage = (Common.RequiredMsg))]
         [Display(Name = "Work Rate")]
-        public Guid WorkRateId { get; set; }
-
-        [Display(Name = "Consultant")]
-        public string ConsultantId { get; set; }
+        public Guid WorkRateId { get; set; }        
 
         [Display(Name = "Work Rate Choice")]
         public string WorkRateChoice { get; set; }
