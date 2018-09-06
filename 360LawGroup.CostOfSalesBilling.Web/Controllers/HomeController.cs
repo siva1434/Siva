@@ -26,7 +26,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
 
             else
             {
-                Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
+                WebCookie.Set("WebLogin", null);
                 return RedirectToAction("Login", "Account", new { Area = "" });
             }
         }

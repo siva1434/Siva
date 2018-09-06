@@ -56,7 +56,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
         [HttpPost]
         public ActionResult LogOut()
         {
-            Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
+            WebCookie.Set("WebLogin", null);
             return Redirect("~/");
         }
 
@@ -160,8 +160,8 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
             //var remember = false;
             //var rememberClaim = CurrentUser.remember;
             //if (rememberClaim != null)
-              //  remember = Convert.ToBoolean(rememberClaim.Value);
-            Request.GetOwinContext().Authentication.SignOut("ApplicationCookie");
+            //  remember = Convert.ToBoolean(rememberClaim.Value);
+            WebCookie.Set("WebLogin", null);
             GenerateIdentity(token, CurrentUser.remember);
         }
     }
