@@ -24,7 +24,14 @@ namespace _360LawGroup.CostOfSalesBilling.Data
             this.AspNetUsers12 = new HashSet<AspNetUser>();
             this.Clients = new HashSet<Client>();
             this.Clients1 = new HashSet<Client>();
+            this.ConsultantHours = new HashSet<ConsultantHour>();
+            this.ConsultantHours1 = new HashSet<ConsultantHour>();
+            this.ConsultantHours2 = new HashSet<ConsultantHour>();
+            this.Matters = new HashSet<Matter>();
+            this.Matters1 = new HashSet<Matter>();
+            this.Matters2 = new HashSet<Matter>();
             this.AspNetRoles = new HashSet<AspNetRole>();
+            this.Matters3 = new HashSet<Matter>();
         }
     
         public string Id { get; set; }
@@ -100,6 +107,20 @@ namespace _360LawGroup.CostOfSalesBilling.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Client> Clients1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ConsultantHour> ConsultantHours { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ConsultantHour> ConsultantHours1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ConsultantHour> ConsultantHours2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Matter> Matters { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Matter> Matters1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Matter> Matters2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Matter> Matters3 { get; set; }
     }
 }

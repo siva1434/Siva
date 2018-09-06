@@ -14,13 +14,6 @@ namespace _360LawGroup.CostOfSalesBilling.Data
     
     public partial class Consultant
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Consultant()
-        {
-            this.ConsultantHours = new HashSet<ConsultantHour>();
-            this.Matters = new HashSet<Matter>();
-        }
-    
         public System.Guid Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
@@ -47,10 +40,5 @@ namespace _360LawGroup.CostOfSalesBilling.Data
         public Nullable<decimal> OverseasHourlyRate { get; set; }
         public Nullable<System.DateTime> LastUpdated { get; set; }
         public string ConsultantName { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ConsultantHour> ConsultantHours { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Matter> Matters { get; set; }
     }
 }

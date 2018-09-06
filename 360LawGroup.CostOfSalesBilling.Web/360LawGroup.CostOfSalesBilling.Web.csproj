@@ -257,6 +257,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
+    <Compile Include="Areas\All\Controllers\ConsultantsController.cs" />
     <Compile Include="Areas\ClientUser\ClientUserAreaRegistration.cs" />
     <Compile Include="Areas\ClientUser\Controllers\HomeController.cs" />
     <Compile Include="Areas\All\CommonAreaRegistration.cs" />
@@ -270,6 +271,7 @@
     <Compile Include="Areas\SuperAdmin\Controllers\HomeController.cs" />
     <Compile Include="Areas\SuperAdmin\SuperAdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\All\ConsultantsController.cs" />
     <Compile Include="Controllers\Api\Common\AccountController.cs" />
     <Compile Include="Controllers\Api\BaseApiController.cs" />
     <Compile Include="Controllers\Api\Common\CommonController.cs" />
@@ -2981,6 +2983,7 @@
     <Content Include="Areas\All\Views\Users\Editor.cshtml" />
     <Content Include="Areas\All\Views\Users\Index.cshtml" />
     <Content Include="Areas\All\Views\web.config" />
+    <Content Include="Areas\All\Views\Consultants\ConsultantHours.cshtml" />
     <None Include="Properties\PublishProfiles\dev-healthfreak - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\qa-hf - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -3084,6 +3087,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Areas\All\Models\" />
+    <Folder Include="Areas\All\Views\Consultant\" />
     <Folder Include="Areas\ClientUser\Models\" />
     <Folder Include="Areas\Consultant\Models\" />
     <Folder Include="Areas\SuperAdmin\Models\" />
