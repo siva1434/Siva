@@ -281,7 +281,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Api\AccountController.cs" />
     <Compile Include="Controllers\Api\BaseApiController.cs" />
-    <Compile Include="Controllers\Api\CommonApiController.cs" />
     <Compile Include="Controllers\Api\Common\ClientsController.cs" />
     <Compile Include="Controllers\Api\Common\EventObject.cs" />
     <Compile Include="Controllers\Api\Common\MatterController.cs" />
