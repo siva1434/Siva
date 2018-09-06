@@ -33,7 +33,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers
 
         public ActionResult Swagger()
         {
-            return Redirect(ViewBag.ApiUrl + "swagger/ui/index?token=" + ViewBag.UserToken);
+            return Redirect(ViewBag.ApiUrl + "api/swagger/ui/index?token=" + ViewBag.UserToken);
         }
         /*
         public ActionResult DashboardCounters()

@@ -24,7 +24,7 @@
             new AjaxOptions
             {
                 HttpMethod = "POST",
-                Url = ViewBag.ApiUrl + "common/client/" + (Model.Id == Guid.Empty ? "create" : "edit"),
+                Url = ViewBag.ApiUrl + "api/common/client/" + (Model.Id == Guid.Empty ? "create" : "edit"),
                 OnSuccess = "ClientDataSuccess",
                 OnFailure = "Failed"
             }, new { @class = "form-horizontal", role = "form" }

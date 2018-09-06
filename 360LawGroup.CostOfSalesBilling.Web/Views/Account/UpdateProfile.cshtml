@@ -10,7 +10,7 @@
             @using ( Ajax.BeginForm("", "", null,
                 new AjaxOptions {
                     HttpMethod = "POST",
-                    Url = ViewBag.ApiUrl + "Account/UpdateProfile",
+                    Url = ViewBag.ApiUrl + "api/Account/UpdateProfile",
                     OnSuccess = "SuccessUpdateProf",
                     OnFailure = "Failed"
                 }, new { @class = "form-horizontal", role = "form" }

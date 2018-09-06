@@ -25,7 +25,7 @@
             new AjaxOptions
             {
                 HttpMethod = "POST",
-                Url = ViewBag.ApiUrl + "common/Matter/" + (Model.Id == Guid.Empty ? "create" : "edit"),
+                Url = ViewBag.ApiUrl + "api/common/Matter/" + (Model.Id == Guid.Empty ? "create" : "edit"),
                 OnSuccess = "ClientDataSuccess",
                 OnFailure = "Failed"
             }, new { @class = "form-horizontal", role = "form" }
@@ -43,12 +43,12 @@
                         </div>
                         <div class="col-md-4">
                             @Html.RequiredLabelFor(m => m.ClientId, new { @class = "control-label text-bold" })
-                            @Html.DropDownListFor(m => m.ClientId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "common/getallclient", @placeholder = "Select Client", @data_value = Model.ClientId })
+                            @Html.DropDownListFor(m => m.ClientId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/getallclient", @placeholder = "Select Client", @data_value = Model.ClientId })
                             @Html.ValidationMessageFor(model => model.ClientId)
                         </div>
                         <div class="col-md-4">
                             @Html.RequiredLabelFor(m => m.WorkRateId, new { @class = "control-label text-bold" })
-                            @Html.DropDownListFor(m => m.WorkRateId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "common/getallworkrate", @placeholder = "Select WorkRate", @data_value = Model.WorkRateId })
+                            @Html.DropDownListFor(m => m.WorkRateId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/getallworkrate", @placeholder = "Select WorkRate", @data_value = Model.WorkRateId })
                             @Html.ValidationMessageFor(model => model.WorkRateId)
                         </div>
                     </div>
@@ -60,7 +60,7 @@
                         </div>
                         <div class="col-md-4">
                             @Html.RequiredLabelFor(m => m.ConsultantId, new { @class = "control-label text-bold" })
-                            @Html.DropDownListFor(m => m.ConsultantId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "common/getallconsultant", @placeholder = "Select Consultant", @data_value = Model.ConsultantId })
+                            @Html.DropDownListFor(m => m.ConsultantId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/getallconsultant", @placeholder = "Select Consultant", @data_value = Model.ConsultantId })
                             @Html.ValidationMessageFor(model => model.ConsultantId)
                         </div>
                         <div class="col-md-4">
