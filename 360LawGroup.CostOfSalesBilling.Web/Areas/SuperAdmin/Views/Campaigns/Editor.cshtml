@@ -1,0 +1,101 @@
+﻿@model HealthFreak.Models.CampaignViewModel
+@{
+    var url = "";
+    var title = "";
+    if (Model.Id == Guid.Empty)
+    {
+        url = ViewBag.ApiUrl + "superadmin/campaigns/create";
+        title = "Create";
+    }
+    else
+    {
+        url = ViewBag.ApiUrl + "superadmin/campaigns/edit";
+        title = "Edit";
+    }
+}
+
+<div id="AddEditModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">
+                    @title Campaign
+                </h4>
+            </div>
+            @using (Ajax.BeginForm("", "", null,
+                                            new AjaxOptions
+                                            {
+                                                HttpMethod = "POST",
+                                                Url = url,
+                                                OnSuccess = "PopupDataSuccess",
+                                                OnFailure = "Failed"
+                                            }, new { @class = "form-horizontal", role = "form" }
+                                    ))
+            {
+                @Html.HiddenFor(x => x.Id)
+                @Html.ValidationMessageFor(model => model.Id)
+
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.RequiredLabelFor(m => m.Name, new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @placeholder = "Enter Campaigns Name", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Name)
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.RequiredLabelFor(m => m.Price, new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @placeholder = "Enter Price", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Price)
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.RequiredLabelFor(m => m.Duration, new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Duration, new { htmlAttributes = new { @placeholder = "Enter Duration", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Duration)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                @Html.RequiredLabelFor(m => m.Capacity, new { @class = "control-label" })
+                                @Html.EditorFor(model => model.Capacity, new { htmlAttributes = new { @placeholder = "Enter Capacity", @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Capacity)
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            @Html.RequiredLabelFor(m => m.IsActive, new { @class = "control-label" })
+
+                            @Html.DropDownListFor(model => model.IsActive,
+                                          new List<SelectListItem>
+                                          {
+                                            new SelectListItem { Text="ACTIVE", Value="true"},
+                                            new SelectListItem { Text="DEACTIVE", Value="false"}
+                                          }
+                                          , new { @class = "form-control", @data_keyboard = "false" }
+                                          )
+                            @Html.ValidationMessageFor(model => model.IsActive)
+                        </div>                       
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="submit" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        ShowModal("#AddEditModal");
+    });
+</script>

@@ -1,0 +1,80 @@
+﻿@model HealthFreak.Models.CampaignViewModel
+@{
+    ViewBag.Title = "Campaigns";
+}
+@*<div id="addeditarea">
+    @Html.Partial("Editor", Model)
+</div>*@
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h5 class="panel-title">Campaigns List</h5>
+        <div class="heading-elements text-right col-md-3">
+            <a href="@Url.Action("Editor")" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess" class="pull-left-sm btn btn-default btn-xs">
+                <i class="glyphicon glyphicon-plus-sign"></i>
+            </a>
+            <ul class="icons-list pull-right">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="search_filter" class="search-filter">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span class="input-group-addon">Name</span>
+                        @Html.TextBox("Name", "", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-addon">Active?</span>
+                        @Html.DropDownList("IsActive",
+                            new List<SelectListItem>
+                            {
+                                new SelectListItem { Text="All", Value="", Selected=true},
+                                new SelectListItem { Text="Active", Value="true"},
+                                new SelectListItem { Text="Deactive", Value="false"}
+                            }, new { @class = "form-control", @data_keyboard = "false" })
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <button id="btnsearch" type="button" class="btn btn-success btn-sm">Search</button>
+                    <button id="btnreset" type="button" class="btn btn-warning btn-sm">Reset</button>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="table-responsive">
+            <table id="grid" data-sort-name="Name" data-sort-order="asc"
+                   data-toggle="table"
+                   data-url="@(ViewBag.ApiUrl+ "superadmin/campaigns/getall")"
+                   data-queryparams="getSearchParam"
+                   data-pagination="true" class="table"
+                   cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th data-field="Name" data-sortable="true">Campaigns Name</th>
+                        <th data-field="Price" data-sortable="true">Price</th>
+                        <th data-field="Duration" data-sortable="true">Duration</th>
+                        <th data-field="Capacity" data-sortable="true">Capacity</th>
+                        <th data-field="IsActive" data-sortable="true" data-formatter="tbl_Status">Active</th>
+                        <th data-field="CreatedOn" data-sortable="true" data-formatter="datetimeformatter">Created On</th>
+                        <th data-field="ModifiedOn" data-sortable="true" data-formatter="datetimeformatter">Modified On</th>
+                        @*<th data-url="AdminCommon/campaigns/CampaignMember" data-align="center" data-width="5%" data-field="Id" data-formatter="tbl_CampMember_Redirect">Assign Campaign Member</th>*@
+                        <th data-url="superadmin/campaigns/Editor" data-align="center" data-width="5%" data-field="Id" data-formatter="tbl_Edit_Popup">Edit</th>
+                        <th data-url="superadmin/campaigns/delete" data-align="center" data-width="5%" data-field="Id" data-formatter="tbl_Delete">Delete</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function tbl_CampMember_Redirect(value) {
+        return '<a href="' + BASEPATH + this.url + "?id=" + value + '" class="btn bg-blue btn-sm"><i class="glyphicon glyphicon-check"></i></a>';
+    }
+</script>
+
+

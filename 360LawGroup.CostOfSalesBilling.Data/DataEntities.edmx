@@ -1,0 +1,1933 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="LawGroup.CostOfSalesBillingModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdminSettings">
+          <Key>
+            <PropertyRef Name="ParamName" />
+          </Key>
+          <Property Name="ParamName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="ParamTitle" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ParamValue" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ParamType" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetRoles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaims">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogins">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUserRoles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="RoleId" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="nvarchar" MaxLength="128" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="IsSendAnEmailIntro" Type="bit" />
+          <Property Name="Address" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AddresslLine1" Type="nvarchar" MaxLength="1000" />
+          <Property Name="City" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Region" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Country" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="PinCode" Type="int" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="201" StoreGeneratedPattern="Computed" />
+          <Property Name="ConsultantCompany" Type="nvarchar" MaxLength="255" />
+          <Property Name="EmailAddress_360BusinessLaw" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailAddress_PrivateClientLaw" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailAddress_360LawServices" Type="nvarchar" MaxLength="256" />
+          <Property Name="PrivateEmailAddress" Type="nvarchar" MaxLength="256" />
+          <Property Name="AreaofLaw" Type="nvarchar" MaxLength="255" />
+          <Property Name="BusinessPhone" Type="nvarchar(max)" />
+          <Property Name="HomePhone" Type="nvarchar(max)" />
+          <Property Name="MobilePhone" Type="nvarchar(max)" />
+          <Property Name="JurisdictionsCovered" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Attachments" Type="nvarchar(max)" />
+          <Property Name="SubscriptionHourlyRate" Type="money" />
+          <Property Name="MemberHourlyRate" Type="money" />
+          <Property Name="PrivateClientHourlyRate" Type="money" />
+          <Property Name="LitigationHourlyRate" Type="money" />
+          <Property Name="RegulatedHourlyRate" Type="money" />
+          <Property Name="OverseasHourlyRate" Type="money" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="ConsultantName" Type="nvarchar" MaxLength="201" StoreGeneratedPattern="Computed" />
+          <Property Name="ConsultantUserId" Type="nvarchar" MaxLength="128" />
+          <Property Name="ClientId" Type="uniqueidentifier" />
+          <Property Name="UserStatus" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ClientFiles">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClientId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Category" Type="nvarchar(max)" />
+          <Property Name="Files" Type="nvarchar(max)" />
+          <Property Name="Image" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="ClientIncomes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClientId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResetNewMonthId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MonNum" Type="bigint" Nullable="false" />
+          <Property Name="Month" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Year" Type="bigint" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="TotalHours" Type="bigint" Nullable="false" />
+          <Property Name="SubscriptionFee" Type="money" Nullable="false" />
+          <Property Name="SubscriptionCost" Type="money" Nullable="false" />
+          <Property Name="SubscriptionFee_Cost" Type="money" />
+          <Property Name="MemberCost" Type="money" />
+          <Property Name="MemberCharge" Type="money" />
+          <Property Name="PrivateClientCost" Type="money" />
+          <Property Name="PrivateClientCharge" Type="money" />
+          <Property Name="LitigationCost" Type="money" />
+          <Property Name="LitigationCharge" Type="money" />
+          <Property Name="RegulatedCost" Type="money" />
+          <Property Name="RegulatedCharge" Type="money" />
+          <Property Name="OverseasCost" Type="money" />
+          <Property Name="OverseasCharge" Type="money" />
+          <Property Name="TotalCost" Type="money" />
+          <Property Name="TotalCharge" Type="money" />
+          <Property Name="SubscriptionProfit" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="SubscriptionProfitPercet" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="MemberProfit" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="MemberProfitPercent" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="PrivateClientProfit" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="PrivateClientProfitPercent" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="LitigationProfit" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="LitigationProfitPercent" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="RegulatedProfit" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="RegulatedProfitPercent" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="OverseasProfit" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="OverseasProfitPercent" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="ChargeMinusCost" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="FeePlusCharge" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="OverallProfit" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="ProfitPercent" Type="money" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Company" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="BusinessPhone" Type="nvarchar(max)" />
+          <Property Name="FaxNumber" Type="nvarchar(max)" />
+          <Property Name="MobileNumber" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AddressLine1" Type="nvarchar(max)" />
+          <Property Name="AddressLIne2" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" />
+          <Property Name="Region" Type="nvarchar" MaxLength="100" />
+          <Property Name="PinCode" Type="int" />
+          <Property Name="ContractedCountries" Type="nvarchar" MaxLength="50" />
+          <Property Name="ContractRenewalDate" Type="datetime" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Attechments" Type="nvarchar(max)" />
+          <Property Name="IsSubscription" Type="bit" Nullable="false" />
+          <Property Name="SubscriptionBasis" Type="nvarchar(max)" />
+          <Property Name="MonthlySubscription" Type="money" />
+          <Property Name="SubscriptionDate" Type="datetime" />
+          <Property Name="SubscriptionType" Type="nvarchar" MaxLength="50" />
+          <Property Name="PaymentMonths" Type="nvarchar" MaxLength="50" />
+          <Property Name="MemberChargeRate" Type="money" />
+          <Property Name="PrivateClientChargeRate" Type="money" />
+          <Property Name="LitigationChargeRate" Type="money" />
+          <Property Name="RegulatedChargeRate" Type="money" />
+          <Property Name="SPAREChargeRate" Type="money" />
+          <Property Name="InWorkThisMonth" Type="bit" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="SubscriptionCharge" Type="money" StoreGeneratedPattern="Computed" />
+          <Property Name="NextSubscriptionDate" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="NextSubMonth" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="128" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="201" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ConsultantCosts">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Matter_Consultant_WorkPeriod" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MatterId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClientId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WorkRateId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WorkDate" Type="datetime" />
+          <Property Name="Month" Type="datetime" />
+          <Property Name="MonNum" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Year" Type="datetime" />
+          <Property Name="ClientWorkPeriod" Type="nvarchar" MaxLength="255" />
+          <Property Name="Hours" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="SubscriptionCost" Type="money" />
+          <Property Name="MemberCost" Type="money" />
+          <Property Name="PrivateClientCost" Type="money" />
+          <Property Name="LitigationCost" Type="money" />
+          <Property Name="RegulatedCost" Type="money" />
+          <Property Name="OverseasCost" Type="money" />
+          <Property Name="Cost_incl_Sub" Type="money" />
+          <Property Name="Cost_excl_Sub" Type="money" />
+          <Property Name="Status" Type="nvarchar(max)" />
+          <Property Name="DisbursementDescription" Type="nvarchar" MaxLength="255" />
+          <Property Name="DisbursementAmount" Type="money" />
+          <Property Name="RateUsed" Type="numeric" Precision="38" Scale="23" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="ConsultantHours">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ConsultantId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MatterId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClientId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WorkDate" Type="datetime" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="WorkHours" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="CurrentMonth" Type="bit" />
+          <Property Name="CostUpdated" Type="bit" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="WorkRateId" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="Agreed" Type="bit" />
+          <Property Name="ResetNewMonthId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DisbursementDescription" Type="nchar" MaxLength="255" />
+          <Property Name="DisbursementAmount" Type="money" />
+          <Property Name="Hours" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Computed" />
+          <Property Name="Minutes" Type="numeric" Precision="22" Scale="0" StoreGeneratedPattern="Computed" />
+          <Property Name="SubscriptionHours" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Computed" />
+          <Property Name="MemberHours" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Computed" />
+          <Property Name="PrivateClientHours" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Computed" />
+          <Property Name="LitigationHours" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Computed" />
+          <Property Name="RegulatedHours" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Computed" />
+          <Property Name="OverseasHours" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Computed" />
+          <Property Name="LastDate" Type="datetime" StoreGeneratedPattern="Computed" />
+          <Property Name="MonNum" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="MonthName" Type="nvarchar" MaxLength="30" StoreGeneratedPattern="Computed" />
+          <Property Name="Year" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="TotalHours_excl_Sub" Type="numeric" Precision="22" Scale="0" StoreGeneratedPattern="Computed" />
+          <Property Name="Month" Type="varchar" MaxLength="3" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="Consultants">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="UserStatus" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ConsultantCompany" Type="nvarchar" MaxLength="255" />
+          <Property Name="EmailAddress_360BusinessLaw" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailAddress_PrivateClientLaw" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailAddress_360LawServices" Type="nvarchar" MaxLength="256" />
+          <Property Name="PrivateEmailAddress" Type="nvarchar" MaxLength="256" />
+          <Property Name="AreaofLaw" Type="nvarchar" MaxLength="255" />
+          <Property Name="BusinessPhone" Type="nvarchar(max)" />
+          <Property Name="HomePhone" Type="nvarchar(max)" />
+          <Property Name="MobilePhone" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="JurisdictionsCovered" Type="nvarchar" MaxLength="255" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Attachments" Type="nvarchar(max)" />
+          <Property Name="SubscriptionHourlyRate" Type="money" />
+          <Property Name="MemberHourlyRate" Type="money" />
+          <Property Name="PrivateClientHourlyRate" Type="money" />
+          <Property Name="LitigationHourlyRate" Type="money" />
+          <Property Name="RegulatedHourlyRate" Type="money" />
+          <Property Name="OverseasHourlyRate" Type="money" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="ConsultantName" Type="nvarchar" MaxLength="256" StoreGeneratedPattern="Computed" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ELMAH_Error">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+          </Key>
+          <Property Name="ErrorId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Application" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Host" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Source" Type="nvarchar" MaxLength="60" Nullable="false" />
+          <Property Name="Message" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="User" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StatusCode" Type="int" Nullable="false" />
+          <Property Name="TimeUtc" Type="datetime" Nullable="false" />
+          <Property Name="Sequence" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AllXml" Type="ntext" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MatterConsultants">
+          <Key>
+            <PropertyRef Name="MatterId" />
+            <PropertyRef Name="ConsultantId" />
+          </Key>
+          <Property Name="MatterId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ConsultantId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Matters">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MatterName" Type="nvarchar" MaxLength="255" />
+          <Property Name="ClientId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WorkRateId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="WorkRateChoice" Type="nvarchar(max)" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="CurrentMonth" Type="bit" Nullable="false" />
+          <Property Name="AreaofLaw" Type="nvarchar(max)" />
+          <Property Name="Status" Type="nvarchar(max)" />
+          <Property Name="Box" Type="nvarchar(max)" />
+          <Property Name="Overseas" Type="bit" />
+          <Property Name="OverseasCountry" Type="nvarchar(max)" />
+          <Property Name="OverseasChargeRate" Type="money" />
+          <Property Name="LastUpdated" Type="datetime" />
+          <Property Name="Billable" Type="bit" />
+          <Property Name="Number" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ClientMatterContact" Type="nvarchar" MaxLength="255" />
+          <Property Name="ClientMatter_ContactEmail" Type="nvarchar" MaxLength="256" />
+          <Property Name="MonNum" Type="int" StoreGeneratedPattern="Computed" />
+          <Property Name="MonthName" Type="nvarchar" MaxLength="30" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityType Name="ResetNewMonths">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsResetNewMonth" Type="bit" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="WorkRates">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RateId" Type="int" Nullable="false" />
+          <Property Name="RateType" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AspNetUsers_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="0..1" />
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsers">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_ConsultantUserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="AspNetUsers1" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsers1">
+              <PropertyRef Name="ConsultantUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_CreatedBy">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="AspNetUsers1" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsers1">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_ModifiedBy">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="AspNetUsers1" Type="Self.AspNetUsers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUsers1">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_AspNetUsers1">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientFiles_Client">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ClientFiles" Type="Self.ClientFiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientFiles">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientIncome_Client">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ClientIncomes" Type="Self.ClientIncomes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientIncomes">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientIncome_ResetNewMonth">
+          <End Role="ResetNewMonths" Type="Self.ResetNewMonths" Multiplicity="1" />
+          <End Role="ClientIncomes" Type="Self.ClientIncomes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResetNewMonths">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientIncomes">
+              <PropertyRef Name="ResetNewMonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantCosts_Client">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ConsultantCosts" Type="Self.ConsultantCosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantCosts">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantCosts_Matter">
+          <End Role="Matters" Type="Self.Matters" Multiplicity="1" />
+          <End Role="ConsultantCosts" Type="Self.ConsultantCosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantCosts">
+              <PropertyRef Name="MatterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantCosts_WorkRates">
+          <End Role="WorkRates" Type="Self.WorkRates" Multiplicity="1" />
+          <End Role="ConsultantCosts" Type="Self.ConsultantCosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkRates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantCosts">
+              <PropertyRef Name="WorkRateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantHours_Client">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="ConsultantHours" Type="Self.ConsultantHours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantHours">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantHours_Consultant">
+          <End Role="Consultants" Type="Self.Consultants" Multiplicity="1" />
+          <End Role="ConsultantHours" Type="Self.ConsultantHours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consultants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantHours">
+              <PropertyRef Name="ConsultantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantHours_Matter">
+          <End Role="Matters" Type="Self.Matters" Multiplicity="1" />
+          <End Role="ConsultantHours" Type="Self.ConsultantHours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantHours">
+              <PropertyRef Name="MatterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantHours_ResetNewMonth">
+          <End Role="ResetNewMonths" Type="Self.ResetNewMonths" Multiplicity="1" />
+          <End Role="ConsultantHours" Type="Self.ConsultantHours" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResetNewMonths">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantHours">
+              <PropertyRef Name="ResetNewMonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaims">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogins">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+          <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetRoles">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="AspNetUserRoles" Type="Self.AspNetUserRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matter_Client">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Matters" Type="Self.Matters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Matters">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matter_WorkRates">
+          <End Role="WorkRates" Type="Self.WorkRates" Multiplicity="1" />
+          <End Role="Matters" Type="Self.Matters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkRates">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Matters">
+              <PropertyRef Name="WorkRateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MatterConsultants_Consultant">
+          <End Role="Consultants" Type="Self.Consultants" Multiplicity="1" />
+          <End Role="MatterConsultants" Type="Self.MatterConsultants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consultants">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatterConsultants">
+              <PropertyRef Name="ConsultantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MatterConsultants_Matter">
+          <End Role="Matters" Type="Self.Matters" Multiplicity="1" />
+          <End Role="MatterConsultants" Type="Self.MatterConsultants" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matters">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="MatterConsultants">
+              <PropertyRef Name="MatterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LawGroupCostOfSalesBillingModelStoreContainer">
+          <EntitySet Name="AdminSettings" EntityType="Self.AdminSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogins" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUserRoles" EntityType="Self.AspNetUserRoles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientFiles" EntityType="Self.ClientFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientIncomes" EntityType="Self.ClientIncomes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsultantCosts" EntityType="Self.ConsultantCosts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ConsultantHours" EntityType="Self.ConsultantHours" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Consultants" EntityType="Self.Consultants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ELMAH_Error" EntityType="Self.ELMAH_Error" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MatterConsultants" EntityType="Self.MatterConsultants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Matters" EntityType="Self.Matters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResetNewMonths" EntityType="Self.ResetNewMonths" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkRates" EntityType="Self.WorkRates" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AspNetUsers_Clients" Association="Self.FK_AspNetUsers_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_ConsultantUserId" Association="Self.FK_AspNetUsers_ConsultantUserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsers1" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_CreatedBy" Association="Self.FK_AspNetUsers_CreatedBy">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsers1" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_ModifiedBy" Association="Self.FK_AspNetUsers_ModifiedBy">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUsers1" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_AspNetUsers" Association="Self.FK_Client_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_AspNetUsers1" Association="Self.FK_Client_AspNetUsers1">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientFiles_Client" Association="Self.FK_ClientFiles_Client">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientFiles" EntitySet="ClientFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientIncome_Client" Association="Self.FK_ClientIncome_Client">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ClientIncomes" EntitySet="ClientIncomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientIncome_ResetNewMonth" Association="Self.FK_ClientIncome_ResetNewMonth">
+            <End Role="ResetNewMonths" EntitySet="ResetNewMonths" />
+            <End Role="ClientIncomes" EntitySet="ClientIncomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantCosts_Client" Association="Self.FK_ConsultantCosts_Client">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ConsultantCosts" EntitySet="ConsultantCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantCosts_Matter" Association="Self.FK_ConsultantCosts_Matter">
+            <End Role="Matters" EntitySet="Matters" />
+            <End Role="ConsultantCosts" EntitySet="ConsultantCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantCosts_WorkRates" Association="Self.FK_ConsultantCosts_WorkRates">
+            <End Role="WorkRates" EntitySet="WorkRates" />
+            <End Role="ConsultantCosts" EntitySet="ConsultantCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantHours_Client" Association="Self.FK_ConsultantHours_Client">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="ConsultantHours" EntitySet="ConsultantHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantHours_Consultant" Association="Self.FK_ConsultantHours_Consultant">
+            <End Role="Consultants" EntitySet="Consultants" />
+            <End Role="ConsultantHours" EntitySet="ConsultantHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantHours_Matter" Association="Self.FK_ConsultantHours_Matter">
+            <End Role="Matters" EntitySet="Matters" />
+            <End Role="ConsultantHours" EntitySet="ConsultantHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantHours_ResetNewMonth" Association="Self.FK_ConsultantHours_ResetNewMonth">
+            <End Role="ResetNewMonths" EntitySet="ResetNewMonths" />
+            <End Role="ConsultantHours" EntitySet="ConsultantHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetRoles_RoleId">
+            <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserRoles_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matter_Client" Association="Self.FK_Matter_Client">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Matters" EntitySet="Matters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matter_WorkRates" Association="Self.FK_Matter_WorkRates">
+            <End Role="WorkRates" EntitySet="WorkRates" />
+            <End Role="Matters" EntitySet="Matters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MatterConsultants_Consultant" Association="Self.FK_MatterConsultants_Consultant">
+            <End Role="Consultants" EntitySet="Consultants" />
+            <End Role="MatterConsultants" EntitySet="MatterConsultants" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MatterConsultants_Matter" Association="Self.FK_MatterConsultants_Matter">
+            <End Role="Matters" EntitySet="Matters" />
+            <End Role="MatterConsultants" EntitySet="MatterConsultants" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LawGroup.CostOfSalesBillingModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DataEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdminSettings" EntityType="LawGroup.CostOfSalesBillingModel.AdminSetting" />
+          <EntitySet Name="AspNetRoles" EntityType="LawGroup.CostOfSalesBillingModel.AspNetRole" />
+          <EntitySet Name="AspNetUserClaims" EntityType="LawGroup.CostOfSalesBillingModel.AspNetUserClaim" />
+          <EntitySet Name="AspNetUserLogins" EntityType="LawGroup.CostOfSalesBillingModel.AspNetUserLogin" />
+          <EntitySet Name="AspNetUsers" EntityType="LawGroup.CostOfSalesBillingModel.AspNetUser" />
+          <EntitySet Name="ClientFiles" EntityType="LawGroup.CostOfSalesBillingModel.ClientFile" />
+          <EntitySet Name="ClientIncomes" EntityType="LawGroup.CostOfSalesBillingModel.ClientIncome" />
+          <EntitySet Name="Clients" EntityType="LawGroup.CostOfSalesBillingModel.Client" />
+          <EntitySet Name="ConsultantCosts" EntityType="LawGroup.CostOfSalesBillingModel.ConsultantCost" />
+          <EntitySet Name="ConsultantHours" EntityType="LawGroup.CostOfSalesBillingModel.ConsultantHour" />
+          <EntitySet Name="Consultants" EntityType="LawGroup.CostOfSalesBillingModel.Consultant" />
+          <EntitySet Name="ELMAH_Error" EntityType="LawGroup.CostOfSalesBillingModel.ELMAH_Error" />
+          <EntitySet Name="Matters" EntityType="LawGroup.CostOfSalesBillingModel.Matter" />
+          <EntitySet Name="ResetNewMonths" EntityType="LawGroup.CostOfSalesBillingModel.ResetNewMonth" />
+          <EntitySet Name="WorkRates" EntityType="LawGroup.CostOfSalesBillingModel.WorkRate" />
+          <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="LawGroup.CostOfSalesBillingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="LawGroup.CostOfSalesBillingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_Clients" Association="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_Clients">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_ConsultantUserId" Association="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_ConsultantUserId">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser1" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_CreatedBy" Association="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_CreatedBy">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser1" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AspNetUsers_ModifiedBy" Association="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_ModifiedBy">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="AspNetUser1" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_AspNetUsers" Association="LawGroup.CostOfSalesBillingModel.FK_Client_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_AspNetUsers1" Association="LawGroup.CostOfSalesBillingModel.FK_Client_AspNetUsers1">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Client" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientFiles_Client" Association="LawGroup.CostOfSalesBillingModel.FK_ClientFiles_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="ClientFile" EntitySet="ClientFiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientIncome_Client" Association="LawGroup.CostOfSalesBillingModel.FK_ClientIncome_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="ClientIncome" EntitySet="ClientIncomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ClientIncome_ResetNewMonth" Association="LawGroup.CostOfSalesBillingModel.FK_ClientIncome_ResetNewMonth">
+            <End Role="ResetNewMonth" EntitySet="ResetNewMonths" />
+            <End Role="ClientIncome" EntitySet="ClientIncomes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantCosts_Client" Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="ConsultantCost" EntitySet="ConsultantCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantHours_Client" Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="ConsultantHour" EntitySet="ConsultantHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matter_Client" Association="LawGroup.CostOfSalesBillingModel.FK_Matter_Client">
+            <End Role="Client" EntitySet="Clients" />
+            <End Role="Matter" EntitySet="Matters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantCosts_Matter" Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_Matter">
+            <End Role="Matter" EntitySet="Matters" />
+            <End Role="ConsultantCost" EntitySet="ConsultantCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantCosts_WorkRates" Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_WorkRates">
+            <End Role="WorkRate" EntitySet="WorkRates" />
+            <End Role="ConsultantCost" EntitySet="ConsultantCosts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantHours_Consultant" Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Consultant">
+            <End Role="Consultant" EntitySet="Consultants" />
+            <End Role="ConsultantHour" EntitySet="ConsultantHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantHours_Matter" Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Matter">
+            <End Role="Matter" EntitySet="Matters" />
+            <End Role="ConsultantHour" EntitySet="ConsultantHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConsultantHours_ResetNewMonth" Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_ResetNewMonth">
+            <End Role="ResetNewMonth" EntitySet="ResetNewMonths" />
+            <End Role="ConsultantHour" EntitySet="ConsultantHours" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Matter_WorkRates" Association="LawGroup.CostOfSalesBillingModel.FK_Matter_WorkRates">
+            <End Role="WorkRate" EntitySet="WorkRates" />
+            <End Role="Matter" EntitySet="Matters" />
+          </AssociationSet>
+          <AssociationSet Name="AspNetUserRoles" Association="LawGroup.CostOfSalesBillingModel.AspNetUserRoles">
+            <End Role="AspNetRole" EntitySet="AspNetRoles" />
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+          </AssociationSet>
+          <AssociationSet Name="MatterConsultants" Association="LawGroup.CostOfSalesBillingModel.MatterConsultants">
+            <End Role="Consultant" EntitySet="Consultants" />
+            <End Role="Matter" EntitySet="Matters" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="AdminSetting">
+          <Key>
+            <PropertyRef Name="ParamName" />
+          </Key>
+          <Property Name="ParamName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ParamTitle" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParamValue" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ParamType" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AspNetRole">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LawGroup.CostOfSalesBillingModel.AspNetUserRoles" FromRole="AspNetRole" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserClaim">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="LawGroup.CostOfSalesBillingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUserLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="LawGroup.CostOfSalesBillingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+        </EntityType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MiddleName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IsSendAnEmailIntro" Type="Boolean" />
+          <Property Name="Address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="AddresslLine1" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="PinCode" Type="Int32" />
+          <Property Name="FullName" Type="String" MaxLength="201" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ConsultantCompany" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress_360BusinessLaw" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress_PrivateClientLaw" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress_360LawServices" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PrivateEmailAddress" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AreaofLaw" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HomePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JurisdictionsCovered" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Attachments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubscriptionHourlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MemberHourlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PrivateClientHourlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LitigationHourlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RegulatedHourlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="OverseasHourlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="ConsultantName" Type="String" MaxLength="201" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ConsultantUserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ClientId" Type="Guid" />
+          <Property Name="UserStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUserClaims" Relationship="LawGroup.CostOfSalesBillingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+          <NavigationProperty Name="AspNetUserLogins" Relationship="LawGroup.CostOfSalesBillingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+          <NavigationProperty Name="Client" Relationship="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_Clients" FromRole="AspNetUser" ToRole="Client" />
+          <NavigationProperty Name="AspNetUsers1" Relationship="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_ConsultantUserId" FromRole="AspNetUser" ToRole="AspNetUser1" />
+          <NavigationProperty Name="AspNetUser1" Relationship="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_ConsultantUserId" FromRole="AspNetUser1" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUsers11" Relationship="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_CreatedBy" FromRole="AspNetUser" ToRole="AspNetUser1" />
+          <NavigationProperty Name="AspNetUser2" Relationship="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_CreatedBy" FromRole="AspNetUser1" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUsers12" Relationship="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_ModifiedBy" FromRole="AspNetUser" ToRole="AspNetUser1" />
+          <NavigationProperty Name="AspNetUser3" Relationship="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_ModifiedBy" FromRole="AspNetUser1" ToRole="AspNetUser" />
+          <NavigationProperty Name="Clients" Relationship="LawGroup.CostOfSalesBillingModel.FK_Client_AspNetUsers" FromRole="AspNetUser" ToRole="Client" />
+          <NavigationProperty Name="Clients1" Relationship="LawGroup.CostOfSalesBillingModel.FK_Client_AspNetUsers1" FromRole="AspNetUser" ToRole="Client" />
+          <NavigationProperty Name="AspNetRoles" Relationship="LawGroup.CostOfSalesBillingModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+        </EntityType>
+        <EntityType Name="ClientFile">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ClientId" Type="Guid" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Files" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Client" Relationship="LawGroup.CostOfSalesBillingModel.FK_ClientFiles_Client" FromRole="ClientFile" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="ClientIncome">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ClientId" Type="Guid" Nullable="false" />
+          <Property Name="ResetNewMonthId" Type="Guid" Nullable="false" />
+          <Property Name="MonNum" Type="Int64" Nullable="false" />
+          <Property Name="Month" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Year" Type="Int64" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TotalHours" Type="Int64" Nullable="false" />
+          <Property Name="SubscriptionFee" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="SubscriptionCost" Type="Decimal" Nullable="false" Precision="19" Scale="4" />
+          <Property Name="SubscriptionFee_Cost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MemberCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MemberCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PrivateClientCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PrivateClientCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LitigationCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LitigationCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RegulatedCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RegulatedCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="OverseasCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="OverseasCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="TotalCharge" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SubscriptionProfit" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SubscriptionProfitPercet" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="MemberProfit" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="MemberProfitPercent" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="PrivateClientProfit" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="PrivateClientProfitPercent" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="LitigationProfit" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="LitigationProfitPercent" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="RegulatedProfit" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="RegulatedProfitPercent" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="OverseasProfit" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="OverseasProfitPercent" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ChargeMinusCost" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="FeePlusCharge" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="OverallProfit" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="ProfitPercent" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Client" Relationship="LawGroup.CostOfSalesBillingModel.FK_ClientIncome_Client" FromRole="ClientIncome" ToRole="Client" />
+          <NavigationProperty Name="ResetNewMonth" Relationship="LawGroup.CostOfSalesBillingModel.FK_ClientIncome_ResetNewMonth" FromRole="ClientIncome" ToRole="ResetNewMonth" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Company" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FaxNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MobileNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLIne2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Region" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PinCode" Type="Int32" />
+          <Property Name="ContractedCountries" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ContractRenewalDate" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Attechments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsSubscription" Type="Boolean" Nullable="false" />
+          <Property Name="SubscriptionBasis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MonthlySubscription" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SubscriptionDate" Type="DateTime" Precision="3" />
+          <Property Name="SubscriptionType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentMonths" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="MemberChargeRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PrivateClientChargeRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LitigationChargeRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RegulatedChargeRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="SPAREChargeRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="InWorkThisMonth" Type="Boolean" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="SubscriptionCharge" Type="Decimal" Precision="19" Scale="4" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="NextSubscriptionDate" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="3" />
+          <Property Name="NextSubMonth" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="FullName" Type="String" Nullable="false" MaxLength="201" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="AspNetUsers" Relationship="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_Clients" FromRole="Client" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser" Relationship="LawGroup.CostOfSalesBillingModel.FK_Client_AspNetUsers" FromRole="Client" ToRole="AspNetUser" />
+          <NavigationProperty Name="AspNetUser1" Relationship="LawGroup.CostOfSalesBillingModel.FK_Client_AspNetUsers1" FromRole="Client" ToRole="AspNetUser" />
+          <NavigationProperty Name="ClientFiles" Relationship="LawGroup.CostOfSalesBillingModel.FK_ClientFiles_Client" FromRole="Client" ToRole="ClientFile" />
+          <NavigationProperty Name="ClientIncomes" Relationship="LawGroup.CostOfSalesBillingModel.FK_ClientIncome_Client" FromRole="Client" ToRole="ClientIncome" />
+          <NavigationProperty Name="ConsultantCosts" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_Client" FromRole="Client" ToRole="ConsultantCost" />
+          <NavigationProperty Name="ConsultantHours" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Client" FromRole="Client" ToRole="ConsultantHour" />
+          <NavigationProperty Name="Matters" Relationship="LawGroup.CostOfSalesBillingModel.FK_Matter_Client" FromRole="Client" ToRole="Matter" />
+        </EntityType>
+        <EntityType Name="ConsultantCost">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Matter_Consultant_WorkPeriod" Type="Guid" Nullable="false" />
+          <Property Name="MatterId" Type="Guid" Nullable="false" />
+          <Property Name="ClientId" Type="Guid" Nullable="false" />
+          <Property Name="WorkRateId" Type="Guid" Nullable="false" />
+          <Property Name="WorkDate" Type="DateTime" Precision="3" />
+          <Property Name="Month" Type="DateTime" Precision="3" />
+          <Property Name="MonNum" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Year" Type="DateTime" Precision="3" />
+          <Property Name="ClientWorkPeriod" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Hours" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SubscriptionCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MemberCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PrivateClientCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LitigationCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RegulatedCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="OverseasCost" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Cost_incl_Sub" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Cost_excl_Sub" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DisbursementDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="DisbursementAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RateUsed" Type="Decimal" Precision="38" Scale="23" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Client" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_Client" FromRole="ConsultantCost" ToRole="Client" />
+          <NavigationProperty Name="Matter" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_Matter" FromRole="ConsultantCost" ToRole="Matter" />
+          <NavigationProperty Name="WorkRate" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_WorkRates" FromRole="ConsultantCost" ToRole="WorkRate" />
+        </EntityType>
+        <EntityType Name="ConsultantHour">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="ConsultantId" Type="Guid" Nullable="false" />
+          <Property Name="MatterId" Type="Guid" Nullable="false" />
+          <Property Name="ClientId" Type="Guid" Nullable="false" />
+          <Property Name="WorkDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="WorkHours" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CurrentMonth" Type="Boolean" />
+          <Property Name="CostUpdated" Type="Boolean" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="WorkRateId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Agreed" Type="Boolean" />
+          <Property Name="ResetNewMonthId" Type="Guid" Nullable="false" />
+          <Property Name="DisbursementDescription" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
+          <Property Name="DisbursementAmount" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="Hours" Type="Decimal" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Minutes" Type="Decimal" Precision="22" Scale="0" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="SubscriptionHours" Type="Decimal" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="MemberHours" Type="Decimal" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="PrivateClientHours" Type="Decimal" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="LitigationHours" Type="Decimal" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="RegulatedHours" Type="Decimal" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="OverseasHours" Type="Decimal" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="LastDate" Type="DateTime" annotation:StoreGeneratedPattern="Computed" Precision="3" />
+          <Property Name="MonNum" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="MonthName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Year" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="TotalHours_excl_Sub" Type="Decimal" Precision="22" Scale="0" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Month" Type="String" MaxLength="3" FixedLength="false" Unicode="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Client" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Client" FromRole="ConsultantHour" ToRole="Client" />
+          <NavigationProperty Name="Consultant" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Consultant" FromRole="ConsultantHour" ToRole="Consultant" />
+          <NavigationProperty Name="Matter" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Matter" FromRole="ConsultantHour" ToRole="Matter" />
+          <NavigationProperty Name="ResetNewMonth" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_ResetNewMonth" FromRole="ConsultantHour" ToRole="ResetNewMonth" />
+        </EntityType>
+        <EntityType Name="Consultant">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="UserStatus" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConsultantCompany" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress_360BusinessLaw" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress_PrivateClientLaw" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress_360LawServices" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PrivateEmailAddress" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AreaofLaw" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="BusinessPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HomePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MobilePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="JurisdictionsCovered" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Attachments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubscriptionHourlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="MemberHourlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="PrivateClientHourlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LitigationHourlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="RegulatedHourlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="OverseasHourlyRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="ConsultantName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="ConsultantHours" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Consultant" FromRole="Consultant" ToRole="ConsultantHour" />
+          <NavigationProperty Name="Matters" Relationship="LawGroup.CostOfSalesBillingModel.MatterConsultants" FromRole="Consultant" ToRole="Matter" />
+        </EntityType>
+        <EntityType Name="ELMAH_Error">
+          <Key>
+            <PropertyRef Name="ErrorId" />
+          </Key>
+          <Property Name="ErrorId" Type="Guid" Nullable="false" />
+          <Property Name="Application" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Host" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Source" Type="String" Nullable="false" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="Message" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="User" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="StatusCode" Type="Int32" Nullable="false" />
+          <Property Name="TimeUtc" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Sequence" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AllXml" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Matter">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="MatterName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ClientId" Type="Guid" Nullable="false" />
+          <Property Name="WorkRateId" Type="Guid" Nullable="false" />
+          <Property Name="WorkRateChoice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="CurrentMonth" Type="Boolean" Nullable="false" />
+          <Property Name="AreaofLaw" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Box" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Overseas" Type="Boolean" />
+          <Property Name="OverseasCountry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OverseasChargeRate" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="Billable" Type="Boolean" />
+          <Property Name="Number" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClientMatterContact" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ClientMatter_ContactEmail" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="MonNum" Type="Int32" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="MonthName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Client" Relationship="LawGroup.CostOfSalesBillingModel.FK_Matter_Client" FromRole="Matter" ToRole="Client" />
+          <NavigationProperty Name="ConsultantCosts" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_Matter" FromRole="Matter" ToRole="ConsultantCost" />
+          <NavigationProperty Name="ConsultantHours" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Matter" FromRole="Matter" ToRole="ConsultantHour" />
+          <NavigationProperty Name="WorkRate" Relationship="LawGroup.CostOfSalesBillingModel.FK_Matter_WorkRates" FromRole="Matter" ToRole="WorkRate" />
+          <NavigationProperty Name="Consultants" Relationship="LawGroup.CostOfSalesBillingModel.MatterConsultants" FromRole="Matter" ToRole="Consultant" />
+        </EntityType>
+        <EntityType Name="ResetNewMonth">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="IsResetNewMonth" Type="Boolean" Nullable="false" />
+          <Property Name="LastUpdated" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="ClientIncomes" Relationship="LawGroup.CostOfSalesBillingModel.FK_ClientIncome_ResetNewMonth" FromRole="ResetNewMonth" ToRole="ClientIncome" />
+          <NavigationProperty Name="ConsultantHours" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_ResetNewMonth" FromRole="ResetNewMonth" ToRole="ConsultantHour" />
+        </EntityType>
+        <EntityType Name="WorkRate">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Guid" Nullable="false" />
+          <Property Name="RateId" Type="Int32" Nullable="false" />
+          <Property Name="RateType" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ConsultantCosts" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_WorkRates" FromRole="WorkRate" ToRole="ConsultantCost" />
+          <NavigationProperty Name="Matters" Relationship="LawGroup.CostOfSalesBillingModel.FK_Matter_WorkRates" FromRole="WorkRate" ToRole="Matter" />
+        </EntityType>
+        <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUserClaim" Role="AspNetUserClaim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserClaim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUserLogin" Role="AspNetUserLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUserLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_Clients">
+          <End Type="LawGroup.CostOfSalesBillingModel.Client" Role="Client" Multiplicity="0..1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUser">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_ConsultantUserId">
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUser1">
+              <PropertyRef Name="ConsultantUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_CreatedBy">
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUser1">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AspNetUsers_ModifiedBy">
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AspNetUser1">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_AspNetUsers">
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="CreatedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_AspNetUsers1">
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.Client" Role="Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="ModifiedBy" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientFiles_Client">
+          <End Type="LawGroup.CostOfSalesBillingModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.ClientFile" Role="ClientFile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientFile">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientIncome_Client">
+          <End Type="LawGroup.CostOfSalesBillingModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.ClientIncome" Role="ClientIncome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientIncome">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ClientIncome_ResetNewMonth">
+          <End Type="LawGroup.CostOfSalesBillingModel.ResetNewMonth" Role="ResetNewMonth" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.ClientIncome" Role="ClientIncome" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResetNewMonth">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ClientIncome">
+              <PropertyRef Name="ResetNewMonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantCosts_Client">
+          <End Type="LawGroup.CostOfSalesBillingModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.ConsultantCost" Role="ConsultantCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantCost">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantHours_Client">
+          <End Type="LawGroup.CostOfSalesBillingModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.ConsultantHour" Role="ConsultantHour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantHour">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matter_Client">
+          <End Type="LawGroup.CostOfSalesBillingModel.Client" Role="Client" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.Matter" Role="Matter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Matter">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantCosts_Matter">
+          <End Type="LawGroup.CostOfSalesBillingModel.Matter" Role="Matter" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.ConsultantCost" Role="ConsultantCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantCost">
+              <PropertyRef Name="MatterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantCosts_WorkRates">
+          <End Type="LawGroup.CostOfSalesBillingModel.WorkRate" Role="WorkRate" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.ConsultantCost" Role="ConsultantCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkRate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantCost">
+              <PropertyRef Name="WorkRateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantHours_Consultant">
+          <End Type="LawGroup.CostOfSalesBillingModel.Consultant" Role="Consultant" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.ConsultantHour" Role="ConsultantHour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Consultant">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantHour">
+              <PropertyRef Name="ConsultantId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantHours_Matter">
+          <End Type="LawGroup.CostOfSalesBillingModel.Matter" Role="Matter" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.ConsultantHour" Role="ConsultantHour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Matter">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantHour">
+              <PropertyRef Name="MatterId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ConsultantHours_ResetNewMonth">
+          <End Type="LawGroup.CostOfSalesBillingModel.ResetNewMonth" Role="ResetNewMonth" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.ConsultantHour" Role="ConsultantHour" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ResetNewMonth">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantHour">
+              <PropertyRef Name="ResetNewMonthId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Matter_WorkRates">
+          <End Type="LawGroup.CostOfSalesBillingModel.WorkRate" Role="WorkRate" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.Matter" Role="Matter" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="WorkRate">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Matter">
+              <PropertyRef Name="WorkRateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="AspNetUserRoles">
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
+          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+        </Association>
+        <Association Name="MatterConsultants">
+          <End Type="LawGroup.CostOfSalesBillingModel.Consultant" Role="Consultant" Multiplicity="*" />
+          <End Type="LawGroup.CostOfSalesBillingModel.Matter" Role="Matter" Multiplicity="*" />
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LawGroupCostOfSalesBillingModelStoreContainer" CdmEntityContainer="DataEntities">
+          <EntitySetMapping Name="AdminSettings">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.AdminSetting">
+              <MappingFragment StoreEntitySet="AdminSettings">
+                <ScalarProperty Name="ParamType" ColumnName="ParamType" />
+                <ScalarProperty Name="ParamValue" ColumnName="ParamValue" />
+                <ScalarProperty Name="ParamTitle" ColumnName="ParamTitle" />
+                <ScalarProperty Name="ParamName" ColumnName="ParamName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetRoles">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.AspNetRole">
+              <MappingFragment StoreEntitySet="AspNetRoles">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserClaims">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.AspNetUserClaim">
+              <MappingFragment StoreEntitySet="AspNetUserClaims">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUserLogins">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.AspNetUserLogin">
+              <MappingFragment StoreEntitySet="AspNetUserLogins">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ConsultantUserId" ColumnName="ConsultantUserId" />
+                <ScalarProperty Name="ConsultantName" ColumnName="ConsultantName" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="OverseasHourlyRate" ColumnName="OverseasHourlyRate" />
+                <ScalarProperty Name="RegulatedHourlyRate" ColumnName="RegulatedHourlyRate" />
+                <ScalarProperty Name="LitigationHourlyRate" ColumnName="LitigationHourlyRate" />
+                <ScalarProperty Name="PrivateClientHourlyRate" ColumnName="PrivateClientHourlyRate" />
+                <ScalarProperty Name="MemberHourlyRate" ColumnName="MemberHourlyRate" />
+                <ScalarProperty Name="SubscriptionHourlyRate" ColumnName="SubscriptionHourlyRate" />
+                <ScalarProperty Name="Attachments" ColumnName="Attachments" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="JurisdictionsCovered" ColumnName="JurisdictionsCovered" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+                <ScalarProperty Name="AreaofLaw" ColumnName="AreaofLaw" />
+                <ScalarProperty Name="PrivateEmailAddress" ColumnName="PrivateEmailAddress" />
+                <ScalarProperty Name="EmailAddress_360LawServices" ColumnName="EmailAddress_360LawServices" />
+                <ScalarProperty Name="EmailAddress_PrivateClientLaw" ColumnName="EmailAddress_PrivateClientLaw" />
+                <ScalarProperty Name="EmailAddress_360BusinessLaw" ColumnName="EmailAddress_360BusinessLaw" />
+                <ScalarProperty Name="ConsultantCompany" ColumnName="ConsultantCompany" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddresslLine1" ColumnName="AddresslLine1" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="IsSendAnEmailIntro" ColumnName="IsSendAnEmailIntro" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientFiles">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.ClientFile">
+              <MappingFragment StoreEntitySet="ClientFiles">
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="Files" ColumnName="Files" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientIncomes">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.ClientIncome">
+              <MappingFragment StoreEntitySet="ClientIncomes">
+                <ScalarProperty Name="ProfitPercent" ColumnName="ProfitPercent" />
+                <ScalarProperty Name="OverallProfit" ColumnName="OverallProfit" />
+                <ScalarProperty Name="FeePlusCharge" ColumnName="FeePlusCharge" />
+                <ScalarProperty Name="ChargeMinusCost" ColumnName="ChargeMinusCost" />
+                <ScalarProperty Name="OverseasProfitPercent" ColumnName="OverseasProfitPercent" />
+                <ScalarProperty Name="OverseasProfit" ColumnName="OverseasProfit" />
+                <ScalarProperty Name="RegulatedProfitPercent" ColumnName="RegulatedProfitPercent" />
+                <ScalarProperty Name="RegulatedProfit" ColumnName="RegulatedProfit" />
+                <ScalarProperty Name="LitigationProfitPercent" ColumnName="LitigationProfitPercent" />
+                <ScalarProperty Name="LitigationProfit" ColumnName="LitigationProfit" />
+                <ScalarProperty Name="PrivateClientProfitPercent" ColumnName="PrivateClientProfitPercent" />
+                <ScalarProperty Name="PrivateClientProfit" ColumnName="PrivateClientProfit" />
+                <ScalarProperty Name="MemberProfitPercent" ColumnName="MemberProfitPercent" />
+                <ScalarProperty Name="MemberProfit" ColumnName="MemberProfit" />
+                <ScalarProperty Name="SubscriptionProfitPercet" ColumnName="SubscriptionProfitPercet" />
+                <ScalarProperty Name="SubscriptionProfit" ColumnName="SubscriptionProfit" />
+                <ScalarProperty Name="TotalCharge" ColumnName="TotalCharge" />
+                <ScalarProperty Name="TotalCost" ColumnName="TotalCost" />
+                <ScalarProperty Name="OverseasCharge" ColumnName="OverseasCharge" />
+                <ScalarProperty Name="OverseasCost" ColumnName="OverseasCost" />
+                <ScalarProperty Name="RegulatedCharge" ColumnName="RegulatedCharge" />
+                <ScalarProperty Name="RegulatedCost" ColumnName="RegulatedCost" />
+                <ScalarProperty Name="LitigationCharge" ColumnName="LitigationCharge" />
+                <ScalarProperty Name="LitigationCost" ColumnName="LitigationCost" />
+                <ScalarProperty Name="PrivateClientCharge" ColumnName="PrivateClientCharge" />
+                <ScalarProperty Name="PrivateClientCost" ColumnName="PrivateClientCost" />
+                <ScalarProperty Name="MemberCharge" ColumnName="MemberCharge" />
+                <ScalarProperty Name="MemberCost" ColumnName="MemberCost" />
+                <ScalarProperty Name="SubscriptionFee_Cost" ColumnName="SubscriptionFee_Cost" />
+                <ScalarProperty Name="SubscriptionCost" ColumnName="SubscriptionCost" />
+                <ScalarProperty Name="SubscriptionFee" ColumnName="SubscriptionFee" />
+                <ScalarProperty Name="TotalHours" ColumnName="TotalHours" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="MonNum" ColumnName="MonNum" />
+                <ScalarProperty Name="ResetNewMonthId" ColumnName="ResetNewMonthId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.Client">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="NextSubMonth" ColumnName="NextSubMonth" />
+                <ScalarProperty Name="NextSubscriptionDate" ColumnName="NextSubscriptionDate" />
+                <ScalarProperty Name="SubscriptionCharge" ColumnName="SubscriptionCharge" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="InWorkThisMonth" ColumnName="InWorkThisMonth" />
+                <ScalarProperty Name="SPAREChargeRate" ColumnName="SPAREChargeRate" />
+                <ScalarProperty Name="RegulatedChargeRate" ColumnName="RegulatedChargeRate" />
+                <ScalarProperty Name="LitigationChargeRate" ColumnName="LitigationChargeRate" />
+                <ScalarProperty Name="PrivateClientChargeRate" ColumnName="PrivateClientChargeRate" />
+                <ScalarProperty Name="MemberChargeRate" ColumnName="MemberChargeRate" />
+                <ScalarProperty Name="PaymentMonths" ColumnName="PaymentMonths" />
+                <ScalarProperty Name="SubscriptionType" ColumnName="SubscriptionType" />
+                <ScalarProperty Name="SubscriptionDate" ColumnName="SubscriptionDate" />
+                <ScalarProperty Name="MonthlySubscription" ColumnName="MonthlySubscription" />
+                <ScalarProperty Name="SubscriptionBasis" ColumnName="SubscriptionBasis" />
+                <ScalarProperty Name="IsSubscription" ColumnName="IsSubscription" />
+                <ScalarProperty Name="Attechments" ColumnName="Attechments" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="ContractRenewalDate" ColumnName="ContractRenewalDate" />
+                <ScalarProperty Name="ContractedCountries" ColumnName="ContractedCountries" />
+                <ScalarProperty Name="PinCode" ColumnName="PinCode" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLIne2" ColumnName="AddressLIne2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MobileNumber" ColumnName="MobileNumber" />
+                <ScalarProperty Name="FaxNumber" ColumnName="FaxNumber" />
+                <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsultantCosts">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.ConsultantCost">
+              <MappingFragment StoreEntitySet="ConsultantCosts">
+                <ScalarProperty Name="RateUsed" ColumnName="RateUsed" />
+                <ScalarProperty Name="DisbursementAmount" ColumnName="DisbursementAmount" />
+                <ScalarProperty Name="DisbursementDescription" ColumnName="DisbursementDescription" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Cost_excl_Sub" ColumnName="Cost_excl_Sub" />
+                <ScalarProperty Name="Cost_incl_Sub" ColumnName="Cost_incl_Sub" />
+                <ScalarProperty Name="OverseasCost" ColumnName="OverseasCost" />
+                <ScalarProperty Name="RegulatedCost" ColumnName="RegulatedCost" />
+                <ScalarProperty Name="LitigationCost" ColumnName="LitigationCost" />
+                <ScalarProperty Name="PrivateClientCost" ColumnName="PrivateClientCost" />
+                <ScalarProperty Name="MemberCost" ColumnName="MemberCost" />
+                <ScalarProperty Name="SubscriptionCost" ColumnName="SubscriptionCost" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="ClientWorkPeriod" ColumnName="ClientWorkPeriod" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="MonNum" ColumnName="MonNum" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="WorkDate" ColumnName="WorkDate" />
+                <ScalarProperty Name="WorkRateId" ColumnName="WorkRateId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="MatterId" ColumnName="MatterId" />
+                <ScalarProperty Name="Matter_Consultant_WorkPeriod" ColumnName="Matter_Consultant_WorkPeriod" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ConsultantHours">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.ConsultantHour">
+              <MappingFragment StoreEntitySet="ConsultantHours">
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="TotalHours_excl_Sub" ColumnName="TotalHours_excl_Sub" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+                <ScalarProperty Name="MonNum" ColumnName="MonNum" />
+                <ScalarProperty Name="LastDate" ColumnName="LastDate" />
+                <ScalarProperty Name="OverseasHours" ColumnName="OverseasHours" />
+                <ScalarProperty Name="RegulatedHours" ColumnName="RegulatedHours" />
+                <ScalarProperty Name="LitigationHours" ColumnName="LitigationHours" />
+                <ScalarProperty Name="PrivateClientHours" ColumnName="PrivateClientHours" />
+                <ScalarProperty Name="MemberHours" ColumnName="MemberHours" />
+                <ScalarProperty Name="SubscriptionHours" ColumnName="SubscriptionHours" />
+                <ScalarProperty Name="Minutes" ColumnName="Minutes" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="DisbursementAmount" ColumnName="DisbursementAmount" />
+                <ScalarProperty Name="DisbursementDescription" ColumnName="DisbursementDescription" />
+                <ScalarProperty Name="ResetNewMonthId" ColumnName="ResetNewMonthId" />
+                <ScalarProperty Name="Agreed" ColumnName="Agreed" />
+                <ScalarProperty Name="WorkRateId" ColumnName="WorkRateId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="CostUpdated" ColumnName="CostUpdated" />
+                <ScalarProperty Name="CurrentMonth" ColumnName="CurrentMonth" />
+                <ScalarProperty Name="WorkHours" ColumnName="WorkHours" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="WorkDate" ColumnName="WorkDate" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="MatterId" ColumnName="MatterId" />
+                <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Consultants">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.Consultant">
+              <MappingFragment StoreEntitySet="Consultants">
+                <ScalarProperty Name="ConsultantName" ColumnName="ConsultantName" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="OverseasHourlyRate" ColumnName="OverseasHourlyRate" />
+                <ScalarProperty Name="RegulatedHourlyRate" ColumnName="RegulatedHourlyRate" />
+                <ScalarProperty Name="LitigationHourlyRate" ColumnName="LitigationHourlyRate" />
+                <ScalarProperty Name="PrivateClientHourlyRate" ColumnName="PrivateClientHourlyRate" />
+                <ScalarProperty Name="MemberHourlyRate" ColumnName="MemberHourlyRate" />
+                <ScalarProperty Name="SubscriptionHourlyRate" ColumnName="SubscriptionHourlyRate" />
+                <ScalarProperty Name="Attachments" ColumnName="Attachments" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="JurisdictionsCovered" ColumnName="JurisdictionsCovered" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
+                <ScalarProperty Name="AreaofLaw" ColumnName="AreaofLaw" />
+                <ScalarProperty Name="PrivateEmailAddress" ColumnName="PrivateEmailAddress" />
+                <ScalarProperty Name="EmailAddress_360LawServices" ColumnName="EmailAddress_360LawServices" />
+                <ScalarProperty Name="EmailAddress_PrivateClientLaw" ColumnName="EmailAddress_PrivateClientLaw" />
+                <ScalarProperty Name="EmailAddress_360BusinessLaw" ColumnName="EmailAddress_360BusinessLaw" />
+                <ScalarProperty Name="ConsultantCompany" ColumnName="ConsultantCompany" />
+                <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ELMAH_Error">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.ELMAH_Error">
+              <MappingFragment StoreEntitySet="ELMAH_Error">
+                <ScalarProperty Name="AllXml" ColumnName="AllXml" />
+                <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+                <ScalarProperty Name="TimeUtc" ColumnName="TimeUtc" />
+                <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Source" ColumnName="Source" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Application" ColumnName="Application" />
+                <ScalarProperty Name="ErrorId" ColumnName="ErrorId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Matters">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.Matter">
+              <MappingFragment StoreEntitySet="Matters">
+                <ScalarProperty Name="MonthName" ColumnName="MonthName" />
+                <ScalarProperty Name="MonNum" ColumnName="MonNum" />
+                <ScalarProperty Name="ClientMatter_ContactEmail" ColumnName="ClientMatter_ContactEmail" />
+                <ScalarProperty Name="ClientMatterContact" ColumnName="ClientMatterContact" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Billable" ColumnName="Billable" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="OverseasChargeRate" ColumnName="OverseasChargeRate" />
+                <ScalarProperty Name="OverseasCountry" ColumnName="OverseasCountry" />
+                <ScalarProperty Name="Overseas" ColumnName="Overseas" />
+                <ScalarProperty Name="Box" ColumnName="Box" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="AreaofLaw" ColumnName="AreaofLaw" />
+                <ScalarProperty Name="CurrentMonth" ColumnName="CurrentMonth" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="WorkRateChoice" ColumnName="WorkRateChoice" />
+                <ScalarProperty Name="WorkRateId" ColumnName="WorkRateId" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="MatterName" ColumnName="MatterName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResetNewMonths">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.ResetNewMonth">
+              <MappingFragment StoreEntitySet="ResetNewMonths">
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="IsResetNewMonth" ColumnName="IsResetNewMonth" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkRates">
+            <EntityTypeMapping TypeName="LawGroup.CostOfSalesBillingModel.WorkRate">
+              <MappingFragment StoreEntitySet="WorkRates">
+                <ScalarProperty Name="RateType" ColumnName="RateType" />
+                <ScalarProperty Name="RateId" ColumnName="RateId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="AspNetUserRoles" TypeName="LawGroup.CostOfSalesBillingModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+            <EndProperty Name="AspNetUser">
+              <ScalarProperty Name="Id" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="AspNetRole">
+              <ScalarProperty Name="Id" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MatterConsultants" TypeName="LawGroup.CostOfSalesBillingModel.MatterConsultants" StoreEntitySet="MatterConsultants">
+            <EndProperty Name="Matter">
+              <ScalarProperty Name="Id" ColumnName="MatterId" />
+            </EndProperty>
+            <EndProperty Name="Consultant">
+              <ScalarProperty Name="Id" ColumnName="ConsultantId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

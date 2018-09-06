@@ -1,0 +1,54 @@
+.StepperWizard-Style-1{
+  float: left;
+  width: 100%;
+  height: 80vh;
+  overflow: hidden;
+  background-color:  #fff;
+}
+.StepperWizard-Style-1 .panel-body {
+    padding: 0px;
+}
+.StepperWizard-Style-1 .ActionBlock{
+  float: left;
+  width: 100%;
+  text-align:  right;
+}
+.StepperWizard-Style-1 .TemplateTab-3 .ActionBlock{
+    transform: scale(1)!important;
+    opacity: 1!important;
+    display: block!important;
+}
+#msform {width: 100%;margin: 10px auto;/* text-align: center; */position: relative;}
+#msform fieldset {background: white;border: 0 none;border-radius: 3px;padding: 10px 10px;box-sizing: border-box;width: 100%;margin: 0 auto;position: absolute;right:  0;left:  0;}
+
+#msform fieldset:not(:first-of-type) {
+display: none;
+}
+/*inputs*/
+
+#msform .action-button {width: 100px;background: #617782;font-weight: bold;color: white;border: 0 none;border-radius: 1px;cursor: pointer;padding: 6px 5px;margin: 0px 16px 0px 0px;float:  right;}
+#msform .action-button:hover, #msform .action-button:focus {box-shadow: 0 0 0 2px white, 0 0 0 3px #617782;}
+
+.fs-title {
+font-size: 15px;
+text-transform: uppercase;
+color: #2C3E50;
+margin-bottom: 10px;
+}
+.fs-subtitle {
+font-weight: normal;
+font-size: 13px;
+color: #666;
+margin-bottom: 20px;
+}
+
+#progressbar {margin-top:  20px;margin-bottom: 20px;overflow: hidden;counter-reset: step;position:  relative;z-index:  1;display:  flex;width: 99%;padding: 0px;}
+#progressbar li {list-style-type: none;color: #737373;text-transform: uppercase;font-size: 10px;width: 33.33%;float: left;position: relative;text-align:  center;}
+#progressbar li:before {content: counter(step);counter-increment: step;width: 30px;line-height: 30px;display: block;font-size: 16px;color: #fff;background: #00BCD4;border-radius: 14px;margin: 2px auto 5px auto;box-shadow: #00000063 -2px 2px 4px, inset #1f1f1f33 3px -5px 14px;}
+
+#progressbar li:after {content: '';width: 100%;height: 10px;background: #40a2d2;position: absolute;left: -50%;top: 14px;z-index: -1; /*put it behind the numbers*/}
+#progressbar li:first-child:after {
+content: none;
+}
+
+#progressbar li.active:before, #progressbar li.active:after {background: #4CAF50;color: white;}

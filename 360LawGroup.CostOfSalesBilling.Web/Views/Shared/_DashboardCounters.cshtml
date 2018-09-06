@@ -1,0 +1,111 @@
+﻿@model CounterViewModel
+<div class="row">
+    <div class="col-md-2">
+        <div class="panel bg-teal-300 mr-0">
+            <div class="panel-body">
+                <div class="heading-elements">
+                    @if (!User.IsInRole(RoleExtension.SalesTeam))
+                    {
+                        <span class="heading-text badge bg-teal-800">By Location</span>
+                    }
+                    else
+                    {
+                        <span class="heading-text badge bg-teal-800">By You</span>
+                    }
+                </div>
+                <strong class="no-margin">@Model.TotalEnquiryHandledBy.ToString("N0")</strong>
+                <div class="text-size-small">Enquiry Handled</div>
+            </div>
+        </div>        
+    </div>
+    <div class="col-md-2">
+        <div class="panel bg-teal-400 mr-0 ml-0">
+            <div class="panel-body">
+                <div class="heading-elements">
+                    @if (!User.IsInRole(RoleExtension.SalesTeam))
+                    {
+                        <span class="heading-text badge bg-teal-800">By Location</span>
+                    }
+                    else
+                    {
+                        <span class="heading-text badge bg-teal-800">By You</span>
+                    }
+                </div>
+                <strong class="no-margin">@Model.TotalClientRepr.ToString("N0")</strong>
+                <div class="text-size-small">Enquiry Represent</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="panel bg-green-600 mr-0 ml-0">
+            <div class="panel-body">
+                <div class="heading-elements">
+                    @if (!User.IsInRole(RoleExtension.SalesTeam))
+                    {
+                        <span class="heading-text badge bg-green-800">By Location</span>
+                    }
+                    else
+                    {
+                        <span class="heading-text badge bg-green-800">By You</span>
+                    }
+                </div>
+                <strong class="no-margin">@Model.TotalMember.ToString("N0")</strong>
+                <div class="text-size-small">Members</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="panel bg-brown-600 mr-0 ml-0">
+            <div class="panel-body">
+                <div class="heading-elements">
+                    @if (!User.IsInRole(RoleExtension.SalesTeam))
+                    {
+                        <span class="heading-text badge bg-brown-800">By Location</span>
+                    }
+                    else
+                    {
+                        <span class="heading-text badge bg-brown-800">By You</span>
+                    }
+                </div>
+                <strong class="no-margin">@Model.TotalAppoinment.ToString("N0")</strong>
+                <div class="text-size-small">Appointments</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="panel bg-blue-600 mr-0 ml-0">
+            <div class="panel-body">
+                <div class="heading-elements">
+                    @if (!User.IsInRole(RoleExtension.SalesTeam))
+                    {
+                        <span class="heading-text badge bg-blue-800">By Location</span>
+                    }
+                    else
+                    {
+                        <span class="heading-text badge bg-blue-800">By You</span>
+                    }
+                </div>
+                <strong class="no-margin">@Model.TotalInvoice.ToString("N0")</strong>
+                <div class="text-size-small">Invoices</div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2">
+        <div class="panel bg-indigo-600 ml-0">
+            <div class="panel-body">
+                <div class="heading-elements">
+                    @if (!User.IsInRole(RoleExtension.SalesTeam))
+                    {
+                        <span class="heading-text badge bg-indigo-800">By Location</span>
+                    }
+                    else
+                    {
+                        <span class="heading-text badge bg-indigo-800">By You</span>
+                    }
+                </div>
+                <strong class="no-margin"><i class="fa fa-inr"></i> @Model.TotalAmount.ToString("N0")</strong>
+                <div class="text-size-small">Invoices Amount</div>
+            </div>
+        </div>
+    </div>
+</div>

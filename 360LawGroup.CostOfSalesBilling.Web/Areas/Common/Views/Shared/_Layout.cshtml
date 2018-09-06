@@ -1,0 +1,83 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section navbar{
+    @RenderSection("topnavbar", false)
+}
+@section sidebar{
+    <div class="sidebar sidebar-main">
+        <div class="sidebar-content">
+
+            @*@Html.Partial("_UserState")*@
+            <div class="sidebar-category sidebar-category-visible">
+                @*<div class="category-title h6">
+                        <span>Navigation</span>
+                        <ul class="icons-list">
+                            <li><a href="#" data-action="collapse"></a></li>
+                        </ul>
+                    </div>*@
+                <div class="category-content no-padding">
+                    <ul class="navigation navigation-main navigation-accordion">
+                        <!-- Main -->
+                        @{
+                            var roles = RoleExtension.GetRoleAccessList(ViewBag.Role as string);
+                        }
+                        @if (User.IsInRole(RoleExtension.ClientUser))
+                        {
+                            <li><a href="@Url.Action("Index", "Home", new { Area = "ClientUser" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                        }
+                        @if (User.IsInRole(RoleExtension.Admin))
+                        {
+                            <li><a href="@Url.Action("Index", "Home", new { Area = "Admin" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                        }
+                        @if (User.IsInRole(RoleExtension.Consultant))
+                        {
+                            <li><a href="@Url.Action("Index", "Home", new { Area = "Consultant" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                        }
+
+                        @if (User.IsInRole(RoleExtension.SuperAdmin))
+                        {
+                            <li><a href="@Url.Action("Index", "Home", new { Area = "SuperAdmin" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                            <li>
+                                <a href="javascript:;"><i class="icon-users4"></i> <span>User Management</span></a>
+                                <ul>
+                                    @if (roles.Any())
+                                    {
+                                        <li class="dropdown dropdown-submenu">
+                                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="icon-users4"></i> <span>Users</span></a>
+                                            <ul class="dropdown dropdown-submenu">
+                                                @foreach (var role in roles)
+                                                {
+                                                    <li><a href="@Url.Action("Index", "Users", new { Area = "Common", selectedRole = role })"><span>@role</span></a></li>
+                                                }
+                                            </ul>
+                                        </li>
+                                    }
+
+                                    @*<li><a href="@Url.Action("Create", "Users", new { Area = "Common" })">Create User</a></li>*@
+                                    @*<li><a href="@Url.Action("Index", "Users", new {Area = "Common"})">Users List</a></li>*@
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Clients", new { Area = "Common"})"><i class="icon-magazine"></i> <span>Manage Client</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("ClientRenewals", "Clients", new { Area = "Common"})"><i class="icon-magazine"></i> <span>Client Renewals</span></a>
+                            </li>
+                            <li>
+                                <a href="@Url.Action("Index", "Matters", new { Area = "Common"})"><i class="icon-magazine"></i> <span>Manage Matters</span></a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+@RenderBody()
+@section css{
+    @RenderSection("styles", required: false)
+}
+@section js{
+    @RenderSection("scripts", required: false)
+}

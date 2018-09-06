@@ -1,0 +1,10 @@
+﻿@model string[]
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ("@Model[2]" == "true") {
+            AlertNotify("@Model[0]", "@Model[1]", "bg-warning");
+        } else {
+            bootbox.alert({ title: "@Model[0]", message: "@Model[1]" });
+        }
+    });
+</script>

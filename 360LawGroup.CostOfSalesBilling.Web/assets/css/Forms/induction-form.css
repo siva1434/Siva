@@ -1,0 +1,123 @@
+.InductionForm table td{
+  padding: 0px 20px!important;
+}
+.InductionForm .form-wizard-actions{
+  margin-top:20px;
+}
+.InductionForm .FrontDesk td:nth-child(1){
+  width: 50px;
+}
+
+.GeneralCounceling ol{
+}
+.GeneralCounceling ol li{
+  float: left;
+  width: 100%;
+  margin: 8px 0px;
+}
+.GeneralCounceling ol li input[type="text"]{
+  border: 0;
+  border-bottom: #ddd solid 1px;
+  border-radius: 0;
+  outline: none;
+  padding: 0px;
+  height: 20px;
+}
+.GeneralCounceling .TrainerName{
+  display: block;
+}
+.GeneralCounceling .TrainerName .select2{
+    width: 50%!important;
+    
+    padding:  0px!important;
+}
+.GeneralCounceling .TrainerName > span{
+  flex: none;
+  padding: 10px 20px 0px 25px;
+}
+.BMI{}
+.Measurements{}
+.BMI table td:nth-child(1),
+.Measurements table td:nth-child(1){
+  padding: 2px 10px!important;
+}
+.BMI table td,
+.Measurements table td{
+  padding: 2px 2px!important;
+}
+.BMI table td .form-group,
+.Measurements table td .form-group{
+  margin: 0px;
+}
+
+.FitnessTest{}
+
+.FitnessTest table td:nth-child(1) {
+     padding: 2px 10px!important;
+}
+.FitnessTest table td{
+    padding: 2px 2px!important;
+}
+.FitnessTest table td .form-group{
+    margin:0px;
+}
+.Target-result label{
+    margin-top:15px;
+}
+.Diet-Counseling .Diet-Counseling-comment{
+    border: 0;
+  border-bottom: #ddd solid 1px;
+  border-radius: 0;
+  outline: none;
+  padding: 0px;
+  height: 20px;
+}
+.Diet-Counseling label{
+    margin-top:15px;
+}
+.InductionForm-form-icone {
+    margin-top: 6px;
+    color: #00bcd4;
+}
+
+
+/*training form*/
+.medical-history input{
+    border: 0;
+  border-bottom: #ddd solid 1px;
+  border-radius: 0;
+  outline: none;
+  padding: 0px;
+  height: 20px;
+}
+
+/*Workout Card*/
+.Work-out-Card{
+        padding:15px;
+    }
+    
+.Workout-Card-icone{
+         margin-top: 6px;
+         color: #00bcd4;
+    }
+.Work-out-Card .card table td:nth-child(1){
+    padding: 2px 10px!important;
+     }
+.Work-out-Card .card table td{
+     padding: 2px 2px!important;
+}
+.Work-out-Card .card table td{
+    margin:0px;
+}
+.css-serial {
+  counter-reset: serial-number;  /* Set the serial number counter to 0 */
+}
+
+.css-serial td:first-child:before {
+  counter-increment: serial-number;  /* Increment the serial number counter */
+  content: counter(serial-number);  /* Display the counter */
+}
+.Day-hedding{
+    text-align:center;
+    color: #42a9db;
+}

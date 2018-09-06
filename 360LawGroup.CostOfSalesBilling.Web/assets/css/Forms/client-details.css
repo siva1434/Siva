@@ -1,0 +1,86 @@
+.ClientDetails{
+
+}
+.ClientDetails #ClientDetailsPopup{
+    padding: 20px 0px!important;
+}
+.ClientDetails #ClientDetailsPopup .container{
+    background-color: #fff;
+    padding: 20px;
+}
+.ClientDetails #ClientDetailsPopup .container .row.group1{
+    height: 310px;
+    overflow:  hidden;
+}
+.ClientDetails .ClientImg{
+    width: 177px;
+    height: 305px;
+    background-color: #fff;
+    border-right: #e2e2e2 solid 1px;
+    padding: 70px 0px;
+}
+.ClientDetails .ClientImg figure{
+    width: 100px;
+    height: 100px;
+    margin: -14px auto;
+    border-radius:  50%;
+    display:  inherit;
+    box-shadow: #d2d2d2 0px 4px 2px;
+}
+.ClientDetails .ClientImg figure img{
+    width: 87%;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 50%;
+    display: block;
+    border: #00000017 solid 2px;
+}
+.ClientDetails .InfoBox{
+
+}
+.ClientDetails .InfoBox .row.Info-1{
+   border-bottom: #e2e2e2 solid 1px;
+   padding:0px 0px 10px 0px;
+}
+.ClientDetails .InfoBox .row{
+    margin-bottom: 20px;
+}
+.ClientDetails .InfoBox .row div[class^=col-]{
+    padding: 06px;
+}
+.ClientDetails .InfoBox .row.Info-1 h4{
+    margin:0px;
+    display:  inline-flex;
+}
+.ClientDetails .InfoBox .row.Info-1 span.Title{
+    font-weight:bold;
+    color: #f97332;
+    padding: 0px 8px;
+}
+.ClientDetails .InfoBox .row.Info-1 span.MobileNo{
+padding: 0px 0px 0px 20px;
+}
+.ClientDetails .InfoBox .row.Info-1 span.Adrs{
+
+}
+.ClientDetails .InfoBox .AddressCol{    
+border-right: #e2e2e2 solid 1px;    
+margin-right: 40px;
+}
+
+.ClientDetails .InfoBox .help-block {
+    color: #999999;
+    font-size: 12px;
+    margin-top: -4px;
+    margin-bottom: 12px;
+}
+.ClientDetails .InfoBox .panel-body {
+    padding: 0px;
+}
+.ClientDetails .TrainingData{
+    background-color: #e6e6e6;
+    padding: 20px 20px;
+}
+.ClientDetails .TrainingData .panel-body{
+    background-color: #ffffff;
+}

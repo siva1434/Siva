@@ -1,0 +1,151 @@
+﻿@model CampaignMembersViewModel
+
+@{
+    var Camp = ViewBag.Camp as CampaignViewModel;
+}
+
+
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <h3>
+            Create Campaign Member
+        </h3>
+        <div class="heading-elements text-right col-md-3">
+            <a id="btnGoBack" class="pull-left-sm  btn btn-default" href="javascript:;" onclick="GoToUrl('AdminCommon/transports/Index')">
+                <i class="glyphicon glyphicon-backward"></i>&nbsp;&nbsp;&nbsp;
+               
+            </a>
+            <ul class="icons-list pull-right">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            <div class="col-md-3">
+                <h6>Campaign Name</h6>
+                @Camp.Name
+            </div>
+            <div class="col-md-2">
+                <h6>Price</h6>
+                @Camp.Price
+            </div>
+            <div class="col-md-2">
+                <h6>Duration</h6>
+                @Camp.Duration
+            </div>
+            <div class="col-md-2">
+                <h6>Capacity</h6>
+                @Camp.Capacity
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel panel-flat">
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-4">
+                @Html.RequiredLabelFor(m => m.CountryId, new { @class = "col-md-3 control-label" })
+                <div class="col-md-9">
+                    @Html.DropDownListFor(m => m.CountryId, new SelectList(new List<string>()), "Select Country ", new { @class = "form-control", @data_url = ViewBag.ApiUrl + "common/getallcountrylist", @data_default = "Select Country", @data_value = Model.CountryId })
+                    @Html.ValidationMessageFor(model => model.CountryId)
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.RequiredLabelFor(m => m.StateId, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(m => m.StateId, new SelectList(new List<string>()), "Select State ", new { @data_url = ViewBag.ApiUrl + "common/getallstatelist", @data_default = "Select State", @data_value = Model.StateId, @data_cascade_selector = "#CountryId" })
+                        @Html.ValidationMessageFor(model => model.StateId)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.RequiredLabelFor(m => m.CityId, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(m => m.CityId, new SelectList(new List<string>()), "Select City ", new { @data_url = ViewBag.ApiUrl + "common/getallcitieslist", @data_default = "Select City", @data_value = Model.CityId, @data_cascade_selector = "#StateId" })
+                        @Html.ValidationMessageFor(model => model.CityId)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.RequiredLabelFor(m => m.LocationId, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(m => m.LocationId, new SelectList(new List<string>()), "Select Location ", new { @data_url = ViewBag.ApiUrl + "common/getalllocationslist", @data_default = "Select Location", @data_value = Model.CityId, @data_cascade_selector = "#CityId" })
+                        @Html.ValidationMessageFor(model => model.LocationId)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" id="dtstartdate">
+                    @Html.RequiredLabelFor(m=>m.PurchaseDate, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m=>m.PurchaseDate,new { @class = "form-control"})
+                        @Html.ValidationMessageFor(model=>model.PurchaseDate)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.RequiredLabelFor(m => m.NetCost, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.NetCost, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.NetCost)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" id="dtstartdate">
+                    @Html.RequiredLabelFor(m => m.ActivationDate, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.ActivationDate, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ActivationDate)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group" id="dtstartdate">
+                    @Html.RequiredLabelFor(m => m.ExpireDate, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.TextBoxFor(m => m.ExpireDate, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ExpireDate)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.RequiredLabelFor(m => m.PaymentType, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.PaymentType, Html.PaymentMethodList(), new { @class = "form-control", @data_keyboard = "false" })
+                        @Html.ValidationMessageFor(model => model.PaymentType)
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.RequiredLabelFor(m => m.IsActive, new { @class = "col-md-3 control-label" })
+                    <div class="col-md-9">
+                        @Html.DropDownListFor(model => model.IsActive, Html.ActiveDeactiveList(), new { @class = "form-control", @data_keyboard = "false" })
+                        @Html.ValidationMessageFor(model => model.IsActive)
+                    </div>
+                </div>
+            </div>
+        
+        </div>
+        <br />
+    </div>
+</div>
+
+@section scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dtstartdate').pickadate({
+            min: true,
+            formatSubmit: 'yyyy-mm-dd',
+            format: 'yyyy-mm-dd',
+        });
+    }
+    </script>
+}

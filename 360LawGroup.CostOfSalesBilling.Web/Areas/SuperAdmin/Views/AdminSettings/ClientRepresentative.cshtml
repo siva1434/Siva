@@ -1,0 +1,54 @@
+﻿@model _360LawGroup.CostOfSalesBilling.Models.ClientRepresentativeSettingsViewModel
+@{
+    ViewBag.Title = "Update Client Representative";
+}
+@using (Ajax.BeginForm("", "", null,
+                                        new AjaxOptions
+                                        {
+                                            HttpMethod = "POST",
+                                            Url = ViewBag.ApiUrl + "superadmin/adminsettings/saveclientsetting",
+                                            OnSuccess = "ClientRepSuccess",
+                                            OnFailure = "Failed"
+                                        }, new { @class = "form-horizontal", role = "form" }
+                                ))
+{
+
+    <div class="panel panel-flat">
+        <div class="panel-body">
+            <div class="form-group">
+                <div class="col-md-12">
+                    @Html.RequiredLabelFor(m => m.MemberUserId, new { @class = "control-label col-md-4" })
+                    <div class="col-md-8">
+                        @Html.DropDownListFor(m => m.MemberUserId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "common/getallmembers", @data_placeholder = "Member Name", @multiple = "multiple" })
+                        @Html.ValidationMessageFor(model => model.MemberUserId)
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        @Html.RequiredLabelFor(m => m.ClientRepresentativeUserId, new { @class = "control-label col-md-4" })
+                        <div class="col-md-8">
+                            @Html.DropDownListFor(m => m.ClientRepresentativeUserId, new SelectList(new List<string>()), "Select Client Representative", new { @class = "form-control", @data_url = ViewBag.ApiUrl + "common/getallsalesteam", @placeholder = "Select Client Representative User", @data_value = Model.ClientRepresentativeUserId })
+                            @Html.ValidationMessageFor(model => model.ClientRepresentativeUserId)
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Save <i class="icon-floppy-disk position-right"></i></button>
+            </div>
+        </div>
+    </div>
+}
+@section scripts{
+    <script type="text/javascript">
+        function ClientRepSuccess(data) {
+            if (isSuccess(data)) {
+                AlertNotify("Success", data.Messages, "bg-success");
+                $("#MemberUserId").val("").trigger("change");
+                $("#ClientRepresentativeUserId").val("").trigger("change");
+            }
+        }
+    </script>
+}

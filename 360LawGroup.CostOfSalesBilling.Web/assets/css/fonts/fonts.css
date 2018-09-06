@@ -1,0 +1,39 @@
+﻿@font-face {
+    font-family: arial;
+    src: url('arial.ttf');
+}
+
+@font-face {
+    font-family: calibri;
+    src: url('calibri.ttf');
+}
+
+@font-face {
+    font-family: georgia;
+    src: url('georgia.ttf');
+}
+
+@font-face {
+    font-family: times;
+    src: url('times.ttf');
+}
+
+@font-face {
+    font-family: verdana;
+    src: url('verdana.ttf');
+}
+
+@font-face {
+    font-family: FuturaStd-Bold;
+    src: url('FuturaStd-Bold.otf');
+}
+
+@font-face {
+    font-family: FuturaStd-Book;
+    src: url('FuturaStd-Book.otf');
+}
+
+@font-face {
+    font-family: FuturaStd-Light;
+    src: url('FuturaStd-Light.otf');
+}

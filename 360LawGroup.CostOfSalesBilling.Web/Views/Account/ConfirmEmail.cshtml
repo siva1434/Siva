@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Confirm Email";
+    Layout = "~/Views/Shared/_OutsideLayout.cshtml";
+}
+<div class="panel panel-body login-form">
+    <div class="text-center">
+        <img src="~/assets/images/logo/hf.png" />
+        <h5 class="content-group-lg">Confirmation for <small class="display-block"> your email address.</small></h5>
+
+        <div id="processing">
+            <p>
+                Please wait
+            </p>
+        </div>
+        <div id="error_confirm" style="display: none;">
+        </div>
+        <div id="success_confirm" style="display: none;">
+            <p>
+                Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+            </p>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            apiCall('account/confirmemail',
+                "get",
+                {
+                    userId: "@ViewBag.ConfirmUserId",
+                    code: "@(((string)ViewBag.ConfirmCode).Replace(" ","+"))"
+                },
+                function (result) {
+                    $("#processing").hide();
+                    if (!result) {
+                        $("#error_confirm").html("Invalid Email Confirm Link. <a href='" + BASEPATH + "'>Back to login</a>").show();
+                    } else {
+                        $("#success_confirm").show();
+                    }
+                },
+                function (result) {
+                    $("#processing").hide();
+                    $("#error_confirm").html("Oops! Something went wrong. <a href='"+BASEPATH+"'>Back to login</a>").show();
+                });
+        });
+    </script>
+}

@@ -1,0 +1,226 @@
+$white: #fff;
+$aqua: #66ccff;
+$gray: #eeeeee;
+$sky: #283c86;
+$light: #e2e2e2;
+
+body {
+  padding-top:60px;
+  background: $sky;/*old browsers*/
+  background: -webkit-linear-gradient(to right, $sky, $light); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, $sky, $light);/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.container {
+  h1{
+    color: $white;
+    margin:15px;
+    padding:15px;
+  }
+  
+  .main {
+    height:50%;
+    
+    .progress{
+      margin: 20px;
+      height:10px;
+      background-color: $gray;
+      
+      .progress-bar{
+        height:15px;
+        color:$gray;
+      }  
+     }
+    
+    .progreso1{
+      transition-delay: 4s;
+      transition: all 0.45s ease-in-out;
+      width: 34.333333%;
+      animation: 0.5s;
+      background-color: $aqua;
+    
+      @media (max-width:768px){
+        width: 34%;
+      }
+    }
+    
+    .progreso2{
+      width: 69.3333%;
+      animation: 0.5s;
+      background-color: $aqua;
+      transition: all 0.45s ease;
+      
+      @media (max-width:768px){
+        width: 73%;
+      }
+    }
+    
+    .progreso3{
+      width: 100%;
+      animation: 0.5s;
+      background-color: $aqua;
+      transition: all 0.45s ease;
+    }
+    
+    .block1{
+      position: absolute;
+      margin: 0 0%;
+      border-radius: 50%;
+      background-color: $aqua;
+      height: 50px;
+      width: 50px;
+      top: 0px;
+      padding:4px;
+      margin-top:90px;
+    }
+    
+    .block2{
+      position: absolute;
+      margin: 0 33.33333333%;
+      border-radius: 50%;
+      background-color: $gray;
+      height: 50px;
+      width: 50px;
+      top: 0px;
+      padding: 4px;
+      margin-top:90px;
+      
+      @media (max-width:768px){
+        margin: 0 31.5%;
+        margin-top:90px;
+      }
+    }
+    
+    .block3{
+      position: absolute;
+      margin: 0 66.3333333%;
+      border-radius: 50%;
+      background-color: $gray;
+      height: 50px;
+      width: 50px;
+      top:0px;
+      padding: 4px;
+      margin-top:90px;
+      
+      @media (max-width:768px){
+        margin: 0 62.5%;
+        margin-top:90px; 
+      }
+    }
+     
+    .block4{
+      position: absolute;
+      margin: 0 92.5%;
+      border-radius: 50%;
+      background-color: $gray;
+      height: 50px;
+      width: 50px;
+      top:0px;
+      padding: 4px;
+      margin-top:90px;
+      
+       @media (max-width:570px){
+        margin: 0 86.5% !important;
+        margin-top:90px!important ; 
+      }
+      
+      @media (max-width:768px){
+        margin: 0 90.5%;
+        margin-top:90px; 
+      }
+    }
+    
+    .circulo{
+      border-radius: 50%; 
+      height: 30px; 
+      width:30px;
+      background-color: $gray;
+      top:0px;
+      margin:6px;
+    }
+    
+    .fa-check{
+      font-size: 14px;
+      color: $white;
+      padding: 2.5px;
+    }
+    
+    .activeblock2{
+      position: absolute;
+      margin: 0 33.33333%;
+      border-radius: 50%;
+      background-color: $aqua !important;
+      height: 50px;
+      width: 50px;
+      top:0px;
+      padding: 4px;
+      margin-top:90px; 
+    }
+    
+    .activeblock3{
+      position: absolute;
+      margin: 0 65%;
+      border-radius: 50%;
+      background-color: $aqua;
+      height: 50px;
+      width: 50px;
+      top:0px;
+      padding: 4px;
+      margin-top:90px; 
+    }
+    
+    .activeblock4{
+      position: absolute;
+      margin: 0 93%;
+      border-radius: 50%;
+      background-color: $aqua;
+      height: 50px;
+      width: 50px;
+      top:0px;
+      padding: 4px;
+      margin-top:90px; 
+      
+      @media (max-width:768px){
+        margin: 0 90.7%;
+         margin-top:90px; 
+      }
+      @media (min-width:510px) and (max-width:600px){
+        margin: 0 89.5%;
+         margin-top:90px; 
+      }
+       @media (min-width:368px) and (max-width:509px){
+        margin: 0 86%;
+         margin-top:90px; 
+      }
+      @media (min-width:200px) and (max-width:367px){
+        margin: 0 86%;
+         margin-top:90px; 
+      }
+      
+    }
+    
+    .activecirculo{
+      border-radius: 50%; 
+      height: 30px; 
+      width: 30px;
+      background-color: $aqua; 
+      border: solid 4px $white;
+      margin: 6px;
+     
+    }  
+  }
+}
+
+/**
+This is just to test, but you don't need it.
+*/
+.next{
+  margin-top:50px;
+  
+  .next2{
+    display:none;
+  }
+  .next3{
+    display:none;
+  }
+}

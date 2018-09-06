@@ -1,0 +1,186 @@
+﻿<script type="text/x-jquery-tmpl" id="hover-template">
+    <table class="tooltip-table">
+        <tr>
+            <td>MID:</td>
+            <td>${AspNetUser2UserName}</td>
+            <td rowspan="3">
+                <img src="@(ViewBag.ApiUrl+"common/memberinfo/viewphoto?fileName=${MemberUserId}.jpg&amp;"+DateTime.UtcNow.Ticks)" class="memberphoto memberphoto-sm" />
+            </td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td>${AspNetUser2FullName}</td>
+        </tr>
+        <tr>
+            <td>Gender:</td>
+            <td>${AspNetUser2Gender}</td>
+        </tr>
+        @*<tr>
+                <td>Email:</td>
+                <td>${AspNetUser2Email}</td>
+            </tr>*@
+        <tr>
+            <td>Phone:</td>
+            <td>${AspNetUser2PhoneNumber}</td>
+        </tr>
+    </table>
+</script>
+<script type='text/javascript'>
+    $(document).ready(function () {
+        $('#btnsearch2').on('click', function () {
+            if ($.trim($("#SearchValue").val()) == "") {
+                AlertNotify("Validations!", "Please enter search text", "bg-warning")
+                return;
+            }
+            if (typeof $('#trainergrid').attr('data-toggle') === 'undefined') {
+                $('#trainergrid').attr('data-toggle', 'table');
+                BindBtTable('body');
+            } else {
+                $('#search_filter_induction #btnsearch').click();
+            }
+            $('#trainergrid').removeClass('hide');
+        });
+        $("#StartDate,#EndDate").val(moment(new Date()).format('DD-MM-YYYY'));
+        $("#StartDate").datePicker({
+            ignoreReadonly:true
+        }).on("change", function () {
+            $('#search_filter_followup #btnsearch').click();
+        });
+        $('#StartDate').attr('readonly', true);
+        $("#EndDate").datePicker({
+            ignoreReadonly: true
+        }).on("change", function () {
+            $('#search_filter_followup #btnsearch').click();
+        });
+        $('#EndDate').attr('readonly', true);
+        $("#FUType").on("change", function () {
+            $('#search_filter_followup #btnsearch').click();
+        })
+        $.get("@Url.Action("DashboardCounters","Home",new { Area=""})").done(function (html) {
+            $("#dashcounters").html(html);
+        });
+
+        $("#trainergrid").on("expand-row.bs.table", function (e, index, row, $detail) {
+            var rowNo = 0;
+            var fRowNo = 0; 
+            $detail.html('<div class="ml-20 mr-20"><strong>Membership Inductions</strong><table class="table table-bordered text-center"></table></div>').find('table').bootstrapTable({
+                columns: [{
+                    formatter: function (value, row) {
+                        ++rowNo;
+                        return rowNo;
+                    },
+                    title: 'No.'
+                }, {
+                     field: "AspNetUser2FullName",
+                    title: "Member",
+                }, {
+                    field: "UserPackageProductName",
+                    title: "Product Name"
+                },
+
+                    {
+                    field: "UserPackageParchaseDate",
+                    title: "Purchase Date",
+                    formatter: "dateformatter"
+                }, {
+                      field:"UserPackageActivationDate",
+                      title:"Activation Date",
+                      formatter:"dateformatter"
+                }, {
+                      field:"UserPackageExpiryDate",
+                      title:"Expiry Date",
+                      formatter:"dateformatter"
+                }, {
+                    field: "Id",
+                    title: "Induction Form",
+                    formatter: "MembershipInductioninfo"
+                }
+                ],
+                data: row.MembershipInductions,
+            });
+
+            $detail.append('<div class="ml-20 mr-20"><strong>Personal Training Inductions</strong><table class="table table-bordered text-center"></table></div>').find('table').bootstrapTable({
+                
+                columns: [{
+
+                    formatter: function (value, row, i) {
+                        //++fRowNo;
+                        fRowNo = i + 1;
+                        return fRowNo;
+                    },
+
+                    //formatter: function (value, row) {
+                    //    ++fRowNo;
+                    //    return fRowNo;
+                    //},
+                    title: 'No.'
+                },
+                {
+                    field: "UserPackageProductTypeName",
+                    title: "Product Type",
+                }, {
+                    field: "UserPackageProductName",
+                    title: "Product"
+                }, {
+                    field: "PersonalTrainingIsCampaign",
+                    title: "Is Campaign",
+                    formatter: "yesnoformat"
+                }, {  
+                    field: "UserPackageActivationDate",
+                    title: "Activation Date",
+                    formatter: "dateformatter"
+                }, {
+                    field: "UserPackageExpiryDate",
+                    title: "Expiry Date",
+                    formatter: "dateformatter"
+                }, {
+                    field: "Id",
+                    title: "Induction Form",
+                    formatter: "PTInductioninfo"
+                }
+
+                ],
+                data: row.PTInductions,
+            });
+        });
+
+
+
+    });
+    function MembershipInductioninfo(value, row) {
+        return '<a href="' + BASEPATH + "Trainer/MembershipInductions/Index?memberUserId=" + row.MemberUserId + "&userpackageId=" + row.UserPackageId + '"class="btn btn-primary btn- sm"><i class="fa fa-clipboard"></i></a>';
+    }
+
+
+    function PTInductioninfo(value, row) {
+        return '<a href="' + BASEPATH + "Trainer/PersonalTrainingInductions/Index?memberUserId=" + row.MemberUserId + "&userpackageId=" + row.UserPackageId + '"class="btn btn-info btn- sm"><i class="fa fa-clipboard"></i></a>';
+    }
+
+    function GetHoverHtml(row) {
+        var tmplet = $("<div/>");
+        $.tmpl($("#hover-template").html(), row).appendTo(tmplet);
+        return tmplet.html();
+    }
+    function bdayloadsuccess(e, data) {
+        var maxHeight = 0;
+        $(".bdaylist .bday-item").each(function () {
+            if ($(this).height() > maxHeight) { maxHeight = $(this).height(); }
+        });
+        $(".bdaylist .bday-item").height(maxHeight);
+    }
+    function followupstatus(status){
+        if (status == "@FollowUpStatus.Green") {
+            return "bg-success";
+        }
+        else if (status == "@FollowUpStatus.Amber") {
+            return "bg-warning";
+        }
+        else if (status == "@FollowUpStatus.Red") {
+            return "bg-danger";
+        }
+        else {
+            return "bg-grey";
+        }
+    }
+</script>
+

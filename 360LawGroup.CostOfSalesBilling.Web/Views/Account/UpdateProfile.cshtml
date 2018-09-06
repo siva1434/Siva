@@ -1,0 +1,88 @@
+﻿@model _360LawGroup.CostOfSalesBilling.Models.UpdateProfileModel
+<div id="AddEditModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">My Profile</h4>
+            </div>
+            @using ( Ajax.BeginForm("", "", null,
+                new AjaxOptions {
+                    HttpMethod = "POST",
+                    Url = ViewBag.ApiUrl + "Account/UpdateProfile",
+                    OnSuccess = "SuccessUpdateProf",
+                    OnFailure = "Failed"
+                }, new { @class = "form-horizontal", role = "form" }
+                ) ) {
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.RequiredLabelFor(m => m.Email, new { @class = "col-md-12 control-label" })
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(m => m.Email)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.RequiredLabelFor(m => m.PhoneNumber, new { @class = "col-md-12 control-label" })
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.ValidationMessageFor(m => m.PhoneNumber)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.RequiredLabelFor(m => m.FirstName, new { @class = "col-md-12 control-label" })
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.FirstName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.RequiredLabelFor(m => m.MiddleName, new { @class = "col-md-12 control-label" })
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.MiddleName)
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.RequiredLabelFor(m => m.LastName, new { @class = "col-md-12 control-label" })
+                        <div class="col-md-12">
+                            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(m => m.LastName)
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        ShowModal("#AddEditModal");
+        $("#showpwd").on("change",
+            function () {
+                if ($(this).is(":checked")) {
+                    $("#Password").attr("type", "text");
+                } else {
+                    $("#Password").attr("type", "password");
+                }
+            });
+    });
+
+    function SuccessUpdateProf(data) {
+        if (isSuccess(data)) {
+            $.post("@Url.Action("SetUpdatedProfile", "Account", new {Area = ""})", data.Data).complete(function () {
+                $("#AddEditModal").modal('hide');
+                bootbox.alert({
+                    title: "Success", message: data.Messages, callback: function () {
+                        window.location.reload();
+                    }
+                });
+            });
+        }
+    }
+</script>

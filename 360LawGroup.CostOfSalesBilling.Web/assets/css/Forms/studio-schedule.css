@@ -1,0 +1,156 @@
+.StudioSchedule{
+}
+.StudioSchedule .table.Schedule{
+    width: 100%;
+    margin:  0 auto;
+}
+.StudioSchedule .table.Schedule th,
+.StudioSchedule .table.Schedule td{
+    position: relative;
+    padding: 0px 0px;
+    display: inline-block;
+    /*margin: 1px 2px;*/
+    border:  0;
+}
+.StudioSchedule .table.Schedule thead{
+    
+margin: 6px 0px;
+    
+display:  block;
+}
+.StudioSchedule .table.Schedule thead td{
+    width: 100px;
+    height: auto;
+}
+    .StudioSchedule .table.Schedule thead .Timing {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        box-shadow: #0000006e 0px 3px 3px;
+        border: #dedede solid 1px;
+        text-align: center;
+        background-color: #263238;
+        color: #fff;
+    }
+.StudioSchedule .table.Schedule tbody td{
+    width: 100px;
+    height: 120px;
+}
+.InstructorNm a, .InstructorNm a .label {
+    display: block;
+    width: 100%;
+    border-radius: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.StudioSchedule .table.Schedule tr td:first-child,
+.StudioSchedule .table.Schedule tr th:first-child{
+    width: 100px;
+}
+.StudioSchedule .table.Schedule tbody .InstructorNm:first-child a:first-child{
+    margin-top:5px;
+}
+.StudioSchedule .table.Schedule tbody .Day,
+.StudioSchedule .table.Schedule tbody .InstructorNm {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 6px;
+    /*box-shadow: #ffffff 0px 3px 3px;*/
+    border: #999999 solid 1px;
+    text-align: center;
+}
+.StudioSchedule .table.Schedule .Day{
+    background-color: #26a69a;
+}
+.StudioSchedule .table.Schedule .Day span {
+    color: #fff;
+    text-transform: uppercase;
+    padding: 0;
+    display: table-cell;
+    font-weight: bold;
+    height: 120px;
+    vertical-align: middle;
+    text-align: center;
+    width: 100px;
+}
+.StudioSchedule .table.Schedule .InstructorNm{
+    background-color: #ffffff;
+    cursor: pointer;
+    transition:background-color .3s;
+    text-align:  center;
+    line-height: 12px;
+    color: #263238;
+    font-size:  12px;
+}
+.StudioSchedule .table.Schedule .InstructorNm img{border-radius:  50%;width: 26%;display:  block;margin: 4px auto;}
+/*.StudioSchedule .table.Schedule .InstructorNm a:hover .label,
+.StudioSchedule .table.Schedule .InstructorNm a:focus .label{
+    background-color: #263238;
+}*/
+.StudioSchedule .table.Schedule .InstructorNm:hover .Trainer,
+.StudioSchedule .table.Schedule .InstructorNm:focus .Trainer{
+    color: #fff;
+}
+.StudioSchedule .table.Schedule .InstructorNm  .Training{display:  block;font-size: 9px;color: #26a69a;/* text-shadow: #0d4a4e7d 0px 1px 2px; */}
+.StudioSchedule .table.Schedule .InstructorNm  .Trainer{font-size: 11px;}
+.StudioSchedule .table.Schedule .Holiday{
+    width: 86%;
+}
+.StudioSchedule .table.Schedule .Holiday h4,
+.StudioSchedule .table.Schedule .HolidayHT h4{
+    width: 100%;
+    text-align:  center;
+    padding: 12px 0px;
+    border: #f15440 solid 1px;
+    border-radius:  06px;
+    margin: 3px 0px;
+    text-transform:  uppercase;
+    color: #ffffff;
+    background-color: #ff5252;
+}
+.StudioSchedule .table.Schedule .HolidayHT{
+    width: 54.5%;
+}
+.StudioSchedule .ServicesList{list-style:  none;padding:  20px 10px;background-color:  #fff;margin:  20px 8px;box-shadow: #0000000d 0px 4px 11px;}
+.StudioSchedule .ServicesList li{
+    display:  inline-block;
+    padding: 6px 10px;
+    border: #d8d8d8 solid 1px;
+    margin:  3px 2px;
+    border-radius:  5px;
+    text-align:  center;
+    box-shadow: #d6d6d6 0px 2px 0px;
+    min-width: 220px;
+}
+.StudioSchedule .ServicesList li h5{
+    margin:  0px 0px;
+}
+.StudioSchedule .ServicesList li span{}
+.TableScrollSet{
+    min-width:320px;
+    overflow-x:scroll;
+    padding: 10px 0px;
+}
+.TableScrollSet::-webkit-scrollbar {
+    width: 05px;
+} 
+/* Track */
+.TableScrollSet::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0);
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+} 
+/* Handle */
+.TableScrollSet::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    background: rgba(48, 48, 48, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
+}
+.TableScrollSet::-webkit-scrollbar-thumb:window-inactive {
+	background: rgba(12, 105, 211, 0); 
+}

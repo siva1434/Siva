@@ -1,0 +1,138 @@
+﻿<script type="text/x-jquery-tmpl" id="hover-template">
+    <table class="tooltip-table">
+        <tr>
+            <td>MID:</td>
+            <td>${AspNetUser2UserName}</td>
+            <td rowspan="3">
+                <img src="@(ViewBag.ApiUrl+"common/memberinfo/viewphoto?fileName=${MemberUserId}.jpg&amp;"+DateTime.UtcNow.Ticks)" class="memberphoto memberphoto-sm" />
+            </td>
+        </tr>
+        <tr>
+            <td>Name:</td>
+            <td>${AspNetUser2FullName}</td>
+        </tr>
+        <tr>
+            <td>Gender:</td>
+            <td>${AspNetUser2Gender}</td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td>${AspNetUser2Email}</td>
+        </tr>
+        <tr>
+            <td>Phone:</td>
+            <td>${AspNetUser2PhoneNumber}</td>
+        </tr>
+    </table>
+</script>
+<script type='text/javascript'>
+    $(document).ready(function () {
+        $('#btnsearch2').on('click', function () {
+            if ($.trim($("#SearchValue").val()) == "") {
+                AlertNotify("Validations!", "Please enter search text", "bg-warning")
+                return;
+            }
+            if (typeof $('#trainergrid').attr('data-toggle') === 'undefined') {
+                $('#trainergrid').attr('data-toggle', 'table');
+                BindBtTable('body');
+            } else {
+                $('#search_filter_enquiry #btnsearch').click();
+            }
+            $('#trainergrid').removeClass('hide');
+        });
+        $("#StartDate,#EndDate").val(moment(new Date()).format('YYYY-MM-DD'));
+        $("#StartDate").datePicker({
+            format: 'yyyy-MM-dd',
+            ignoreReadonly:true
+        }).on("change", function () {
+            $('#search_filter_followup #btnsearch').click();
+        });
+        $("#EndDate").datePicker({
+            format: 'yyyy-MM-dd',
+            ignoreReadonly: true
+        }).on("change", function () {
+            $('#search_filter_followup #btnsearch').click();
+        });
+        $("#FUType").on("change", function () {
+            $('#search_filter_followup #btnsearch').click();
+        })
+        $('#trainergrid').on('expand-row.bs.table', function (e, index, row, $detail) {
+            var trailLink = $("<a href='" + BASEPATH + "Common/InquiryTrails/Editor?id=" + row.Id + "' data-ajax='true' data-ajax-mode='replace' data-ajax-update='#popupmodals' data-success='popupsuccess' class='btn btn-xs bg-grey'><i class='glyphicon glyphicon-plus'></i> Trial</a>");
+            var detailHtml = $.tmpl($("#detail-template").html(), row);
+            $(detailHtml).appendTo($detail);
+        });
+        $.get("@Url.Action("DashboardCounters","Home",new { Area=""})").done(function (html) {
+            $("#dashcounters").html(html);
+        });
+    });
+    function PTInfo(value, row) {        
+        return "<a href='@Url.Action("PTInductionForm", "PTInduction", new { Area="Common"})?memberUserId=" + row.MemberUserId + "&userpackageId=" + row.UserPackageId + "' data-placement='right' data-toggle='popover' data-container='body' title='" + GetHoverHtml(row) +"'>" + row.AspNetUser2FullName + "</a>";
+    }
+
+    function GetHoverHtml(row) {
+        var tmplet = $("<div/>");
+        $.tmpl($("#hover-template").html(), row).appendTo(tmplet);
+        return tmplet.html();
+    }
+    function bdayloadsuccess(e, data) {
+        var maxHeight = 0;
+        $(".bdaylist .bday-item").each(function () {
+            if ($(this).height() > maxHeight) { maxHeight = $(this).height(); }
+        });
+        $(".bdaylist .bday-item").height(maxHeight);
+    }
+    function followupstatus(status){
+        if (status == "@FollowUpStatus.Green") {
+            return "bg-success";
+        }
+        else if (status == "@FollowUpStatus.Amber") {
+            return "bg-warning";
+        }
+        else if (status == "@FollowUpStatus.Red") {
+            return "bg-danger";
+        }
+        else {
+            return "bg-grey";
+        }
+    }
+
+    $("#trainergrid").on("expand-row.bs.table", function (e, index, row, $detail) {
+        var rowNo = 0;
+        $detail.html('<div class="ml-20 mr-20"><table class="table table-bordered"></table></div>').find('table').bootstrapTable({
+            columns: [{
+                formatter: function (value, row) {
+                    ++rowNo;
+                    return rowNo;
+                },
+                title: 'No.'
+            }, {
+                field: "PersonalTrainingsPTType",
+                title: "Type",
+                },
+                 {
+                field: "UserPackageProductTypeName",
+                title: "Product Type",
+            }, {
+                field: "UserPackageProductName",
+                title: "Product"
+            }, {
+                field: "PersonalTrainingIsCampaign",
+                title: "Is Campaign"
+            }, {
+                field: "PersonalTrainingStartDate",
+                title: "Start Date",
+            }, {
+                field: "PersonalTrainingEndDate",
+                title: "End Date"
+            }, {
+                field: "FullName",
+                title: "Join Members"
+            }
+            ],
+            data: row.PersonalTrainingInducations,
+        });
+    });
+
+</script>
+
+

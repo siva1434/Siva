@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "External login";
+    Layout = "~/Views/Shared/_OutsideLayout.cshtml";
+}
+<div class="panel panel-body login-form">
+    <div class="text-center">
+        <img src="~/assets/images/logo/hf.png" />
+        <h5 class="content-group-lg">Authenticating <small class="display-block"> external login.</small></h5>
+
+        <div id="success">
+            <h3 class="form-title font-green">Authenticating</h3>
+            <div class="alert alert-success">
+                <button class="close" data-close="alert"></button>
+                <span>Please wait we are redirecting...</span>
+            </div>
+        </div>
+        <div id="failed" class="hide">
+            <h3 class="form-title font-green">Error</h3>
+            <div class="alert alert-danger">
+                <button class="close" data-close="alert"></button>
+                <span>@ViewBag.Error <a href="~/">Back to login</a></span>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function() {
+            if ("@ViewBag.Success".toLowerCase() === "true") {
+                setTimeout(function() {
+                    window.location = BASEPATH + "/Home/Index";
+                }, 1000);
+            } else {
+                $("#failed").removeClass("hide");
+                $("#success").addClass("hide");
+            }
+        });
+    </script>
+}

@@ -1,0 +1,96 @@
+﻿@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+<div class="panel panel-body login-form">
+    <div class="text-center">
+        <img src="~/assets/images/logo/360businesslaw.png" style="width:280px;" />
+        <h5 class="content-group-lg">CITRAS - Unregulated Legal Services Database account <small class="display-block">Enter your credentials</small></h5>
+    </div>
+    @using (Ajax.BeginForm("Login", "Account", null,
+                                                                new AjaxOptions
+                                                                {
+                                                                    HttpMethod = "POST",
+                                                                    OnSuccess = "SuccessLoginToken",
+                                                                    OnFailure = "Failed"
+                                                                }, new { }
+                                                                ))
+    {
+
+        <div class="form-group has-feedback has-feedback-left">
+            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", placeholder = "Username / Email Id" })
+            @Html.ValidationMessageFor(m => m.UserName)
+            <div class="form-control-feedback">
+                <i class="icon-user text-muted"></i>
+            </div>
+        </div>
+        <div class="form-group has-feedback has-feedback-left">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control", placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.Password)
+            <div class="form-control-feedback">
+                <i class="icon-lock2 text-muted"></i>
+            </div>
+        </div>
+
+        <div class="form-group login-options">
+            <div class="row">
+                <div class="col-sm-6">
+                    <label class="checkbox-inline">
+                        @Html.CheckBoxFor(m => m.RememberMe, new { @class = "styled", @checked = "checked" })
+                        @Html.DisplayNameFor(m => m.RememberMe)
+                    </label>
+                </div>
+
+                <div class="col-sm-6 text-right">
+                    @Html.ActionLink("Forgot password?", "ForgotPassword", "Account")
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col-md-12">
+                    <button type="submit" class="btn bg-blue btn-block">Login <i class="icon-circle-right2 position-right"></i></button>
+                </div>
+            </div>
+        </div>
+        @*<div id="extlogin" class="form-group hide">
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="button" id="extlogin-Microsoft" href="javascript:;" class="btn bg-indigo btn-block"><i class="icon icon-windows"></i> </button>
+                </div>
+                <div class="col-md-6">
+                    <button type="button" id="extlogin-Google" href="javascript:;" class="btn bg-danger btn-block"><i class="icon icon-google"></i> </button>
+                </div>
+            </div>
+        </div>*@
+    }
+    @*<div class="content-divider text-muted form-group">
+        <span>Don't have an account?</span>
+    </div>
+    @Html.ActionLink("Register", "Register", "Account", null, new { @class = "btn bg-slate btn-block content-group" })*@
+    <span class="help-block text-center no-margin">By continuing, you're confirming that you've read our <a href="javascript:;" data-target="#termsandconditions" data-toggle="modal">Terms &amp; Conditions</a> </span>
+    @Html.Partial("_TermsAndConditions")
+</div>
+@section Scripts {
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //apiCall("account/360LawGroupextloginlist?returnUrl=&generateState=true", "get", null,
+            //    function (data) {
+            //        if (isSuccess(data)) {
+            //            $(data.Data).each(function (i, item) {
+            //                $("#extlogin-" + item.Provider).attr("onclick", "window.location='" + ApiUrl + "account/360LawGroupextlogin?provider=" + item.Provider + "&state=" + item.State + "&response_type=" + item.ResponseType + "&client_id=" + item.ClientId + "&redirect_uri=" + BASEPATH + "Account/ExternalConfirm';");
+            //                $("#extlogin-" + item.Provider).append(item.Name);
+            //            });
+            //            $("#extlogin").removeClass("hide");
+            //        }
+            //    });
+        });
+
+        function SuccessLoginToken(data) {
+            if (isSuccess(data)) {
+                window.location = "@Url.Action("Index", "Home")";
+            }
+        }
+    </script>
+}

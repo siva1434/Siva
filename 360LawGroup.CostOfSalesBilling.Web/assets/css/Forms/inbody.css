@@ -1,0 +1,308 @@
+.InBody hr{}
+.InBody .HeaderData + .col-md-8{
+    max-width: 670px;
+}
+.InBody .row{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+.InBody .panel {
+    float: left;
+    width: 100%;
+}
+.InBody .panel-white > .panel-heading {
+    float: left;
+    width: 100%;
+}
+
+.InBody .HeaderData{}
+.InBody .HeaderData ul{
+    list-style:  none;
+    padding: 6px 18px;
+    border: #eaeaea solid 1px;
+    box-shadow: #0000000a 0px 4px 6px;
+}
+.InBody .HeaderData ul li{
+    display:  inline-block;
+    width: 150px;
+}
+.InBody .HeaderData ul li:nth-child(n+2):nth-child(-n+4){
+    width: 100px;
+}
+.InBody .HeaderData ul li .Lbl{
+    color: #989898;
+    font-size:  12px;
+}
+.InBody .HeaderData ul li .LblData{
+    font-weight:  bold;
+    color: #565656;
+    font-size: 12px;
+}
+
+.InBody .BodyCompositionAnalysis .CellGroup,
+.InBody .BodyCompositionAnalysis .CellUnGroup{
+    padding: 8px 10px;
+    height: 36px;
+}
+.InBody .BodyCompositionAnalysis .CellGroup{
+    background-color: #f3f3f3;
+    border-bottom: #ffffff solid 2px;
+}
+.InBody .BodyCompositionAnalysis .CellGroup label{
+    font-weight: bold;
+}
+.InBody .BodyCompositionAnalysis .CellGroup .UnitMeasurment{float:  right;}
+.InBody .BodyCompositionAnalysis .CellUnGroup{
+    background-color: #ffffff;
+    border-bottom: #eaeaea solid 2px;
+}
+
+.MuscleFatAnalysis .Title .Label,
+.MuscleFatAnalysis .Title .Under,
+.MuscleFatAnalysis .Title .Normal,
+.MuscleFatAnalysis .Title .Over{
+    display: inline-block;
+    color:  #fff;
+    padding: 6px 8px;
+    vertical-align:  middle;
+    text-align:  center;
+    height:  30px;
+}
+
+
+.MuscleFatAnalysis .Title .Label{
+    width: 140px;
+    background-color: #eaeaea;
+}
+.MuscleFatAnalysis .Title .Under{
+    width: 120px;
+    background-color: #bbb;
+}
+.MuscleFatAnalysis .Title .Normal{
+    width: 81px;
+    background-color: #8c8c8c;
+}
+.MuscleFatAnalysis .Title .Over{
+    width: 298px;
+    background-color: #c5c5c5;
+}
+
+.MuscleFatAnalysis .MFA-Data .Label,
+.MuscleFatAnalysis .MFA-Data .AnalysisData{
+    display: inline-block;
+    padding: 0px 0px;
+    vertical-align: top;
+}
+.MFA-Data{
+border-bottom: #cacaca solid 2px;
+margin-bottom: 6px;
+box-shadow: #ececec 0px 2px 2px;
+}
+.MFA-Data .Label{
+   width: 140px;
+   padding: 12px 06px!important;
+   background-color: #f9f9f9;
+}
+.MFA-Data .Label label{
+    font-weight: bold;
+ }
+ .SMM,
+ .BMI,
+ .PBF {
+     position:relative;
+ }
+ .BMI span,
+ .SMM span,
+ .PBF span{
+    position: absolute;
+    top: 15px;
+    width: 137px;
+    font-size: 9px;
+    left: 0;
+    color: #676767;
+    font-weight: normal;
+ }
+.MFA-Data .AnalysisData{
+    width: 506px;
+    border-top: #bfbfbf solid 1px;
+    border-left: #bfbfbf solid 1px;
+}
+.MFA-Data .AnalysisData .RulerUI{
+    width: 100%;
+    padding: 1px;
+    float: left;
+    position:  relative;
+    height: 50px;
+    overflow:  hidden;
+}
+.MFA-Data .AnalysisData .RulerUI ul{
+    padding: 0px;
+    list-style: none;
+    position:  relative;
+    z-index: 99;
+}
+.MFA-Data .AnalysisData .RulerUI ul li{
+    display: inline-block;
+    padding: 4px 20px;
+    font-size:  12px;
+    position:  relative;
+    height: 34px;
+}
+.MFA-Data .AnalysisData .RulerUI ul li:nth-child(1){padding: 4px 16px;}
+.MFA-Data .AnalysisData .RulerUI ul li:nth-child(n+2){padding: 4px 20px;}
+.MFA-Data .AnalysisData .RulerUI ul .Last i{position:  absolute;right: -50px;top: 12px;}
+.MFA-Data .AnalysisData .RulerUI ul li span{position: absolute;font-size: 9px;l;color:  #000;z-index:  99;width: 20px;height: 20px;border-radius:  50%;background-color: white;display: table-cell;text-align:  center;padding:  3px 0px;box-shadow: #0000002b 0px 1px 4px;right: -9px;top: 8px;}
+.MFA-Data .AnalysisData .RulerUI ul li:before{
+    content: '';
+    position:  absolute;
+    width: 2px;
+    height: 6px;
+    background-color: #bbb;
+    top: 0;
+    right:  0;
+}
+.MFA-Data .AnalysisData .RulerUI ul li:after{
+    content: '';
+    position:  absolute;
+    width: 2px;
+    height: 12px;
+    background-color: #ffffff;
+    bottom: -10px;
+    right: 0;
+}
+
+.MFA-Data .AnalysisData .RulerUI .ProgressLine{
+    width: 100%;
+    height: 12px;
+    position:  absolute;
+    top: 33px;
+}
+.MFA-Data .AnalysisData .RulerUI .ProgressLine div.CurrentData{
+    /* width: 536px; */
+    overflow:  hidden;
+    height:  12px;
+    position:  relative;
+}
+    .MFA-Data .AnalysisData .RulerUI .ProgressLine div.CurrentData .Bg {
+        width: 506px;
+        height: 12px;
+     
+        background-image: url('../../images/progress-bar-bg.jpg');
+        background-position: 0px 0px;
+        background-size: contain;
+    }
+.MFA-Data .AnalysisData .RulerUI .ProgressLine div.CurrentData span{position:  absolute;top: -3px;background-color: #ffffffad;right:  0;padding: 0px 3px;z-index:  999;border-left: #565656 solid 2px;}
+
+.LeanNFatMass{
+    float: left;
+    width: 100%;
+    margin-top:  20px;
+}
+.LeanNFatMass div{
+    padding:0px;
+}
+    .LeanNFatMass div.Left,
+    .LeanNFatMass div.Right {
+        width: 320px;
+        height: 320px;
+        background-color: #f5f5f5;
+       
+        background-image: url('../../images/segmental-fats-bg.jpg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-size: contain;
+    }
+.LeanNFatMass ul{
+    list-style:none;
+    padding:0px;
+}
+.LeanNFatMass ul li{
+
+}
+.LeanNFatMass ul li div:nth-child(1){
+
+border-bottom: #8c8b8b dotted 1px;
+}
+.LeanNFatMass ul li div:nth-child(3){
+    
+border-top: #8c8b8b dotted 1px;
+}
+.LeanNFatMass ul li.Left{width: 45px;float:  left;margin: 32px 56px;text-align:  center;}
+.LeanNFatMass ul li.Right{width: 45px;float: right;text-align: center;margin: 32px 56px;}
+.LeanNFatMass ul li.Middle{width: 100%;float: left;text-align:  center;position:  relative;}
+.LeanNFatMass ul li.Middle div{width: 60px;text-align:  center;margin:  0 auto;}
+
+.LeanNFatMass ul li.Middle:before{
+    content:'Left';
+    position:  absolute;
+    left: 6px;
+    transform: rotate(-90deg);
+    top: 23px;
+}
+.LeanNFatMass ul li.Middle:after{
+    content:'Right';
+    position: absolute;
+    right: 6px;
+    transform: rotate(90deg);
+    top: 23px;
+}
+
+.LeanNFatMass .TopEval{
+    width: 64px;
+    display: block;
+    float: right;
+    position:  relative;
+    font-size: 10px;
+}
+.LeanNFatMass .TopEval div{
+    width: 100%;
+    text-align:center;
+    float: right;
+}
+.LeanNFatMass .TopEval div:nth-child(1){
+    border-bottom: #8c8b8b dotted 1px;
+}
+.LeanNFatMass .TopEval div:nth-child(3){
+    border-top: #8c8b8b dotted 1px;
+}
+.LeanNFatMass ul + .FooterNotes{
+    float:  left;
+    text-align:  right;
+    width:  100%;
+    padding:  12px 0px;
+    font-size: 12px;
+    color: #8e8e8e;
+}
+.BodyCompositionHistory div.Label{
+    float: left;
+}
+.BodyCompositionHistory .MFA-Data .AnalysisData {
+    width: 508px;
+    border:  0;
+    border-left: #6d6d6d solid 1px;
+    border-bottom: #6d6d6d solid 1px;
+    float: right;
+    height: 51px;
+}
+.BodyCompositionHistory .MFA-Data .AnalysisData ul{
+    list-style:none;
+    padding:0px;
+}
+.BodyCompositionHistory .MFA-Data .AnalysisData ul li span{
+    position:  relative;
+    padding: 0px 8px;
+}
+.BodyCompositionHistory .MFA-Data .AnalysisData ul li span:after{
+    content:'\25CE';
+    position:absolute;
+    top: 14px;
+    left: 13px;
+}
+.RightSide{
+    float: left;
+    width: 100%;
+    padding: 44px 30px;
+}
+.RightSide h6{
+    color: #8e8e8e;
+}

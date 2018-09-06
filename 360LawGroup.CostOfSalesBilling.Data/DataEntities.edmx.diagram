@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="58a10f2360c946e6b16dfbbb7732d476" Name="Diagram1" ZoomLevel="59">
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.AdminSetting" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.AspNetRole" Width="1.5" PointX="0.75" PointY="21.25" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.AspNetUserClaim" Width="1.5" PointX="5.25" PointY="25.5" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.AspNetUserLogin" Width="1.5" PointX="5.25" PointY="28.25" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.AspNetUser" Width="1.5" PointX="3" PointY="15.25" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.ClientFile" Width="1.5" PointX="7.5" PointY="33" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.ClientIncome" Width="1.5" PointX="15.5" PointY="15" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.Client" Width="1.5" PointX="5.25" PointY="14" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.ConsultantCost" Width="1.5" PointX="12.75" PointY="16.375" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.ConsultantHour" Width="1.5" PointX="9.75" PointY="15.75" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.Consultant" Width="1.5" PointX="5.25" PointY="3.5" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.ELMAH_Error" Width="1.5" PointX="0.75" PointY="3.75" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.Matter" Width="1.5" PointX="7.5" PointY="16.5" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.ResetNewMonth" Width="1.5" PointX="13.25" PointY="13.375" />
+        <EntityTypeShape EntityType="LawGroup.CostOfSalesBillingModel.WorkRate" Width="1.5" PointX="5.25" PointY="10.875" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_Clients" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_ConsultantUserId" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_CreatedBy" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_AspNetUsers_ModifiedBy" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_Client_AspNetUsers" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_Client_AspNetUsers1" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_ClientFiles_Client" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_ClientIncome_Client" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_ClientIncome_ResetNewMonth" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_Client" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Client" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_Matter_Client" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_Matter" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_WorkRates" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Consultant" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Matter" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_ResetNewMonth" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.FK_Matter_WorkRates" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.AspNetUserRoles" />
+        <AssociationConnector Association="LawGroup.CostOfSalesBillingModel.MatterConsultants" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

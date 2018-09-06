@@ -1,0 +1,57 @@
+﻿@model string
+@{
+    ViewBag.Title = ViewBag.ParamType + " Settings";
+}
+
+<div class="panel panel-flat">
+    <div class="table-responsive">
+        <div id="settingfilter" class="search-filter">
+            <input type="hidden" name="ParamType" value="@ViewBag.ParamType" />
+        </div>
+        <table id="grid" data-sort-name="ParamName" data-sort-order="asc"
+               data-toggle="table"
+               data-url="@(ViewBag.ApiUrl+ "superadmin/adminsettings/getall")"
+               data-queryparams="getSearchParam"
+               data-searchselector="#settingfilter"
+               data-pagination="true" class="table"
+               cellspacing="0" width="100%">
+            <thead>
+                <tr>
+                    <th data-field="_RowNumber_" data-sortable="false" >Sr. No.</th>
+                    <th data-field="ParamTitle" data-sortable="true">Parameter Title</th>
+                    <th data-field="ParamValue" data-formatter="paramvalue" data-sortable="true">Parameter Value(In%)</th>
+                    <th data-align="center" data-width="5%" data-field="Id" data-formatter="tbl_AdminSettings">Save</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+</div>
+<script type="text/javascript">
+
+    var idx = 1;
+    function srno(value) {
+        return (idx++).toString();
+    }
+    function paramvalue(value, row) {
+        var ele = $('<div><input id="TXT_' + row.ParamName + '" class="form-control" type="text"/></div>');
+        ele.find("input").attr("value",value);
+        return ele.html();
+    }
+
+    function tbl_AdminSettings(value, row) {
+        return "<a class='btn btn-primary' href='javascript:;' onclick='SaveSettings(\"" + row.ParamName + "\")'><i class='fa fa-floppy-o'></i></a>";
+    }
+
+    function SaveSettings(paramName) {
+        apiCall("superadmin/adminsettings/saveadminsettings",
+            "get",
+            {
+                paramName: paramName, paramValue: $("#TXT_" + paramName).val()
+            },
+            function (data) {
+                if (isSuccess(data)) {
+                    AlertNotify("Success", data.Messages, "bg-success");
+                }
+            });
+    }
+</script>

@@ -1,0 +1,184 @@
+﻿<div id="dashcounters">
+    @Html.Partial("_DashboardCounters", new CounterViewModel())
+</div>
+<div class="col-md-9">
+    <div class="panel panel-flat ml-10 mr-0">
+        <div class="panel-body">
+            <div id="search_filter_enquiry" class="search-filter">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-8">
+                            <div class="input-group">
+                                <span class="input-group-addon">Search</span>
+                                @Html.TextBox("SearchValue", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="btnsearch2" type="button" class="btn btn-success btn-sm">Search</button>
+                            <button id="btnsearch" type="button" class="hide btn btn-success btn-sm">Search</button>
+                            @*<button id="btnreset" type="button" class="btn btn-warning btn-sm">Reset</button>*@
+                        </div>
+                        <div class="col-md-2 text-right">
+                            <a href="@Url.Action("Create", "Inquiry", new { Area="Common" })" dat data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess" class="pull-left-sm btn btn-default">
+                                <i class="glyphicon glyphicon-plus-sign"></i>
+                                &nbsp; Enquiry
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="clearfix"></div>
+                <div class="table-responsive">
+                    <table id="salesgrid" data-sort-name="FollowUpDate" data-sort-order="desc"
+                           @*data-toggle="table"*@
+                           data-url="@(ViewBag.ApiUrl+ "Common/inquiry/getall")"
+                           data-queryparams="getSearchParam"
+                           data-pagination="true" class="table hide"
+                           data-searchselector="#search_filter_enquiry"
+                           data-detail-view="true"
+                           cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th data-field="AspNetUser2FullName" data-sortable="true" data-formatter="Viewinfo">Full Name</th>
+                                <th data-field="AspNetUser2MemberType" data-sortable="true">Person Type</th>
+                                <th data-field="AspNetUser2UserName" data-sortable="true">ID</th>
+                                <th data-field="AspNetUser2Email" data-sortable="true">Email</th>
+                                <th data-field="AspNetUser2PhoneNumber" data-sortable="true">Phone</th>
+                                <th data-field="AspNetUser2Gender" data-sortable="true">Gender</th>
+                                <th data-field="AspNetUser3FullName" data-sortable="true">Sales Repres.</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    @{
+        var dt = DateTime.UtcNow.AddMinutes((int)ViewBag.TimeZoneInterval);
+    }
+    <div class="panel panel-flat ml-10 mr-0">
+        <div class="panel-heading no-padding pl-20 pb-0 pt-0">
+            <h5>Upcoming Birthdays <span class="text-size-small">(@dt.ToString("dd-MMM") to @dt.AddDays(7).ToString("dd-MMM"))</span></h5>
+        </div>
+        <div class="clearfix"></div>
+        <div class="panel-body pt-10 pb-10 pr-10 pl-9">
+            <div id="search_filter_bday"></div>
+            <div id="btdiv_Bdays" data-sort-name="Name" data-sort-order="asc"
+                 data-toggle="btdiv"
+                 data-url="@(ViewBag.ApiUrl+ "Dashboard/getupcomingbdays")"
+                 data-queryparams="getSearchParam"
+                 data-searchselector="#search_filter_bday"
+                 data-no-found-text=""
+                 data-load-success="bdayloadsuccess"
+                 data-pagination="true"
+                 data-page-size="@int.MaxValue"
+                 class="bdaylist text-left">
+                <script type="text/x-jquery-tmpl" id="bt-div-template">
+                    <div class="bday-item">
+                        <strong class="pull-left ml-5">${Day}-${Month}</strong>
+                        <span class="pull-right mr-5">${DayName}</span>
+                        <div class="clearfix"></div>
+                        {{if Members.length==0}}
+                        <span>-</span>
+                        {{else}}
+                        {{each(i,m) Members}}
+                        <table>
+                            <tr>
+                                <td>{{html (i+1)}})&nbsp;</td>
+                                <td>{{html Viewinfo('',m)}}</td>
+                            </tr>
+                        </table>
+                        {{/each}}
+                        {{/if}}
+                    </div>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-3">
+    <div class="panel panel-flat ml-0 mr-10">
+        <div id="search_filter_followup" class="search-filter">
+            <div class="panel-heading no-padding pl-20">
+                <h5>Follow Ups</h5>
+            </div>
+            <div class="ml-10 mr-10 mb-10">
+                @Html.DropDownList("FUType", Html.FUTypeList(true), new { @class = "form-control", @data_keyboard = "false" })
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-2 text-bold pt-5">FROM</label>
+                <div class="col-md-10">
+                    <input type="text" readonly="readonly" id="StartDate" name="StartDate" class="form-control input-xs" value="" placeholder="Select Date" />
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="form-group mt-10">
+                <label class="control-label col-md-2 text-bold pt-5">TO</label>
+                <div class="col-md-10">
+                    <input type="text" readonly="readonly" id="EndDate" name="EndDate" class="form-control input-xs" value="" placeholder="Select Date" />
+                </div>
+            </div>
+            <button id="btnsearch" type="button" class="hide"></button>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="panel-body">
+            <div id="btdiv_products" data-sort-name="Name" data-sort-order="asc"
+                 data-toggle="btdiv"
+                 data-url="@(ViewBag.ApiUrl+ "common/inquiry/getallfollowups")"
+                 data-queryparams="getSearchParam"
+                 data-searchselector="#search_filter_followup"
+                 data-no-found-text="No follow ups."
+                 data-pagination="true"
+                 data-page-size="@int.MaxValue"
+                 class="row">
+                <script type="text/x-jquery-tmpl" id="bt-div-template">
+                    <div class="followup-heading">
+                        <strong>{{html dateformatter(FollowUpDate)}}:</strong>
+                    </div>
+                    <div class="followup-body">
+                        {{each FollowUps}}
+                        <div class="followup-item">
+                            <div class="text-left" data-toggle="tooltip" title="${FollowUps[$index].FollowUpComment}">
+                                <table width="100%" class="no-border">
+                                    <tr>
+                                        <td>
+                                            ${FollowUps[$index].FUType}
+                                        </td>
+                                        <td class="text-right">
+                                            <label class="badge {{html followupstatus(FollowUps[$index].FollowUpStatus)}}">${FollowUps[$index].FollowUpStatus}</label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            {{if FollowUps[$index].FUType=="@FollowUpType.Enquiry"}}
+                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="Common" })?memberUserId=${FollowUps[$index].InquiryMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].InquiryAspNetUser2FullName}</a>
+                                            {{/if}}
+                                            {{if FollowUps[$index].FUType=="@FollowUpType.Trail"}}
+                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="Common" })?memberUserId=${FollowUps[$index].InquiryTrailMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].InquiryTrailAspNetUser2FullName}</a>
+                                            {{/if}}
+                                            {{if FollowUps[$index].FUType=="@FollowUpType.AppointmentPayment"}}
+                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="Common" })?memberUserId=${FollowUps[$index].AppointmentMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].AppointmentAspNetUser2FullName}</a>
+                                            {{/if}}
+                                            {{if FollowUps[$index].FUType=="@FollowUpType.MembershipRequired"}}
+                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="Common" })?memberUserId=${FollowUps[$index].AppointmentMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].InquiryTrailAspNetUser2FullName}</a>
+                                            {{/if}}
+                                            {{if FollowUps[$index].FUType=="@FollowUpType.ProductPlanPayment"}}
+                                            <a target="_blank" href="@Url.Action("Index", "MemberInfo",new{ Area="Common" })?memberUserId=${FollowUps[$index].UserPackageMemberUserId}"><i class="fa fa-user"></i> ${FollowUps[$index].UserPackageAspNetUser2FullName}</a>
+                                            {{/if}}
+                                        </td>
+                                        <td class="text-right">
+                                            <i class="fa fa-user-secret"></i> ${AspNetUserFullName}
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>jQuery Scrollbar</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="includes/style.css">
+        <link rel="stylesheet" href="includes/prettify/prettify.css">
+        <link rel="stylesheet" href="jquery.scrollbar.css">
+
+        <script type="text/javascript" src="includes/prettify/prettify.js"></script>
+        <script type="text/javascript" src="includes/jquery.js"></script>
+        <script type="text/javascript" src="jquery.scrollbar.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function($){
+                window.prettyPrint && prettyPrint();
+                $('.wrapper').scrollbar();
+            });
+        </script>
+    </head>
+    <body>
+        <div class="wrapper scrollbar-dynamic">
+            <div class="page-content" style="height:1024px;">
+
+            </div>
+        </div>
+    </body>
+</html>

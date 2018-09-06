@@ -1,0 +1,202 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title | 360 Business and Private Law</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet" type="text/css">
+    <link rel="apple-touch-icon" sizes="57x57" href="~/assets/images/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="~/assets/images/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="~/assets/images/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="~/assets/images/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="~/assets/images/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="~/assets/images/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="~/assets/images/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="~/assets/images/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="~/assets/images/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="~/assets/images/favicon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="~/assets/images/favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="~/assets/images/favicon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="~/assets/images/favicon/favicon-16x16.png">
+    <link rel="manifest" href="~/assets/images/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="~/assets/images/favicon/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    @Styles.Render("~/bundles/css/global")
+    @RenderSection("css", required: false)
+</head>
+<body class="navbar-bottom">
+    <div class="navbar navbar-default header-highlight">
+        <div class="navbar-header">
+            <a class="navbar-brand" href="~/">
+                <img src="~/assets/images/logo_light.png" alt="">
+            </a>
+            <ul class="nav navbar-nav visible-xs-block">
+                <li>
+                    <a data-toggle="collapse" data-target="#navbar-mobile">
+                        <i class="icon-tree5"></i>
+                    </a>
+                </li>
+                <li>
+                    <a class="sidebar-mobile-main-toggle">
+                        <i class="icon-paragraph-justify3"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-mobile">
+            @RenderSection("navbar", false)
+            <ul class="nav navbar-nav">
+                <li><a class="sidebar-control sidebar-main-toggle hidden-xs"><i class="icon-paragraph-justify3"></i></a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="icon-bell2"></i>
+                        <span class="visible-xs-inline-block position-right">Notification</span>
+                        <span class="badge bg-warning-400">0</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-content width-350">
+                        <div class="dropdown-content-heading">
+                            Notifications
+                            <ul class="icons-list">
+                                @*<li><a href="#"><i class="icon-compose"></i></a></li>*@
+                            </ul>
+                        </div>
+                        <ul class="media-list dropdown-content-body">
+                            <li>
+                                no notifications.
+                            </li>
+                        </ul>
+                        <div class="dropdown-content-footer">
+                            <a href="#" data-popup="tooltip" title="All messages"><i class="icon-menu display-block"></i></a>
+                        </div>
+                    </div>
+                </li>
+                <li class="dropdown dropdown-user">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        @*<img src="assets/images/placeholder.jpg" alt="">*@
+                        <span class="text-capitalize">
+                            <strong>@ViewBag.FullName</strong>
+                            <small class="text-size-xs">(@ViewBag.Role)</small>
+                        </span>
+                        <i class="caret"></i>
+
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li><a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" href="@Url.Action("UpdateProfile", "Account", new {Area = ""})"><i class="icon-user-plus"></i> My profile</a></li>
+                        <li><a data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" href="@Url.Action("ChangePassword", "Account", new {Area = ""})"><i class="icon-lock"></i> Change password</a></li>
+                        @{
+                            var roles = RoleExtension.GetRoleAccessList(ViewBag.Role as string);
+                        }
+                        @if (User.IsInRole(RoleExtension.SuperAdmin))
+                        {
+                            <li class="dropdown dropdown-submenu">
+                                <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="glyphicon glyphicon-cog"></i> Settings
+                                </a>
+                                <ul class="dropdown-menu dropdown-custom">
+                                    @if (User.IsInRole(RoleExtension.SuperAdmin))
+                                    {
+                                        <li class="dropdown dropdown-submenu">
+                                            <a href="javascript:;"><i class="glyphicon glyphicon-cog"></i> Settings</a>
+                                            <ul class="dropdown-menu dropdown-custom">
+                                                <li><a href="@Url.Action("Index", "AdminSettings", new { Area = "SuperAdmin", type = "Clients" })">Clients </a></li>
+                                                <li><a href="@Url.Action("Index", "AdminSettings", new { Area = "SuperAdmin", type = "Client Matters" })">Client Matters</a></li>
+                                            </ul>
+                                        </li>
+                                    }
+                                </ul>
+                            </li>
+                        }
+                        <li>
+                            <form action="@Url.Action("LogOut", "Account", new {Area = ""})" method="post" class="hidden">
+                                <button type="submit" id="frmlogout"></button>
+                            </form>
+                            <a href="javascript:void(0);" onclick="$('#frmlogout').click();">
+                                <i class="icon-switch2"></i> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="page-container">
+        <div class="page-content">
+            @RenderSection("sidebar", required: false)
+            <div class="content-wrapper">
+                <div class="page-header page-header-default">
+                    <div class="page-header-content">
+                        <div class="page-title">
+                            <h4 class="pull-left"><span class="text-semibold">@ViewBag.Title</span></h4>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <div class="navbar navbar-default navbar-fixed-bottom footer">
+        <ul class="nav navbar-nav visible-xs-block">
+            <li><a class="text-center collapsed" data-toggle="collapse" data-target="#footer"><i class="icon-circle-up2"></i></a></li>
+        </ul>
+        <div class="navbar-collapse collapse" id="footer">
+            <div class="navbar-text">
+                &copy; @DateTime.Now.Year. <a href="@ViewBag.BasePath">Health Freaks</a>
+            </div>
+            <div class="navbar-right">
+                <ul class="nav navbar-nav">
+                    <li><a href="javascript:;" data-target="#about" data-toggle="modal">About</a></li>
+                    <li><a href="javascript:;" data-target="#termsandconditions" data-toggle="modal">Terms</a></li>
+                    <li><a href="javascript:;" data-target="#contact" data-toggle="modal">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    @Html.Partial("_About")
+    @Html.Partial("_TermsAndConditions")
+    @Html.Partial("_Contact")
+    <script type="text/javascript">
+        var AuthHeader = "@ViewBag.UserToken";
+        var ApiUrl = "@ViewBag.ApiUrl";
+        var BASEPATH = "@ViewBag.BasePath";
+        var CurrentLocation = "@ViewBag.CurrentLocation" == "0" ? "" : "@ViewBag.CurrentLocation";
+        var IsSuperAdmin = "@User.IsInRole(RoleExtension.SuperAdmin).ToString().ToLower()";
+    </script>
+    @Scripts.Render("~/bundles/jquery", "~/bundles/validations", "~/assets/js/plugins/tinymce/bundle", "~/bundles/plugins")
+    <script tyep="text/javascript">
+        $(document).ready(function () {
+            apiCall("account/userinfo", "get", {}, function (data) {
+                if (data.StatusCode != 200) {
+                    isSuccess(data);
+                }
+            })
+            $("select#CurrentLocation1").on("change", function () {
+                if ($(this).val() == "") {
+                    var firstValue = $(this).find("option:first").attr("value");
+                    if (firstValue == "") {
+                        firstValue = $(this).find("option:first").next().attr("value");
+                    }
+                    if (firstValue != "" && typeof firstValue !== "undefined") {
+                        $(this).val(firstValue).change();
+                    }
+                }
+                if ($(this).val() != CurrentLocation) {
+                    $.get("@Url.Action("UpdateBranch", "Account", new {Area=""})?branchId=" + $(this).val()).done(function () {
+                        window.location.reload();
+                    });
+                }
+            });
+        })
+    </script>
+    <div id="popupmodals"></div>
+    @RenderSection("js", required: false)
+</body>
+</html>
+
+
+@*Australia,Austria,Belgium,Denmark,Denmark,France,Germany,India,Italy,Netherlands,Northern Ireland,Poland,Switzeland,UAE,UK,USA
+Commercial,Corporate,Data Protection,Employment,Litigation,Dispute,Commercial Contracts,Commercial Property,Construction Engineering,Landlord Tenant,Consumer Contracts,Clinical Negligence and Personal Injury,Family Law,Agricultural Property,Asset Management,Aviation Travel,Banking Finance,Biotechnology Pharmaceutical Life Science,Brand Management,Charities Social Enterprise,Company Secretarial,Corporate Finance,Corporate Recovery Insolvency,Customs,Digital Media,Dispute Resolution,E Commerce,Employee Benefits/Pensions,Employee Share Schemes,Environmental,Equine Law,Estate Planning,EU UK competition law,Facility Management,Finance Regulations,Gambling,GDPR - Data Protection,Immigration Law,Infrastructure Projects,Information Technology,Insolvency,Insurance Reinsurance,Intellectual Property,International Arbitration,International Trade,Licensing,Marine Shipping,Media,Military Claims,Oil,Planning,Planning Environmental,Private Client,Private Equity and Funds,Product Liability,Professional Negligence,Public Procurement,Real Estate and Construction,Real Estate Insolvency,Residential Property,Sport,Tax,Telecommunications,Trust and Estate Planning,Wills Probate*@
