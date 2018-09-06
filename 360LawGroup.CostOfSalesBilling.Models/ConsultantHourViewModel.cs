@@ -8,9 +8,8 @@ using System.Threading.Tasks;
 
 namespace _360LawGroup.CostOfSalesBilling.Models
 {
-    public class ConsultantHourViewModel
+    public class ConsultantHourViewModel : BaseViewModel<Guid>
     {
-        public Guid Id { get; set; }
 
         [Required(ErrorMessage = Common.RequiredMsg)]
         [Display(Name = "Consultant")]
@@ -113,7 +112,8 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         public virtual string WorkRateText { get; set; }
         public virtual string ClientWorkPeriod { get; set; }
 
-
+        //consultant
+        public virtual string AspNetUser2FullName { get; set; }
         //public virtual Client Client { get; set; }
         //public virtual Consultant Consultant { get; set; }
         //public virtual Matter Matter { get; set; }
