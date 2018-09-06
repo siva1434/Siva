@@ -15,7 +15,7 @@ namespace _360LawGroup.CostOfSalesBilling.Data
     public partial class ConsultantHour
     {
         public System.Guid Id { get; set; }
-        public System.Guid ConsultantId { get; set; }
+        public string ConsultantId { get; set; }
         public System.Guid MatterId { get; set; }
         public System.Guid ClientId { get; set; }
         public Nullable<System.DateTime> WorkDate { get; set; }
@@ -43,9 +43,17 @@ namespace _360LawGroup.CostOfSalesBilling.Data
         public Nullable<int> Year { get; set; }
         public Nullable<decimal> TotalHours_excl_Sub { get; set; }
         public string Month { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsDeleted { get; set; }
+        public string CreatedBy { get; set; }
+        public System.DateTime CreatedOn { get; set; }
+        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedOn { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser AspNetUser1 { get; set; }
+        public virtual AspNetUser AspNetUser2 { get; set; }
         public virtual Client Client { get; set; }
-        public virtual Consultant Consultant { get; set; }
         public virtual Matter Matter { get; set; }
         public virtual ResetNewMonth ResetNewMonth { get; set; }
     }

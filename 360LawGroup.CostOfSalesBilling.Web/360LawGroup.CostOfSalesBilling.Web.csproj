@@ -270,10 +270,10 @@
     <Compile Include="Areas\SuperAdmin\Controllers\HomeController.cs" />
     <Compile Include="Areas\SuperAdmin\SuperAdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Api\All\ClientsController.cs" />
     <Compile Include="Controllers\Api\Common\AccountController.cs" />
     <Compile Include="Controllers\Api\BaseApiController.cs" />
     <Compile Include="Controllers\Api\Common\CommonController.cs" />
-    <Compile Include="Controllers\Api\All\ClientsController.cs" />
     <Compile Include="Controllers\Api\All\MatterController.cs" />
     <Compile Include="Controllers\Api\All\UsersController.cs" />
     <Compile Include="Controllers\Api\Common\DashboardController.cs" />
