@@ -19,67 +19,72 @@
     </div>
 
     <div class="panel-body">
-        <div id="serach_filter" class="search-filter">
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <span class="input-group-addon">Search</span>
-                            @Html.TextBox("SearchValue", "", new { @class = "form-control" })
+        <div id="serach_filter_matter" class="search-filter">
+            <div class="form-group">
+                <div class="row">
+                    <div class="form-group">
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">Search</span>
+                                @Html.TextBox("SearchValue", "", new { @class = "form-control" })
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <button id="btnsearch2" type="button" class="btn btn-success btn-sm">Search</button>
+                            <button id="btnreset" type="button" class="btn btn-warning btn-sm">Reset</button>
+                            <button id="btnsearch" type="button" class="hide btn btn-success btn-sm">Search</button>
                         </div>
                     </div>
-                    <div class="col-md-2">
-                        <button id="btnserach" type="button" class="btn btn-success btn-sm">Search</button>
-                        <button id="btnreset" type="button" class="btn btn-warning btn-sm">Reset</button>
-                    </div>
                 </div>
+                <div class="clearfix"></div>
             </div>
-        </div>
-        <div class="clearfix"></div>
-        <div class="table-responsive">
-            <table id="grid" data-sort-name="FirstName" data-sort-order="asc"
-                   data-toggle="table"
-                   data-url="@(ViewBag.ApiUrl + "api/all/matter/getall")"
-                   data-queryparams="getSearchParam"
-                   data-searchselector="#search_filter"
-                   data-pagination="true" class="table"
-                   cellspacing="0" width="100%">
-                <thead>
-                    <tr>
-                        <th data-url="All/Matters/Edit" data-align="center" data-width="5%" data-field="Id" data-formatter="tbl_Edit_Popup">Edit</th>
-                        <th data-field="MatterName" data-sortable="true">Matter</th>
-                        <th data-field="Date" data-sortable="true" data-formatter="dateformatter">Date</th>
-                        <th data-field="ClientFullName" data-sortable="true">Client</th>
-                        <th data-field="AreaofLaw" data-sortable="true">Area of Law</th>
-                        <th data-field="AspNetUsers" data-sortable="true" data-formatter="consultantlist">Consultant</th>
-                        <th data-field="WorkRateRateType" data-sortable="true">Work Rate</th>
-                        <th data-field="Box" data-sortable="true">Box</th>
-                        <th data-field="Status" data-sortable="true">Status</th>
-                    </tr>
-                </thead>
-            </table>
+            <div class="table-responsive">
+                <table id="mattergrid" data-sort-name="FirstName" data-sort-order="asc"
+                       data-toggle="table"
+                       data-url="@(ViewBag.ApiUrl + "api/all/matter/getall")"
+                       data-queryparams="getSearchParam"
+                       data-searchselector="#serach_filter_matter"
+                       data-pagination="true" class="table"
+                       cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th data-url="All/Matters/Edit" data-align="center" data-width="5%" data-field="Id" data-formatter="tbl_Edit_Popup">Edit Matter</th>
+                            <th data-field="Date" data-sortable="true">Date</th>
+                            <th data-field="ClientFullName" data-sortable="true">Client</th>
+                            <th data-field="AreaofLaw" data-sortable="true">Area of Law</th>
+                            <th data-field="AspNetUsers" data-sortable="true" data-formatter="consultantlist">Consultant</th>
+                            <th data-field="WorkRateRateType" data-sortable="true">Work Rate</th>
+                            <th data-field="Box" data-sortable="true">Box</th>
+                            <th data-field="Status" data-sortable="true">Status</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 </div>
 
+
+
 @section scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#btnserach').on('click', function () {                     
+            $('#btnsearch2').on('click', function () {
                 if ($.trim($("#SearchValue").val()) == "") {
                     AlertNotify("Validations!", "Please enter search text", "bg-warning")
                     return;
                 }
-                if (typeof $('#grid').attr('data-toggle') == 'undefined') {
-                    $('#grid').attr('data-toggle', 'table');
+                if (typeof $('#mattergrid').attr('data-toggle') === 'undefined') {
+                    $('#mattergrid').attr('data-toggle', 'table');
                     BindBtTable('body');
                 } else {
-                    $('#search_filter #btnsearch').click();
+                    $('#serach_filter_matter #btnsearch').click();
                 }
-                $('#grid').removeClass('hide');
+                $('#mattergrid').removeClass('hide');
             });
         });
-        function consultantlist(value) {            
+        function consultantlist(value) {
+            debugger
             var namelist = "";
             $(value).each(function (i, item) {
                 if (namelist != "") namelist += ", ";
