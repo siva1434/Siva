@@ -26,7 +26,6 @@ namespace _360LawGroup.CostOfSalesBilling.Data
         public string MatterName { get; set; }
         public System.Guid ClientId { get; set; }
         public System.Guid WorkRateId { get; set; }
-        public string ConsultantId { get; set; }
         public string WorkRateChoice { get; set; }
         public Nullable<System.DateTime> Date { get; set; }
         public bool CurrentMonth { get; set; }
@@ -52,7 +51,6 @@ namespace _360LawGroup.CostOfSalesBilling.Data
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual AspNetUser AspNetUser1 { get; set; }
-        public virtual AspNetUser AspNetUser2 { get; set; }
         public virtual Client Client { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ConsultantCost> ConsultantCosts { get; set; }

@@ -33,15 +33,14 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.All.Controllers
             }
             else
             {
-                //ViewBag.Title = "Edit Matter";
-                //var status = ApiHelper.Get<MatterViewModel>("common/client/getbyid", id);
-                //if (status.StatusCode == HttpStatusCode.OK)
-                //{
-                //    model = status.Data;
-                //    // ViewBag.SelectedRole = model.RoleId;
-                //}
-                //else
-                //    return Content("");
+                ViewBag.Title = "Edit Matter";
+                var status = ApiHelper.Get<MatterViewModel>("api/all/matter/getbyid", id);
+                if (status.StatusCode == HttpStatusCode.OK)
+                {
+                    model = status.Data;                    
+                }
+                else
+                    return Content("");
             }
             var overseascountrylist = ApiHelper.GetWithParam<AdminSettingsViewModel>("api/common/common/getsettingbyname", "name", "CLIENTMATTER_OVERSEAS_COUNTRY");
             if (overseascountrylist.StatusCode == HttpStatusCode.OK)

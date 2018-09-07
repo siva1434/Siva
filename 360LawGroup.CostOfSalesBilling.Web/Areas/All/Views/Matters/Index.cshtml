@@ -39,21 +39,21 @@
         <div class="table-responsive">
             <table id="grid" data-sort-name="FirstName" data-sort-order="asc"
                    data-toggle="table"
-                   data-url="@(ViewBag.ApiUrl + "api/common/common/matters/getall")"
+                   data-url="@(ViewBag.ApiUrl + "api/all/matter/getall")"
                    data-queryparams="getSearchParam"
                    data-searchselector="#search_filter"
                    data-pagination="true" class="table"
                    cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th data-url="Common/Matters/Edit" data-align="center" data-width="5%" data-field="Id" data-formatter="tbl_Edit_Popup">Edit Matter</th>
-                        <th data-field="" data-sortable="true">Date</th>
-                        <th data-field="" data-sortable="true">Client</th>
-                        <th data-field="" data-sortable="true">Area of Law</th>
-                        <th data-field="" data-sortable="true">Consultant</th>
-                        <th data-field="" data-sortable="true">Work Rate</th>
-                        <th data-field="" data-sortable="true">Box</th>
-                        <th data-field="" data-sortable="true">Status</th>
+                        <th data-url="All/Matters/Edit" data-align="center" data-width="5%" data-field="Id" data-formatter="tbl_Edit_Popup">Edit Matter</th>
+                        <th data-field="Date" data-sortable="true">Date</th>
+                        <th data-field="ClientFullName" data-sortable="true">Client</th>
+                        <th data-field="AreaofLaw" data-sortable="true">Area of Law</th>
+                        <th data-field="AspNetUsers" data-sortable="true" data-formatter="consultantlist">Consultant</th>
+                        <th data-field="WorkRateRateType" data-sortable="true">Work Rate</th>
+                        <th data-field="Box" data-sortable="true">Box</th>
+                        <th data-field="Status" data-sortable="true">Status</th>
                     </tr>
                 </thead>
             </table>
@@ -66,7 +66,8 @@
 @section scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#btnsearch').on('click', function () {
+            $('#btnserach').on('click', function () { 
+                debugger
                 if ($.trim($("#SearchValue").val()) == "") {
                     AlertNotify("Validations!", "Please enter search text", "bg-warning")
                     return;
@@ -80,5 +81,14 @@
                 $('#grid').removeClass('hide');
             });
         });
+        function consultantlist(value) {
+            debugger
+            var namelist = "";
+            $(value).each(function (i, item) {
+                if (namelist != "") namelist += ", ";
+                namelist += item.FullName;
+            });
+            return namelist;
+        }
     </script>
 }

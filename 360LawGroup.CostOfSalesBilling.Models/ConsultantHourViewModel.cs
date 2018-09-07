@@ -48,7 +48,7 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         public bool? Agreed { get; set; }
 
         [Display(Name = "Reset New Month")]
-        public Guid ResetNewMonthId { get; set; }
+        public Guid? ResetNewMonthId { get; set; }
 
         [Display(Name = "Disbursement Description")]
         public string DisbursementDescription { get; set; }

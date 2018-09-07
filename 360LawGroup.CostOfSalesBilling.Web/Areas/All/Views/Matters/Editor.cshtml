@@ -25,7 +25,7 @@
             new AjaxOptions
             {
                 HttpMethod = "POST",
-                Url = ViewBag.ApiUrl + "api/common/common/Matter/" + (Model.Id == Guid.Empty ? "create" : "edit"),
+                Url = ViewBag.ApiUrl + "api/all/matter/" + (Model.Id == Guid.Empty ? "create" : "edit"),
                 OnSuccess = "ClientDataSuccess",
                 OnFailure = "Failed"
             }, new { @class = "form-horizontal", role = "form" }
@@ -59,9 +59,9 @@
                             @Html.ValidationMessageFor(model => model.Date)
                         </div>
                         <div class="col-md-4">
-                            @Html.RequiredLabelFor(m => m.ConsultantId, new { @class = "control-label text-bold" })
-                            @Html.DropDownListFor(m => m.ConsultantId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/common/getallconsultant", @placeholder = "Select Consultant", @data_value = Model.ConsultantId })
-                            @Html.ValidationMessageFor(model => model.ConsultantId)
+                            @Html.RequiredLabelFor(m => m.ConsultantIds, new { @class = "control-label text-bold" })
+                            @Html.DropDownListFor(m => m.ConsultantIds, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/common/getallconsultant", @placeholder = "Select Consultant", @multiple="multiple",@data_value = Newtonsoft.Json.JsonConvert.SerializeObject(Model.ConsultantIds) })
+                            @Html.ValidationMessageFor(model => model.ConsultantIds)
                         </div>
                         <div class="col-md-4">
                             @{
@@ -138,6 +138,8 @@
         $('.Dateofcal').attr("readonly", true);
         ShowModal("#AddEditModal", function () {
         });
+
+
     });
 
     function AddOverseasCountryList() {        

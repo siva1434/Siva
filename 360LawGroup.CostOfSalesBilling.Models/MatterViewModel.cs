@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace _360LawGroup.CostOfSalesBilling.Models
 {
     public class MatterViewModel : BaseViewModel<Guid>
-    {    
+    {
         [Required(ErrorMessage = (Common.RequiredMsg))]
         [Display(Name = "Matter")]
         public string MatterName { get; set; }
@@ -18,13 +18,17 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         [Display(Name = "Client")]
         public Guid ClientId { get; set; }
 
-        [Required(ErrorMessage = (Common.RequiredMsg))]
+
         [Display(Name = "Consultant")]
         public string ConsultantId { get; set; }
 
         [Required(ErrorMessage = (Common.RequiredMsg))]
+        [Display(Name = "Consultants")]
+        public virtual List<string> ConsultantIds { get; set; }
+
+        [Required(ErrorMessage = (Common.RequiredMsg))]
         [Display(Name = "Work Rate")]
-        public Guid WorkRateId { get; set; }        
+        public Guid WorkRateId { get; set; }
 
         [Display(Name = "Work Rate Choice")]
         public string WorkRateChoice { get; set; }
@@ -94,7 +98,10 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         public virtual decimal? DisbursementAmount { get; set; }
 
         public virtual decimal? MemberCharge { get; set; }
-        //public virtual Client Client { get; set; }
-        //public virtual WorkRate WorkRate { get; set; }
+        public virtual string ClientFullName { get; set; }
+        public virtual string WorkRateRateType { get; set; }
+        //public virtual string AspNetUserConsultantName { get; set; }
+
+        public virtual IList<UserViewModel> AspNetUsers { get; set; }
     }
 }
