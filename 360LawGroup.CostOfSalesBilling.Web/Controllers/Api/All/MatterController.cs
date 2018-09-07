@@ -24,8 +24,8 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             if (model.search.ContainsKey("SearchValue"))
             {
                 var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
-                query = query.Where(x => x.ClientFullName.ToLower().Contains(value)
-                || x.AreaofLaw.ToLower().Contains(value) || x.WorkRateRateType.Contains(value) || x.Status.ToLower().Contains(value));
+                query = query.Where(x => x.ClientFullName.ToLower().Contains(value) || x.MatterName.ToLower().Contains(value) || x.Box.ToLower().Contains(value) ||
+                x.AspNetUsers.ToString().ToLower().Contains(value) || x.AreaofLaw.ToLower().Contains(value) || x.WorkRateRateType.Contains(value) || x.Status.ToLower().Contains(value));
 
                 model.search.Remove("SearchValue");
             }
