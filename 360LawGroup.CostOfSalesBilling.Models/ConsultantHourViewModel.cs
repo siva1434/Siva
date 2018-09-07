@@ -13,9 +13,8 @@ namespace _360LawGroup.CostOfSalesBilling.Models
 
         [Required(ErrorMessage = Common.RequiredMsg)]
         [Display(Name = "Consultant")]
-        public Guid ConsultantId { get; set; }
+        public string ConsultantId { get; set; }
 
-        [Required(ErrorMessage = Common.RequiredMsg)]
         [Display(Name = "Matter")]
         public Guid MatterId { get; set; }
 
@@ -48,7 +47,7 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         public bool? Agreed { get; set; }
 
         [Display(Name = "Reset New Month")]
-        public Guid ResetNewMonthId { get; set; }
+        public Guid? ResetNewMonthId { get; set; }
 
         [Display(Name = "Disbursement Description")]
         public string DisbursementDescription { get; set; }
@@ -114,8 +113,11 @@ namespace _360LawGroup.CostOfSalesBilling.Models
 
         //consultant
         public virtual string AspNetUser2FullName { get; set; }
-        //public virtual Client Client { get; set; }
-        //public virtual Consultant Consultant { get; set; }
+        public virtual string ClientFullName { get; set; }
+
+        [Display(Name = "Matter")]
+        [Required(ErrorMessage = Common.RequiredMsg)]
+        public virtual IEnumerable<string> MatterNames { get; set; }
         //public virtual Matter Matter { get; set; }
     }
 }

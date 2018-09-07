@@ -29,9 +29,8 @@ namespace _360LawGroup.CostOfSalesBilling.Data
             this.ConsultantHours2 = new HashSet<ConsultantHour>();
             this.Matters = new HashSet<Matter>();
             this.Matters1 = new HashSet<Matter>();
-            this.Matters2 = new HashSet<Matter>();
             this.AspNetRoles = new HashSet<AspNetRole>();
-            this.Matters3 = new HashSet<Matter>();
+            this.Matters2 = new HashSet<Matter>();
         }
     
         public string Id { get; set; }
@@ -117,10 +116,8 @@ namespace _360LawGroup.CostOfSalesBilling.Data
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Matter> Matters1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Matter> Matters2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Matter> Matters3 { get; set; }
+        public virtual ICollection<Matter> Matters2 { get; set; }
     }
 }

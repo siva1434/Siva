@@ -2984,6 +2984,7 @@
     <Content Include="Areas\All\Views\Users\Index.cshtml" />
     <Content Include="Areas\All\Views\web.config" />
     <Content Include="Areas\All\Views\Consultants\ConsultantHours.cshtml" />
+    <Content Include="Areas\All\Views\Consultants\Editor.cshtml" />
     <None Include="Properties\PublishProfiles\dev-healthfreak - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\qa-hf - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />

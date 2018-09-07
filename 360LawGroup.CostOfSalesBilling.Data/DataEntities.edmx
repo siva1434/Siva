@@ -252,7 +252,7 @@
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="WorkRateId" Type="numeric" Precision="18" Scale="0" />
           <Property Name="Agreed" Type="bit" />
-          <Property Name="ResetNewMonthId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ResetNewMonthId" Type="uniqueidentifier" />
           <Property Name="DisbursementDescription" Type="nchar" MaxLength="255" />
           <Property Name="DisbursementAmount" Type="money" />
           <Property Name="Hours" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Computed" />
@@ -339,7 +339,6 @@
           <Property Name="MatterName" Type="nvarchar" MaxLength="255" />
           <Property Name="ClientId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="WorkRateId" Type="uniqueidentifier" Nullable="false" />
-          <Property Name="ConsultantId" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="WorkRateChoice" Type="nvarchar(max)" />
           <Property Name="Date" Type="datetime" />
           <Property Name="CurrentMonth" Type="bit" Nullable="false" />
@@ -584,7 +583,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ConsultantHours_ResetNewMonth">
-          <End Role="ResetNewMonths" Type="Self.ResetNewMonths" Multiplicity="1" />
+          <End Role="ResetNewMonths" Type="Self.ResetNewMonths" Multiplicity="0..1" />
           <End Role="ConsultantHours" Type="Self.ConsultantHours" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ResetNewMonths">
@@ -723,18 +722,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Matters_AspNetUsers2">
-          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1" />
-          <End Role="Matters" Type="Self.Matters" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUsers">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Matters">
-              <PropertyRef Name="ConsultantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="LawGroupCostOfSalesBillingModelStoreContainer">
           <EntitySet Name="AdminSettings" EntityType="Self.AdminSettings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
@@ -865,10 +852,6 @@
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Matters" EntitySet="Matters" />
           </AssociationSet>
-          <AssociationSet Name="FK_Matters_AspNetUsers2" Association="Self.FK_Matters_AspNetUsers2">
-            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-            <End Role="Matters" EntitySet="Matters" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -939,10 +922,6 @@
             <End Role="Matter" EntitySet="Matters" />
           </AssociationSet>
           <AssociationSet Name="FK_Matters_AspNetUsers1" Association="LawGroup.CostOfSalesBillingModel.FK_Matters_AspNetUsers1">
-            <End Role="AspNetUser" EntitySet="AspNetUsers" />
-            <End Role="Matter" EntitySet="Matters" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Matters_AspNetUsers2" Association="LawGroup.CostOfSalesBillingModel.FK_Matters_AspNetUsers2">
             <End Role="AspNetUser" EntitySet="AspNetUsers" />
             <End Role="Matter" EntitySet="Matters" />
           </AssociationSet>
@@ -1110,9 +1089,8 @@
           <NavigationProperty Name="ConsultantHours2" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_AspNetUsers2" FromRole="AspNetUser" ToRole="ConsultantHour" />
           <NavigationProperty Name="Matters" Relationship="LawGroup.CostOfSalesBillingModel.FK_Matters_AspNetUsers" FromRole="AspNetUser" ToRole="Matter" />
           <NavigationProperty Name="Matters1" Relationship="LawGroup.CostOfSalesBillingModel.FK_Matters_AspNetUsers1" FromRole="AspNetUser" ToRole="Matter" />
-          <NavigationProperty Name="Matters2" Relationship="LawGroup.CostOfSalesBillingModel.FK_Matters_AspNetUsers2" FromRole="AspNetUser" ToRole="Matter" />
           <NavigationProperty Name="AspNetRoles" Relationship="LawGroup.CostOfSalesBillingModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
-          <NavigationProperty Name="Matters3" Relationship="LawGroup.CostOfSalesBillingModel.MatterConsultants" FromRole="AspNetUser" ToRole="Matter" />
+          <NavigationProperty Name="Matters2" Relationship="LawGroup.CostOfSalesBillingModel.MatterConsultants" FromRole="AspNetUser" ToRole="Matter" />
         </EntityType>
         <EntityType Name="ClientFile">
           <Key>
@@ -1274,7 +1252,7 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="WorkRateId" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="Agreed" Type="Boolean" />
-          <Property Name="ResetNewMonthId" Type="Guid" Nullable="false" />
+          <Property Name="ResetNewMonthId" Type="Guid" />
           <Property Name="DisbursementDescription" Type="String" MaxLength="255" FixedLength="true" Unicode="true" />
           <Property Name="DisbursementAmount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="Hours" Type="Decimal" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Computed" />
@@ -1359,7 +1337,6 @@
           <Property Name="MatterName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="ClientId" Type="Guid" Nullable="false" />
           <Property Name="WorkRateId" Type="Guid" Nullable="false" />
-          <Property Name="ConsultantId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="WorkRateChoice" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="CurrentMonth" Type="Boolean" Nullable="false" />
@@ -1384,7 +1361,6 @@
           <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
           <NavigationProperty Name="AspNetUser" Relationship="LawGroup.CostOfSalesBillingModel.FK_Matters_AspNetUsers" FromRole="Matter" ToRole="AspNetUser" />
           <NavigationProperty Name="AspNetUser1" Relationship="LawGroup.CostOfSalesBillingModel.FK_Matters_AspNetUsers1" FromRole="Matter" ToRole="AspNetUser" />
-          <NavigationProperty Name="AspNetUser2" Relationship="LawGroup.CostOfSalesBillingModel.FK_Matters_AspNetUsers2" FromRole="Matter" ToRole="AspNetUser" />
           <NavigationProperty Name="Client" Relationship="LawGroup.CostOfSalesBillingModel.FK_Matter_Client" FromRole="Matter" ToRole="Client" />
           <NavigationProperty Name="ConsultantCosts" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_Matter" FromRole="Matter" ToRole="ConsultantCost" />
           <NavigationProperty Name="ConsultantHours" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Matter" FromRole="Matter" ToRole="ConsultantHour" />
@@ -1571,18 +1547,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Matters_AspNetUsers2">
-          <End Type="LawGroup.CostOfSalesBillingModel.AspNetUser" Role="AspNetUser" Multiplicity="1" />
-          <End Type="LawGroup.CostOfSalesBillingModel.Matter" Role="Matter" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="AspNetUser">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Matter">
-              <PropertyRef Name="ConsultantId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_ClientFiles_Client">
           <End Type="LawGroup.CostOfSalesBillingModel.Client" Role="Client" Multiplicity="1" />
           <End Type="LawGroup.CostOfSalesBillingModel.ClientFile" Role="ClientFile" Multiplicity="*" />
@@ -1692,7 +1656,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_ConsultantHours_ResetNewMonth">
-          <End Type="LawGroup.CostOfSalesBillingModel.ResetNewMonth" Role="ResetNewMonth" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.ResetNewMonth" Role="ResetNewMonth" Multiplicity="0..1" />
           <End Type="LawGroup.CostOfSalesBillingModel.ConsultantHour" Role="ConsultantHour" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="ResetNewMonth">
@@ -2074,7 +2038,6 @@
                 <ScalarProperty Name="CurrentMonth" ColumnName="CurrentMonth" />
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="WorkRateChoice" ColumnName="WorkRateChoice" />
-                <ScalarProperty Name="ConsultantId" ColumnName="ConsultantId" />
                 <ScalarProperty Name="WorkRateId" ColumnName="WorkRateId" />
                 <ScalarProperty Name="ClientId" ColumnName="ClientId" />
                 <ScalarProperty Name="MatterName" ColumnName="MatterName" />

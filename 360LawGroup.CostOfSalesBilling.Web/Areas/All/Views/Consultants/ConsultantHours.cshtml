@@ -49,22 +49,17 @@
                    cellspacing="0" width="100%">
                 <thead>
                     <tr>
-                        <th data-field="Company" data-sortable="true">
-                            Company
-                        </th>
-                        <th data-field="FullName" data-sortable="true">
-                            Full Name
-                        </th>
-                        <th data-field="Email" data-sortable="true">
-                            E-mail Address
-                        </th>
-
-                        <th data-field="JobTitle" data-sortable="true">Job Title</th>
-
-                        <th data-field="BusinessPhone" data-sortable="true">Business Phone</th>
-                        <th data-url="Common/Clients/Show" data-align="center" data-sortable="true" data-field="Id" data-formatter="clientshow">Client Details</th>
-                        <th data-url="Common/Clients/Edit" data-align="center" data-width="5%" data-field="Id" data-formatter="tbl_Edit_Popup">Edit</th>
+                        <th data-field="WorkDate" data-formatter="dateformatter" data-sortable="true">Work Date</th>
+                        <th data-field="AspNetUser2FullName" data-sortable="true">Consultant</th>
+                        <th data-field="MonNum" data-sortable="true">Mon</th>
+                        <th data-field="ClientFullName" data-sortable="true">Client</th>
+                        <th data-field="WorkRateText" data-sortable="true">Work Rate</th>
+                        <th data-field="Description" data-sortable="true">Discription</th>
+                        <th data-field="Hours" data-sortable="true">Hours</th>
+                        <th data-field="TotalCost_exclSub" data-sortable="true">Cost</th>
                         <th data-url="api/all/client/delete" data-align="center" data-width="5%" data-field="Id" data-formatter="tbl_Delete">Delete</th>
+                        <th data-field="DisbursementDescription" data-sortable="true">Disbursement</th>
+                        <th data-field="DisbursementAmount" data-sortable="true">Amount</th>
 
                     </tr>
                 </thead>

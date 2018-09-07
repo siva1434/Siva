@@ -26,7 +26,7 @@ namespace _360LawGroup.CostOfSalesBilling.Data
         public string Description { get; set; }
         public Nullable<decimal> WorkRateId { get; set; }
         public Nullable<bool> Agreed { get; set; }
-        public System.Guid ResetNewMonthId { get; set; }
+        public Nullable<System.Guid> ResetNewMonthId { get; set; }
         public string DisbursementDescription { get; set; }
         public Nullable<decimal> DisbursementAmount { get; set; }
         public Nullable<decimal> Hours { get; set; }

@@ -152,5 +152,19 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.Common
                 Data = ParamList.FirstOrDefault()
             };
         }
+
+        [ApiAuth, HttpGet, Route("getallmatterslist")]
+        public GenericResponse<List<KeyValuePair<string, string>>> GetAllSubject(string q)
+        {
+            q = (q ?? string.Empty).ToLower();
+            var list = Uow.MatterRepository.GetQuery(x => x.IsActive && !x.IsDeleted && x.MatterName.ToLower().Contains(q))
+                    .Select(x => new { x.MatterName, x.IsActive }).ToList();
+            return new GenericResponse<List<KeyValuePair<string, string>>>
+            {
+                StatusCode = HttpStatusCode.OK,
+                Data = list.Distinct().Select(x =>
+                        new KeyValuePair<string, string>(x.MatterName, x.MatterName)).ToList()
+            };
+        }
     }
 }
