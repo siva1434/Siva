@@ -26,7 +26,7 @@
             {
                 HttpMethod = "POST",
                 Url = ViewBag.ApiUrl + "api/all/matter/" + (Model.Id == Guid.Empty ? "create" : "edit"),
-                OnSuccess = "ClientDataSuccess",
+                OnSuccess = "MatterDataSuccess",
                 OnFailure = "Failed"
             }, new { @class = "form-horizontal", role = "form" }
              ))
@@ -165,7 +165,7 @@
             })
         }
 
-    function ClientDataSuccess(data) {
+    function MatterDataSuccess(data) {
         if (data.StatusCode === 200) {
             AlertNotify("Success", data.Messages, "bg-success");
             setTimeout(function () {
