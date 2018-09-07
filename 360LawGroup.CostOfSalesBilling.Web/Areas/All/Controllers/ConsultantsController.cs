@@ -14,7 +14,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.All.Controllers
     public class ConsultantsController : BaseController
     {
         // GET: All/Consultant
-        public ActionResult ConsultantHours()
+        public ActionResult Index()
         {
             return View();
         }

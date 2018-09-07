@@ -20,11 +20,11 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
         {
             int total;
             var newmodel = model.Clone();
-            var query = Uow.MatterRepository.GetQuery<MatterViewModel>(x => !x.IsDeleted);            
+            var query = Uow.MatterRepository.GetQuery<MatterViewModel>(x => !x.IsDeleted);
             if (model.search.ContainsKey("SearchValue"))
-            {                
-                var value = (model.search["SearchValue"] ?? string.Empty).ToLower();                
-                query = query.Where(x => x.ClientFullName.ToLower().Contains(value) 
+            {
+                var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
+                query = query.Where(x => x.ClientFullName.ToLower().Contains(value)
                 || x.AreaofLaw.ToLower().Contains(value) || x.WorkRateRateType.Contains(value) || x.Status.ToLower().Contains(value));
 
                 model.search.Remove("SearchValue");
@@ -36,24 +36,24 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             //    var consultants = Uow.UserRepository.GetQuery(x => !x.IsDeleted && x.AspNetRoles.Any(i => i.Id == RoleExtension.Consultant));
             //    item.ConsultantIds = query.FirstOrDefault().
             //}
-            var gridData = new GridData<MatterViewModel>(list, model, total, TimeZoneInterval);          
+            var gridData = new GridData<MatterViewModel>(list, model, total, TimeZoneInterval);
             return gridData;
         }
 
         [Route("getbyid"), HttpGet]
         public GenericResponse<MatterViewModel> GetById(Guid id)
-        {            
+        {
             var matters = new GenericResponse<MatterViewModel>
-            {                
+            {
                 StatusCode = HttpStatusCode.NotFound,
                 Messages = new List<string>() { "Matters not found." }
-            };  
+            };
 
             var data = new MatterViewModel();
-            var instance = Uow.MatterRepository.GetQuery(x => x.Id == id).FirstOrDefault();                        
+            var instance = Uow.MatterRepository.GetQuery(x => x.Id == id).FirstOrDefault();
 
             if (instance == null)
-                return matters;                       
+                return matters;
             matters.StatusCode = HttpStatusCode.OK;
             matters.Messages = new List<string>();
             matters.Data = instance.To<MatterViewModel>(TimeZoneInterval);
@@ -75,15 +75,15 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
 
 
         private DefaultResponse ValidateAndSave(MatterViewModel model)
-        {            
+        {
             var isError = false;
             ModelState.Remove("model.CreatedBy");
             ModelState.Remove("model.CreatedOn");
             if (ModelState.IsValid)
             {
-                if (Uow.ClientRepository.GetQuery(x => x.Id != model.Id && x.Email.Equals(model.ClientMatter_ContactEmail, StringComparison.OrdinalIgnoreCase)).Any())
+                if (Uow.MatterRepository.GetQuery(x => x.Id != model.Id && x.MatterName.Equals(model.MatterName, StringComparison.OrdinalIgnoreCase)).Any())
                 {
-                    ModelState.AddModelError("Email", "Email '" + model.ClientMatter_ContactEmail + "' is already taken.");
+                    ModelState.AddModelError("Name", "Name '" + model.MatterName + "' is exists.");
                     isError = true;
                 }
                 else if (model.Id == Guid.Empty) //create   
@@ -112,18 +112,20 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
                     {
                         return new DefaultResponse(HttpStatusCode.NotFound, "matter not found for update.");
                     }
-                    foreach (var id in model.ConsultantIds)
-                    {
-                        extMatter.AspNetUsers.Add(Uow.UserRepository.GetById(id));
-                    }
+
                     var createdBy = extMatter.CreatedBy;
                     var createdOn = extMatter.CreatedOn;
+                    extMatter.AspNetUsers.Clear();
                     var matter = model.To(extMatter, -TimeZoneInterval);
                     matter.CreatedBy = createdBy;
                     matter.CreatedOn = createdOn;
                     matter.ModifiedOn = DateTime.UtcNow;
                     matter.ModifiedBy = LoggedInUser.Id;
                     matter.IsActive = true;
+                    foreach (var id in model.ConsultantIds)
+                    {
+                        matter.AspNetUsers.Add(Uow.UserRepository.GetById(id));
+                    }
                     Uow.MatterRepository.Update(extMatter);
                     isError = Uow.Save(this) == 0;
                 }
