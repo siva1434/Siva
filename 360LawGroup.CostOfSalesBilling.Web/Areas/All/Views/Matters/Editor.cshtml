@@ -142,23 +142,23 @@
 
     });
 
-    function AddOverseasCountryList() {        
+    function AddOverseasCountryList() {         
            bootbox.prompt({
-                title: "Enter Country", callback: function (value) {
-                    if (value !== null) {
+               title: "Enter Country", callback: function (value) {
+                   if (value !== null) {                     
                         if ($.trim(value) === "") {
                             AlertNotify("Overseas Country", "Please enter country.", "bg-danger");                            
-                        } else {
-                            debugger
-                            $.ajax({
-                                type: "GET",
-                                url: "api/superadmin/adminsettings/saveadminsettings",
-                                data: JSON.stringify(value),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                success: function () {                                  
-                                },                               
-                            });  
+                        } else { 
+                            apiCall("api/superadmin/adminsettings/addadminsettings",
+                            "get",
+                            {
+                                paramName: "CLIENTMATTER_OVERSEAS_COUNTRY", paramValue: value                               
+                            },
+                            function (data) {
+                                if (isSuccess(data)) {
+                                    AlertNotify("Success", data.Messages, "bg-success");
+                                }
+                            });
                         }
                     }
                 }
