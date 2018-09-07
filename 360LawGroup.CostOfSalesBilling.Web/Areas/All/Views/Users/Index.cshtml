@@ -139,7 +139,7 @@
                 message: "Are you sure you want to delete?",
                 callback: function (status) {
                     if (status) {
-                        apiCall("common/users/delete?id=" + id,
+                        apiCall("api/all/users/delete?id=" + id,
                             "get",
                             {},
                             function (data) {
