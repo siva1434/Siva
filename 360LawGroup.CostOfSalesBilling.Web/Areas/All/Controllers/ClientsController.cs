@@ -92,5 +92,17 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.All.Controllers
             }
             return PartialView("Show", model);
         }
+
+        [HttpGet]
+        public ActionResult SubscriptionClient()
+        {
+            var model = new ClientViewModel();
+            var status = ApiHelper.Get<ClientViewModel>("api/all/client/getallsubscriptionclient");
+            if (status.StatusCode == HttpStatusCode.OK)
+            {
+                model = status.Data;
+            }
+            return View();
+        }
     }
 }

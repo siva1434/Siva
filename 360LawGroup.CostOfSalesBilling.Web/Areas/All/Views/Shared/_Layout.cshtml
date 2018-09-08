@@ -53,10 +53,16 @@
                         }
                         @if (Html.UserIsInRole(RoleExtension.SuperAdmin) || Html.UserIsInRole(RoleExtension.Admin))
                         {
-                            <li><a href="@Url.Action("Index", "Clients", new { Area = "All"})"><i class="fa fa-street-view"></i> <span>Manage Client</span></a></li>
-                            <li><a href="@Url.Action("ClientRenewals", "ClientRenewals", new { Area = "All"})"><i class="fa fa-calendar"></i> <span>Client Renewals</span></a></li>
-                            <li><a href="@Url.Action("Index", "Matters", new { Area = "All"})"><i class="fa fa-folder-open"></i> <span>Manage Matters</span></a></li>
-                            <li><a href="@Url.Action("Index", "Consultants", new { Area = "All"})"><i class="fa fa-clock-o"></i> <span>Consultant Hours</span></a></li>
+                            <li>
+                                <a href="javascript:;"><i class="icon-user"></i> <span>Admin</span></a>
+                                <ul>
+                                    <li><a href="@Url.Action("Index", "Clients", new { Area = "All"})"><i class="fa fa-street-view"></i> <span>Manage Client</span></a></li>
+                                    <li><a href="@Url.Action("ClientRenewals", "ClientRenewals", new { Area = "All"})"><i class="fa fa-calendar"></i> <span>Client Renewals</span></a></li>
+                                    <li><a href="@Url.Action("Index", "Matters", new { Area = "All"})"><i class="fa fa-folder-open"></i> <span>Manage Matters</span></a></li>
+                                    <li><a href="@Url.Action("Index", "Consultants", new { Area = "All"})"><i class="fa fa-clock-o"></i> <span>Consultant Hours</span></a></li>
+                                    <li><a href="@Url.Action("SubscriptionClient", "Clients", new { Area = "All"})"><i class="fa fa-key"></i> <span>Subscription Clients</span></a></li>
+                                </ul>
+                            </li>
                         }
                     </ul>
                 </div>

@@ -108,6 +108,8 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.Common
             };
         }
 
+        
+
         [Route("getbase64"), HttpPost]
         public DefaultResponse GetFileBase64()
         {

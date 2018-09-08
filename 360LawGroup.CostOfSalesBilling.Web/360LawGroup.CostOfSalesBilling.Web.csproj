@@ -258,11 +258,11 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\All\Controllers\ClientRenewalsController.cs" />
+    <Compile Include="Areas\All\Controllers\ClientsController.cs" />
     <Compile Include="Areas\All\Controllers\ConsultantsController.cs" />
     <Compile Include="Areas\ClientUser\ClientUserAreaRegistration.cs" />
     <Compile Include="Areas\ClientUser\Controllers\HomeController.cs" />
     <Compile Include="Areas\All\CommonAreaRegistration.cs" />
-    <Compile Include="Areas\All\Controllers\ClientsController.cs" />
     <Compile Include="Areas\All\Controllers\MattersController.cs" />
     <Compile Include="Areas\All\Controllers\UsersController.cs" />
     <Compile Include="Areas\Consultant\ConsultantAreaRegistration.cs" />
@@ -2984,6 +2984,7 @@
     <Content Include="Areas\All\Views\Consultants\Editor.cshtml" />
     <Content Include="Areas\All\Views\ClientRenewals\ClientRenewals.cshtml" />
     <Content Include="Areas\All\Views\ClientRenewals\ClientRenewalsDetails.cshtml" />
+    <Content Include="Areas\All\Views\Clients\SubscriptionClient.cshtml" />
     <None Include="Properties\PublishProfiles\dev-healthfreak - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\qa-hf - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />

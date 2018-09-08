@@ -1,0 +1,85 @@
+﻿
+@{
+    ViewBag.Title = "Subscription Client";
+}
+
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <div class="col-md-9">
+            <h3>
+               Subscription Clients
+            </h3>
+            <h4>
+                List of all Subscription Services Clients and Fees.
+            </h4>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="search_filter" class="search-filter">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Search</span>
+                            @Html.TextBox("SearchValue", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="btnsearch" type="button" class="btn btn-success btn-sm">Search</button>
+                        <button id="btnreset" type="button" class="btn btn-warning btn-sm">Reset</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="table-responsive">
+            <table id="grid" data-sort-name="Company" data-sort-order="asc"
+                   data-toggle="table"
+                   data-url="@(ViewBag.ApiUrl+ "api/all/client/getallsubscriptionclient")"
+                   data-queryparams="getSearchParam"
+                   data-searchselector="#search_filter"
+                   data-pagination="true" class="table"
+                   cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th data-field="Company" data-sortable="true">Company</th>
+                        <th data-field="ContractRenewalDate" data-sortable="true">Contract Renewal Date</th>
+                        <th data-field="MonthlySubscription" data-sortable="true">Monthly Subscription</th>
+                        <th data-field="PaymentMonths" data-sortable="true">Payment Months</th>
+                        <th data-field="SubscriptionBasis" data-sortable="true">Subscription Basis</th>
+                        <th data-field="SubscriptionDate" data-sortable="true">Subscription Date</th>
+                        <th data-field="NextSubscriptionDate" data-sortable="true">Next Subscription Date</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnsearch2').on('click', function () {
+                if ($.trim($("#SearchValue").val()) == "") {
+                    AlertNotify("Validations!", "Please enter search text", "bg-warning")
+                    return;
+                }
+                if (typeof $('#grid').attr('data-toggle') === 'undefined') {
+                    $('#grid').attr('data-toggle', 'table');
+                    BindBtTable('body');
+                } else {
+                    $('#search_filter #btnsearch').click();
+                }
+                $('#grid').removeClass('hide');
+            });
+        });
+
+        @*function clientshow(value) {
+            if (value !== "@ViewBag.UserId" && value !== "@Guid.Empty")
+            return '<a href="@Url.Action("Show")?id=' +
+                    value + '" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess">View</a>';
+        }*@
+
+
+    </script>
+}
