@@ -58,7 +58,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.SuperAdmin
             var overseaslist = instance.ParamValue.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
             if (overseaslist.Contains(paramValue))
             {
-                status.SetCustomMessages(HttpStatusCode.NotFound, $"{paramValue} alredy exists");
+                status.SetCustomMessages(HttpStatusCode.NotFound, $"{paramValue} alredy exists");                
                 return status;
             }
             instance.ParamValue += "," + paramValue;
@@ -67,7 +67,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.SuperAdmin
             {
                 status.SetErrorMessages(this);
             }
-            status.SetCustomMessages(HttpStatusCode.OK, "Settings saved successfully.");
+            status.SetCustomMessages(HttpStatusCode.OK, "Overseas Country saved successfully.");
             return status;
         }
     }

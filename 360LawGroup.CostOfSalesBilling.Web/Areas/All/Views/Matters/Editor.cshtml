@@ -136,29 +136,32 @@
 
         });
         $('.Dateofcal').attr("readonly", true);
-        ShowModal("#AddEditModal", function () {
+        ShowModal("#AddEditModal", function () {            
         });
-
-
     });
 
-    function AddOverseasCountryList() {         
+    function AddOverseasCountryList() {
            bootbox.prompt({
                title: "Enter Country", callback: function (value) {
-                   if (value !== null) {                     
+                   if (value !== null) {
                         if ($.trim(value) === "") {
-                            AlertNotify("Overseas Country", "Please enter country.", "bg-danger");                            
-                        } else { 
+                            AlertNotify("Overseas Country", "Please enter country.", "bg-danger");
+                        } else {                            
                             apiCall("api/superadmin/adminsettings/addadminsettings",
                             "get",
                             {
-                                paramName: "CLIENTMATTER_OVERSEAS_COUNTRY", paramValue: value                               
+                                paramName: "CLIENTMATTER_OVERSEAS_COUNTRY", paramValue: value
                             },
-                            function (data) {
+                            function (data) {                                
                                 if (isSuccess(data)) {
                                     AlertNotify("Success", data.Messages, "bg-success");
                                 }
-                            });
+                                //if (data.StatusCode === 200) {                                    
+                                //        setTimeout(function () {
+                                //            AlertNotify("Success", data.Messages, "bg-success");
+                                //    }, 1000);                                                                       
+                                //}
+                            });                           
                         }
                     }
                 }
