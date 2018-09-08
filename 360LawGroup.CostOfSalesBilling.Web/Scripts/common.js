@@ -190,7 +190,7 @@ function GetTodayDate() {
 }
 
 function GetTodayDateNoSA() {
-    return moment(new Date()).format("DD-MM-YYYY");
+    return moment(new Date()).format("MM/DD/YYYY");
 }
 
 function DefaultCollapsedAll() {
@@ -453,7 +453,7 @@ function yesnoformat(value) {
 }
 function dateformatter(value) {
     if (value != null) {
-        return moment(value).format("DD-MM-YYYY");
+        return moment(value).format("MM/DD/YYYY");
     }
     else {
         return "";
@@ -464,7 +464,7 @@ function datetimeformatter(value) {
 }
 function datetimeformatterinline(value) {
     if (value != null) {
-        return moment(value).format("DD-MM-YYYY h:mm A").toUpperCase();
+        return moment(value).format("MM/DD/YYYY h:mm A").toUpperCase();
     }
     else {
         return "";

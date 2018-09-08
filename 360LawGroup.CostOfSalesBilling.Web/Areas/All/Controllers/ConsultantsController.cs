@@ -28,7 +28,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.All.Controllers
         [HttpGet]
         public ActionResult Edit(string id)
         {
-            var model = new ConsultantHourViewModel { WorkDate = DateTime.UtcNow };
+            var model = new ConsultantHourViewModel();
             if (string.IsNullOrEmpty(id))
             {
                 ViewBag.Title = "Create New client";

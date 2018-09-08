@@ -28,23 +28,26 @@
                         }
                         @if (Html.UserIsInRole(RoleExtension.Admin))
                         {
-                            <li><a href="@Url.Action("Index", "Home", new { Area = "Admin" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                            <li><a href="@Url.Action("Index", "Home", new { Area = "Admin" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>                           
+                        }
+                        @if (Html.UserIsInRole(RoleExtension.SuperAdmin))
+                        {
+                            <li><a href="@Url.Action("Index", "Home", new { Area = "SuperAdmin" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                         }
                         @if (Html.UserIsInRole(RoleExtension.Consultant))
                         {
                             <li><a href="@Url.Action("Index", "Home", new { Area = "Consultant" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                         }
 
-                        @if (Html.UserIsInRole(RoleExtension.SuperAdmin))
+                        @if (Html.UserIsInRole(RoleExtension.SuperAdmin) || Html.UserIsInRole(RoleExtension.Admin))
                         {
-                            <li><a href="@Url.Action("Index", "Home", new { Area = "SuperAdmin" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
                             <li>
                                 <a href="javascript:;"><i class="icon-users4"></i> <span>User Management</span></a>
                                 <ul>
                                     @if (roles.Any())
                                     {
                                         foreach (var role in roles)
-                                        {
+                                        {                                            
                                             <li><a href="@Url.Action("Index", "Users", new { Area = "All", selectedRole = role })"><span>@role</span></a></li>
                                         }
                                     }

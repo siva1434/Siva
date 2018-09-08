@@ -25,7 +25,7 @@ namespace _360LawGroup.CostOfSalesBilling.Utilities
                 case SuperAdmin:
                     return (new string[] { SuperAdmin, Admin, Consultant, ClientUser }).Contains(role);
                 case Admin:
-                    return (new string[] { Admin }).Contains(role);
+                    return (new string[] { Admin, ClientUser }).Contains(role);
                 case Consultant:
                     return (new string[] { Consultant }).Contains(role);
                 case ClientUser:
@@ -42,7 +42,7 @@ namespace _360LawGroup.CostOfSalesBilling.Utilities
                 case SuperAdmin:
                     return (new string[] { Admin, Consultant, ClientUser });
                 case Admin:
-                    return (new string[] { Consultant });
+                    return (new string[] {ClientUser});
                 case Consultant:
                     return (new string[] { ClientUser});
                 case ClientUser:

@@ -120,7 +120,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web
                     ShortDatePattern = "MM/dd/yyyy",
                     ShortTimePattern="hh:mm tt",
                     FullDateTimePattern="MM/dd/yyyy hh:mm tt",
-                    DateSeparator = "-"
+                    DateSeparator = "/"
                 }
             };
             Thread.CurrentThread.CurrentCulture = cInfo;

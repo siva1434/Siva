@@ -99,6 +99,7 @@ namespace _360LawGroup.CostOfSalesBilling.Data
                 cfg.CreateMap<ConsultantHourViewModel, ConsultantHour>(MemberList.None);
 
                 cfg.CreateMap<Matter, MatterViewModel>(MemberList.None)
+                .ForMember(x => x.Client_Matter, y => y.MapFrom(z => z.Client.Company + " - " + z.MatterName))
                 .ForMember(x => x.WorkRateText, y => y.MapFrom(z => z.WorkRate.RateType))
                 .ForMember(x => x.ClientText, y => y.MapFrom(z => z.Client.Company))
                 .ForMember(x => x.WorkHours, y => y.MapFrom(z => z.ConsultantHours.Sum(i => i.WorkHours)))
