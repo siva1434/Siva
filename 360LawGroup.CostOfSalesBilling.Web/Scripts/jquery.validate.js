@@ -1042,9 +1042,9 @@
                 var dt = moment(value);
                 if (!dt.isValid()) {
                     if (value.split(' ').length==2)
-                        dt = moment(value, "DD-MM-YYYY HH:mm A");
+                        dt = moment(value, "MM/DD/YYYY HH:mm A");
                     else
-                        dt = moment(value, "DD-MM-YYYY");
+                        dt = moment(value, "MM/DD/YYYY");
                 }
                 return dt.isValid();
                 //return this.optional(element) || !/Invalid|NaN/.test(new Date(value.replace(/-/g,"/")).toString());

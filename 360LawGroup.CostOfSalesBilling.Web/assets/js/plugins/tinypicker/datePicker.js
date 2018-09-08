@@ -47,8 +47,8 @@
 					'</div>',
 				nextLabel: 'Next month',
 				prevLabel: 'Previous month',
-				minDate: '01-01-1969',
-				maxDate: '31-12-2050',
+				minDate: '01/01/1969',
+				maxDate: '12/31/2050',
 				minDateAttribute: 'data-mindate',
 				maxDateAttribute: 'data-maxdate',
 				// classes for event listeners
@@ -221,7 +221,7 @@
 		var template = calendar.options.template,
 			datePicker = options.body.appendChild(document.createElement('div'));
         template.row = template.row.replace(/<(.*?)>/, // extend template for picker
-			'<$1 ' + options.pickerAttribute + '="{{day}}-{{month}}-{{year}}">');
+            '<$1 ' + options.pickerAttribute + '="{{month}}/{{day}}/{{year}}">');
 		datePicker.className = options.datePickerClass;
 
 		addEvent(datePicker, 'click', function(e) {
@@ -428,14 +428,14 @@
 
     function getDateObject(date) { // simple version
         if (typeof date === "object")
-            date = moment(date).format("DD-MM-YYYY hh:mm a");
-		date = ((date.indexOf('-') !== -1 ? '' : '--- ') + date).split(/(?:\s+|T)/);
-		date[0] = date[0].split('-');
+            date = moment(date).format("MM/DD/YYYY hh:mm a");
+		date = ((date.indexOf('/') !== -1 ? '' : '--- ') + date).split(/(?:\s+|T)/);
+		date[0] = date[0].split('/');
         date[1] = (date[1] ||  '').split(':');
         return {
 			year: date[0][2],
-			month: lZ(date[0][1]),
-			day: lZ(date[0][0]),
+			month: lZ(date[0][0]),
+			day: lZ(date[0][1]),
 			hour: lZ(date[1][0]), // add value if time is enabled
 			minute: lZ(date[1][1]),
 			second: lZ(date[1][2]),
@@ -445,8 +445,8 @@
 
 	function assembleDate(date, dateOnly) { // simple version
 		return (
-            (date.day ? (date.day + '-' + date.month +
-                (date.year ? '-' + date.year : '')) : '') +
+            (date.month ? (date.month + '/' + date.day +
+                (date.year ? '/' + date.year : '')) : '') +
             (date.hour && !dateOnly ? ((date.year ? ' ' : '') +
 				date.hour + ':' + date.minute +
 				(date.second ? ':' + date.second : '') +
@@ -454,7 +454,7 @@
 	}
 
 	function getDateString(date, time) {
-        return lZ(date.getDate()) + '-' + lZ(date.getMonth() + 1) + '-' +
+        return lZ(date.getMonth() + 1) + '/' + lZ(date.getDate()) + '/' +
             date.getFullYear() + (time ? ' ' + date.toTimeString().split(' ')[0] : '');
 	}
 

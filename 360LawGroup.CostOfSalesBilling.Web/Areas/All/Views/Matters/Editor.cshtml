@@ -55,7 +55,7 @@
                     <div class="form-group">
                         <div class="col-md-4">
                             @Html.LabelFor(m => m.Date, new { @class = "control-label text-bold" })
-                            @Html.TextBoxFor(model => model.Date, "{0:dd-MM-yyyy}", new { @class = "form-control Dateofcal", @data_value = Model.Date })
+                            @Html.TextBoxFor(model => model.Date, "{0:MM/dd/yyyy}", new { @class = "form-control Dateofcal", @data_value = Model.Date })
                             @Html.ValidationMessageFor(model => model.Date)
                         </div>
                         <div class="col-md-4">
