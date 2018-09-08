@@ -74,6 +74,18 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             return newlist;
         }
 
+        [ApiAuth, HttpGet, Route("getallsubscriptionclient")]
+        public GenericResponse<List<KeyValuePair<Guid, bool>>> GetAllSubscriptionClient()
+        {
+            var list = Uow.ClientRepository.GetQuery().AsEnumerable().Select(x =>
+                            new KeyValuePair<Guid, bool>(x.Id, x.IsSubscription==true)).ToList();
+            return new GenericResponse<List<KeyValuePair<Guid, bool>>>
+            {
+                StatusCode = HttpStatusCode.OK,
+                Data = list
+            };
+        }
+
         [Route("create"), HttpPost]
         public DefaultResponse Create(ClientViewModel model)
         {
