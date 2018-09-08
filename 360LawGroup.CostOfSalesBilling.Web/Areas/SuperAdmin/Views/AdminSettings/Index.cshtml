@@ -43,7 +43,7 @@
     }
 
     function SaveSettings(paramName) {
-        apiCall("superadmin/adminsettings/saveadminsettings",
+        apiCall("api/superadmin/adminsettings/saveadminsettings",
             "get",
             {
                 paramName: paramName, paramValue: $("#TXT_" + paramName).val()
