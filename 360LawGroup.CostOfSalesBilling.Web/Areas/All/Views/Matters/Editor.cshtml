@@ -141,11 +141,14 @@
     });
 
     function AddOverseasCountryList() {
+        $("#AddEditModal").modal('hide');
            bootbox.prompt({
                title: "Enter Country", callback: function (value) {
+                   debugger
                    if (value !== null) {
                         if ($.trim(value) === "") {
                             AlertNotify("Overseas Country", "Please enter country.", "bg-danger");
+                            ShowModal("#AddEditModal");
                         } else {                            
                             apiCall("api/superadmin/adminsettings/addadminsettings",
                             "get",
@@ -153,17 +156,23 @@
                                 paramName: "CLIENTMATTER_OVERSEAS_COUNTRY", paramValue: value
                             },
                             function (data) {                                
-                                if (isSuccess(data)) {
-                                    AlertNotify("Success", data.Messages, "bg-success");
+                                if (data.StatusCode === 200) {                                    
+                                    debugger
+                                    var newOption = "<option value='" + value + "'>" + value + "</option>";
+                                    $(newOption).insertAfter($("#OverseasCountry option:last")); //add new option 
+                                    $("#OverseasCountry").val(value);
+                                    ShowModal("#AddEditModal");
                                 }
-                                //if (data.StatusCode === 200) {                                    
-                                //        setTimeout(function () {
-                                //            AlertNotify("Success", data.Messages, "bg-success");
-                                //    }, 1000);                                                                       
-                                //}
+                                else {
+                                    AlertNotify("Attention!", data.Messages, "bg-danger");
+                                    ShowModal("#AddEditModal");
+                                }
                             });                           
                         }
-                    }
+                   }
+                   else {
+                       ShowModal("#AddEditModal");
+                   }
                 }
             })
         }

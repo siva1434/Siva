@@ -1,0 +1,85 @@
+﻿@model _360LawGroup.CostOfSalesBilling.Models.ClientViewModel
+
+<div id="ShowClientRenewalsModal" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog" style="min-width:65%;">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title"></h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            @Html.Label("Client ID", new { @class = "control-label text-bold", @id = "para1" })
+                        </div>
+                        <span>@Model.Id</span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            @Html.LabelFor(m => m.Company, new { @class = "control-label text-bold", @id = "para1" })
+                        </div>
+                        <span>@Model.Company</span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            @Html.LabelFor(m => m.FullName, new { @class = "control-label text-bold", @id = "para1" })
+                        </div>
+                        <span>@Model.FullName</span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            @Html.LabelFor(m => m.LastName, new { @class = "control-label text-bold", @id = "para1" })
+                        </div>
+                        <span>@Model.LastName</span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            @Html.LabelFor(m => m.Email, new { @class = "control-label text-bold", @id = "para1" })
+                        </div>
+                        <span>@Model.Email</span>
+                    </div>
+
+                    <div class="col-md-12">
+                        <div class="col-md-3">
+                            @Html.LabelFor(m => m.JobTitle, new { @class = "control-label text-bold", @id = "para1" })
+                        </div>
+                        <span>@Model.JobTitle</span>
+                    </div>
+                </div>
+
+                <div class="clearfix"></div>
+                <div class="clearfix"></div>
+                <div class="clearfix"></div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function () {
+        ShowModal("#ShowClientRenewalsModal", function () {
+        });
+    });
+</script>
+
+<style>
+    #para1 {
+        background-color: #f2f2f2;
+        font-weight: 700;
+        min-width: 186px;
+        max-width: 186px;
+        font-size: 14px;
+        flex-basis: 100%;
+        padding: 4px;
+    }
+</style>
+
+
