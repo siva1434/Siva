@@ -179,7 +179,7 @@
         }
 	}
 
-	function getDateTime(_this, options, element) { // revisit
+    function getDateTime(_this, options, element) { // revisit        
 		var value = options.readValue.call(_this, element),
 			date = getDateObject(value || getDateString(new Date(), true)),
 			timeFormat = element.getAttribute(options.timeFormatAttribute),
@@ -443,8 +443,8 @@
 		}
 	}
 
-	function assembleDate(date, dateOnly) { // simple version
-		return (
+    function assembleDate(date, dateOnly) { // simple version
+        return (
             (date.month ? (date.month + '/' + date.day +
                 (date.year ? '/' + date.year : '')) : '') +
             (date.hour && !dateOnly ? ((date.year ? ' ' : '') +
@@ -453,7 +453,7 @@
 				(date.AMPM ? ' ' + date.AMPM : '')) : ''));
 	}
 
-	function getDateString(date, time) {
+    function getDateString(date, time) {
         return lZ(date.getMonth() + 1) + '/' + lZ(date.getDate()) + '/' +
             date.getFullYear() + (time ? ' ' + date.toTimeString().split(' ')[0] : '');
 	}

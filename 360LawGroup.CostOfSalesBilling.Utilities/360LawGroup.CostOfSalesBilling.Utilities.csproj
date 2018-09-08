@@ -100,16 +100,10 @@
     <Compile Include="IsIntType.cs" />
     <Compile Include="MemberTypes.cs" />
     <Compile Include="MessageDataHelper.cs" />
-    <Compile Include="PackageHistory.cs" />
     <Compile Include="PaperCropper.cs" />
     <Compile Include="PaymentModes.cs" />
-    <Compile Include="ProductTypes.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PTPackageTypes.cs" />
-    <Compile Include="QuestionTypes.cs" />
     <Compile Include="Roles.cs" />
-    <Compile Include="TaxTypes.cs" />
-    <Compile Include="TrialStatus.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

@@ -3052,12 +3052,7 @@
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\Forbidden.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
-    <Content Include="Views\Shared\_SalesDashboard.cshtml" />
     <Content Include="Views\Shared\PopupMsg.cshtml" />
-    <Content Include="Views\Shared\_SalesDashboardScripts.cshtml" />
-    <Content Include="Views\Shared\_DashboardCounters.cshtml" />
-    <Content Include="Views\Shared\_TrainerDashboard.cshtml" />
-    <Content Include="Views\Shared\_TrainerDashboardScripts.cshtml" />
     <Content Include="Views\Shared\_UserState.cshtml" />
     <None Include="Web.Dev.config">
       <DependentUpon>Web.config</DependentUpon>
