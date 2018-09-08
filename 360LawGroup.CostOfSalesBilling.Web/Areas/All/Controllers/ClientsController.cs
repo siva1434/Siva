@@ -98,5 +98,10 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.All.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ActionResult RateChecks()
+        {
+            return View();
+        }
     }
 }

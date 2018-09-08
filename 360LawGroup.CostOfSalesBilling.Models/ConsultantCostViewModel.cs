@@ -77,6 +77,8 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         [Display(Name = "Rate Used")]
         public decimal? RateUsed { get; set; }
 
+        public virtual string WorkRateRateType { get; set; }
+
         //public virtual Client Client { get; set; }
         //public virtual Matter Matter { get; set; }
         //public virtual WorkRate WorkRate { get; set; }

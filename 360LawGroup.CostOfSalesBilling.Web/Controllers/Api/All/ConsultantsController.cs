@@ -148,5 +148,25 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             }
             return status;
         }
+
+        [Route("getconsultantcostsdata"), HttpPost]
+        public GridData<ConsultantCostViewModel> GetConsultantsData(SearchModel model)
+        {
+            int total;
+            var query = Uow.ConsultantCostRepository.GetQuery<ConsultantCostViewModel>();
+            //if (model.search.ContainsKey("SearchValue"))
+            //{
+            //    var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
+            //    query = query.Where(x => x..ToLower().Contains(value)
+            //    || x.Status.ToLower().Contains(value) || x.WorkRateRateType.Contains(value));
+
+            //    model.search.Remove("SearchValue");
+
+            //}
+            //query = query.Where(x => x.WorkHours > 0);
+            var list = query.ApplyFilter(model, out total);
+            var gridData = new GridData<ConsultantCostViewModel>(list, model, total, TimeZoneInterval);
+            return gridData;
+        }
     }
 }

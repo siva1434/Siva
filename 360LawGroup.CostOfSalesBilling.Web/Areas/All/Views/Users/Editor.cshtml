@@ -62,9 +62,9 @@
                                 @Html.DropDownListFor(model => model.UserStatus,
                                                             new List<SelectListItem>
                                                             {
-                                                                new SelectListItem { Text="Active", Value="Active"},
-                                                                new SelectListItem { Text="Inactive", Value="Inactive"},
-                                                                new SelectListItem { Text="Pending Approval", Value="Pending Approval"}
+                                                                new SelectListItem { Text=UserStatus.Active, Value=UserStatus.Active},
+                                                                new SelectListItem { Text=UserStatus.InActive, Value=UserStatus.InActive},
+                                                                new SelectListItem { Text=UserStatus.PendingApproval, Value=UserStatus.PendingApproval}
                                                             }
                                                 , new { @class = "form-control", @data_keyboard = "false", @data_value = Model.UserStatus })
                                 @Html.ValidationMessageFor(model => model.UserStatus)
@@ -230,9 +230,9 @@
                                 @Html.DropDownListFor(model => model.UserStatus,
                                              new List<SelectListItem>
                                              {
-                                               new SelectListItem { Text="Active", Value="Active"},
-                                               new SelectListItem { Text="InActive", Value="InActive"},
-                                               new SelectListItem { Text="Pending Approval", Value="Pending Approval"}
+                                                     new SelectListItem { Text=UserStatus.Active, Value=UserStatus.Active},
+                                                     new SelectListItem { Text=UserStatus.InActive, Value=UserStatus.InActive},
+                                                     new SelectListItem { Text=UserStatus.PendingApproval, Value=UserStatus.PendingApproval}
                                              }
                                              , new { @class = "form-control", @data_keyboard = "false", @data_value = Model.UserStatus }
                                              )
@@ -252,7 +252,7 @@
                             </div>
                             <div class="col-md-4">
                                 @Html.LabelFor(m => m.RoleId, new { @class = "control-label text-bold" })
-                                @Html.TextBoxFor(model => model.RoleId, new { @class = "form-control",@readonly="readonly" })
+                                @Html.TextBoxFor(model => model.RoleId, new { @class = "form-control", @readonly = "readonly" })
                                 @Html.ValidationMessageFor(model => model.RoleId)
                             </div>
                         </div>
@@ -334,9 +334,9 @@
                                 @Html.DropDownListFor(model => model.UserStatus,
                                                             new List<SelectListItem>
                                                             {
-                                                                new SelectListItem { Text="Active", Value="Active"},
-                                                                new SelectListItem { Text="Inactive", Value="Inactive"},
-                                                                new SelectListItem { Text="Pending Approval", Value="Pending Approval"}
+                                                                new SelectListItem { Text=UserStatus.Active, Value=UserStatus.Active},
+                                                                new SelectListItem { Text=UserStatus.InActive, Value=UserStatus.InActive},
+                                                                new SelectListItem { Text=UserStatus.PendingApproval, Value=UserStatus.PendingApproval}
                                                             }
                                                 , new { @class = "form-control", @data_keyboard = "false", @data_value = Model.UserStatus })
                                 @Html.ValidationMessageFor(model => model.UserStatus)

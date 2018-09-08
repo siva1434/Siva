@@ -2985,6 +2985,9 @@
     <Content Include="Areas\All\Views\ClientRenewals\ClientRenewals.cshtml" />
     <Content Include="Areas\All\Views\ClientRenewals\ClientRenewalsDetails.cshtml" />
     <Content Include="Areas\All\Views\Clients\SubscriptionClient.cshtml" />
+    <Content Include="Areas\All\Views\Clients\RateChecks.cshtml" />
+    <Content Include="Areas\All\Views\Matters\GridCurrentMatter.cshtml" />
+    <Content Include="Areas\All\Views\Consultants\ConsultantCosts.cshtml" />
     <None Include="Properties\PublishProfiles\dev-healthfreak - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\qa-hf - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
