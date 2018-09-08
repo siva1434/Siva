@@ -28,7 +28,7 @@
                     },
                     defaultView: 'month',
                     eventSources: {
-                        url: "@ViewBag.ApiUrl/common/client/getclientrenewalslist",
+                        url: "@ViewBag.ApiUrl/api/all/client/getclientrenewalslist",
                     type: 'GET',
                     cache: false,
                     beforeSend: function (xhr) {
@@ -38,7 +38,7 @@
                 },
 
                     eventClick: function (calEvent, jsEvent, view) {
-                    $.get("@Url.Action("ClientRenewalsDetails", "Clients", new { Area = "All" })?id=" + calEvent.id ).done(function (html) {
+                    $.get("@Url.Action("ClientRenewalsDetails", "ClientRenewals", new { Area = "All" })?id=" + calEvent.id ).done(function (html) {
                         $("#popupmodals").html(html);
                     });
                 }

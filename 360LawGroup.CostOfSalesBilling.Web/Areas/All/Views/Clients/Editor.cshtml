@@ -135,7 +135,7 @@
                         </div>
                         <div class="col-md-4">
                             @Html.LabelFor(m => m.SubscriptionDate, new { @class = "control-label text-bold" })
-                            @Html.TextBoxFor(model => model.SubscriptionDate, "{0:dd-MM-yyyy}", new { @class = "form-control Dateofcal", @data_value = Model.SubscriptionDate })
+                            @Html.TextBoxFor(model => model.SubscriptionDate, "{0:MM/dd/yyyy}", new { @class = "form-control Dateofcal", @data_value = Model.SubscriptionDate })
                             @Html.ValidationMessageFor(model => model.SubscriptionDate)
                         </div>
                     </div>
@@ -179,7 +179,7 @@
                     <div class="form-group">
                         <div class="col-md-4">
                             @Html.RequiredLabelFor(m => m.ContractRenewalDate, new { @class = "control-label text-bold" })
-                            @Html.TextBoxFor(model => model.ContractRenewalDate, "{0:dd-MM-yyyy}", new { @class = "form-control Dateofcal", @data_value = Model.ContractRenewalDate })
+                            @Html.TextBoxFor(model => model.ContractRenewalDate, "{0:MM/dd/yyyy}", new { @class = "form-control Dateofcal", @data_value = Model.ContractRenewalDate })
                             @Html.ValidationMessageFor(model => model.ContractRenewalDate)
                         </div>
                         <div class="col-md-4">

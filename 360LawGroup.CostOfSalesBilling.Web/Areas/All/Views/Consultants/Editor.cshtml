@@ -48,7 +48,7 @@
                         </div>
                         <div class="col-md-4">
                             @Html.LabelFor(m => m.WorkDate, new { @class = "control-label text-bold" })
-                            @Html.TextBoxFor(model => model.WorkDate, "{0:dd-MM-yyyy}", new { @class = "form-control Dateofcal", @data_value = Model.WorkDate })
+                            @Html.TextBoxFor(model => model.WorkDate, "{0:MM/dd/yyyy}", new { @class = "form-control DateofWork", @data_value = Model.WorkDate })
                             @Html.ValidationMessageFor(model => model.WorkDate)
                         </div>
                     </div>
@@ -79,10 +79,10 @@
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
-        $('.Dateofcal').datePicker({
+        $('.DateofWork').datePicker({
             min: true
         });
-        $('.Dateofcal').attr("readonly", true);
+        $('.DateofWork').attr("readonly", true);
         ShowModal("#AddEditModal", function () {
         });
     });

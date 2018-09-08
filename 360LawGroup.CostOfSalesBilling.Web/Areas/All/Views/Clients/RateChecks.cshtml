@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Client/Consultant Charge Rates";
+}
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <div class="col-md-9">
+            <h3>
+                Client Charge Rates
+            </h3>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="search_filter" class="search-filter">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Search</span>
+                            @Html.TextBox("SearchValue", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="btnsearch" type="button" class="btn btn-success btn-sm">Search</button>
+                        <button id="btnreset" type="button" class="btn btn-warning btn-sm">Reset</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="table-responsive">
+            <table id="gridsubscription" data-sort-name="Company" data-sort-order="asc"
+                   data-toggle="table"
+                   data-url="@(ViewBag.ApiUrl+ "api/all/client/getallclientcheckrates")"
+                   data-queryparams="getSearchParam"
+                   data-searchselector="#search_filter"
+                   data-pagination="true" class="table"
+                   cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th data-field="Company" data-align="center" data-sortable="true">Company</th>
+                        <th data-field="FullName" data-align="center" data-sortable="true">Full Name</th>
+                        <th data-field="Email" data-align="center" data-sortable="true">E-mail Address</th>
+                        <th data-field="MemberChargeRate" data-align="center" data-sortable="true">Member</th>
+                        <th data-field="PrivateClientChargeRate" data-align="center" data-sortable="true">Private Client</th>
+                        <th data-field="LitigationChargeRate" data-align="center" data-sortable="true">Litigation</th>
+                        <th data-field="RegulatedChargeRate" data-align="center" data-sortable="true">Regulated</th>
+                        <th data-field="OverseasCharge" data-align="center" data-sortable="true">Overseas</th>
+                    </tr>
+
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <div class="col-md-9">
+            <h3>
+                Consultant Work Rates
+            </h3>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="search_filter" class="search-filter">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Search</span>
+                            @Html.TextBox("SearchValue", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="btnsearch" type="button" class="btn btn-success btn-sm">Search</button>
+                        <button id="btnreset" type="button" class="btn btn-warning btn-sm">Reset</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="clearfix"></div>
+        <div class="table-responsive">
+            <table id="gridsubscription" data-sort-name="Name" data-sort-order="asc"
+                   data-toggle="table"
+                   data-url="@(ViewBag.ApiUrl+ "api/all/client/getallconsaltantrates")"
+                   data-queryparams="getSearchParam"
+                   data-searchselector="#search_filter"
+                   data-pagination="true" class="table"
+                   cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th data-field="FullName" data-align="center" data-sortable="true">Name</th>
+                        <th data-field="Email" data-align="center" data-sortable="true">Email</th>
+                        <th data-field="SubscriptionHourlyRate" data-align="center" data-sortable="true">Subscription</th>
+                        <th data-field="MemberHourlyRate" data-align="center" data-sortable="true">Member</th>
+                        <th data-field="PrivateClientHourlyRate" data-align="center" data-sortable="true">Private Client</th>
+                        <th data-field="LitigationHourlyRate" data-align="center" data-sortable="true">Litigation</th>
+                        <th data-field="RegulatedHourlyRate" data-align="center" data-sortable="true">Regulated</th>
+                        <th data-field="OverseasHourlyRate" data-align="center" data-sortable="true">Overseas</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+
