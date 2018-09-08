@@ -163,5 +163,7 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         public virtual decimal? PrivateClientCharge { get; set; }
         public virtual decimal? LitigationCharge { get; set; }
         public virtual decimal? RegulatedCharge { get; set; }
+
+        public virtual decimal? TotalMonthlySubscrptionForAll { get; set; }
     }
 }
