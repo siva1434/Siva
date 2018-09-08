@@ -21,7 +21,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             int total;
             var newmodel = model.Clone();
             var query = Uow.MatterRepository.GetQuery<MatterViewModel>(x => !x.IsDeleted);
-            if (model.search.ContainsKey("SearchValue"))    
+            if (model.search.ContainsKey("SearchValue"))
             {
                 var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
                 query = query.Where(x => x.ClientFullName.ToLower().Contains(value) || x.MatterName.ToLower().Contains(value) || x.Box.ToLower().Contains(value) ||
@@ -30,12 +30,6 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
                 model.search.Remove("SearchValue");
             }
             var list = query.ApplyFilter(model, out total);
-
-            //foreach (var item in list)
-            //{
-            //    var consultants = Uow.UserRepository.GetQuery(x => !x.IsDeleted && x.AspNetRoles.Any(i => i.Id == RoleExtension.Consultant));
-            //    item.ConsultantIds = query.FirstOrDefault().
-            //}
             var gridData = new GridData<MatterViewModel>(list, model, total, TimeZoneInterval);
             return gridData;
         }
@@ -144,6 +138,26 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             var res = new DefaultResponse();
             res.SetErrorMessages(this);
             return res;
+        }
+
+        [Route("getcurrentmatterdata"), HttpPost]
+        public GridData<MatterViewModel> GetCurrentMatterData(SearchModel model)
+        {
+            int total;
+            var query = Uow.MatterRepository.GetQuery<MatterViewModel>(x => !x.IsDeleted);
+            if (model.search.ContainsKey("SearchValue"))
+            {
+                var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
+                query = query.Where(x => x.Client_Matter.ToLower().Contains(value)  
+                || x.Status.ToLower().Contains(value) || x.WorkRateRateType.Contains(value));
+
+                model.search.Remove("SearchValue");
+
+            }
+            query = query.Where(x => x.WorkHours > 0);
+            var list = query.ApplyFilter(model, out total);
+            var gridData = new GridData<MatterViewModel>(list, model, total, TimeZoneInterval);
+            return gridData;
         }
     }
 }

@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Current Matter";
+}
+
+        <div class="table-responsive">
+            <table id="mattergrid" data-sort-name="Client_Matter" data-sort-order="asc"
+                   data-toggle="table"
+                   data-url="@(ViewBag.ApiUrl + "api/all/matter/getcurrentmatterdata")"
+                   data-queryparams="getSearchParam"
+                   data-searchselector="#search_filter"
+                   data-pagination="true" class="table"
+                   cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th data-field="Client_Matter" data-sortable="true">Client-Matter</th>
+                        <th data-field="AspNetUsers" data-sortable="false" data-formatter="consultantlist">Consultant</th>
+                        <th data-field="Status" data-sortable="true">Status</th>
+                        <th data-field="WorkRateRateType" data-sortable="true">Work Rate</th>
+                        <th data-field="WorkHours" data-sortable="true">Work Hours</th>
+                        <th data-field="CheckCost_inclSub" data-sortable="true">Cost(inc Sub)</th>
+                        <th data-field="CheckCost_exclSub" data-sortable="true">Cost(exc Sub)</th>
+                        <th data-field="TotalCharge_exclSub" data-sortable="true">Charge(exc Sub)</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        @section scripts{
+            <script type="text/javascript">
+                function consultantlist(value) {
+                    var namelist = "";
+                    $(value).each(function (i, item) {
+                        if (namelist != "") namelist += ", ";
+                        namelist += item.FullName;
+                    });
+                    return namelist;
+                }
+            </script>
+        }

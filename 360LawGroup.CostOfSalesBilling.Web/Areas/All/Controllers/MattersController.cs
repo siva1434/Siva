@@ -55,5 +55,10 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.All.Controllers
                 ViewBag.AreaOfList = new List<string>();
             return PartialView("Editor",model);
         }
+
+        public ActionResult GridCurrentMatter()
+        {
+            return View();
+        }
     }
 }
