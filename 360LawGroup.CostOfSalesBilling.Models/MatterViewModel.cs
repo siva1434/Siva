@@ -79,6 +79,8 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         [Display(Name = "Month Name")]
         public string MonthName { get; set; }
 
+
+        public virtual string Client_Matter { get; set; }
         public virtual string WorkRateText { get; set; }
         public virtual string ClientText { get; set; }
         public virtual decimal? WorkHours { get; set; }
