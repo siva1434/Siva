@@ -2970,8 +2970,6 @@
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\All\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\All\Views\Clients\ClientRenewals.cshtml" />
-    <Content Include="Areas\All\Views\Clients\ClientRenewalsDetails.cshtml" />
     <Content Include="Areas\All\Views\Clients\Editor.cshtml" />
     <Content Include="Areas\All\Views\Clients\Index.cshtml" />
     <Content Include="Areas\All\Views\Clients\Show.cshtml" />
