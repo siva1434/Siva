@@ -96,7 +96,13 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.All.Controllers
         [HttpGet]
         public ActionResult SubscriptionClient()
         {
-            return View();
+            var model = new ClientViewModel();
+            var subscriptionbasislist = ApiHelper.GetWithParam<AdminSettingsViewModel>("api/common/common/getsettingbyname", "name", "CLIENT_SUBSCRIPTION_BASIS");
+            if (subscriptionbasislist.StatusCode == HttpStatusCode.OK)
+                ViewBag.SubscrptionBasisList = subscriptionbasislist.Data.ParamValue.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            else
+                ViewBag.SubscrptionBasisList = new List<string>();
+            return View("SubscriptionClient",model);
         }
         [HttpGet]
         public ActionResult RateChecks()
