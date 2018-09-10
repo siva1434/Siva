@@ -40,7 +40,7 @@
                     <div class="col-md-4">
                         <div class="input-group">
                             <span class="input-group-addon">Consultant</span>
-                            @Html.DropDownList("ConsultantId", new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/common/getallconsultant"})
+                            @Html.DropDownList("ConsultantUserId", new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/common/getallconsultant",@data_default="All",@data_keyboard="false"})
                         </div>
                     </div>
                     <div class="clearfix"></div>

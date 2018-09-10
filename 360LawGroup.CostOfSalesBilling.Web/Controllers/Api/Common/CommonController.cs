@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.Common
 {
-    [RoutePrefix("api/common")]
+    [RoutePrefix("api/common/common")]
     public class _CommonApiController : BaseApiController
     {
         [AllowAnonymous, HttpGet, Route("getnotification")]
