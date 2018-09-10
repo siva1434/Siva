@@ -16,6 +16,11 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.All.Controllers
         // GET: Common/Matters
         public ActionResult Index()
         {
+            var AreaOfList = ApiHelper.GetWithParam<AdminSettingsViewModel>("api/common/common/getsettingbyname", "name", "CLIENTMATTER_AREA_OF_LAW");
+            if (AreaOfList.StatusCode == HttpStatusCode.OK)
+                ViewBag.AreaOfLists = AreaOfList.Data.ParamValue.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            else
+                ViewBag.AreaOfLists = new List<string>();
             return View();
         }
         [HttpGet]

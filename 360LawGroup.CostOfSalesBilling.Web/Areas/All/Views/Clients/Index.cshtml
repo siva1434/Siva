@@ -2,18 +2,85 @@
     ViewBag.Title = "Manage Client";
 
 }
-<div class="panel panel-flat">
+<div class="panel panel-flat panel-collapsed">
     <div class="panel-heading">
-        <div class="col-md-9">
-            <h3>
-                Clients
-            </h3>
-        </div>
-        <div class="heading-elements text-right col-md-3">
+        <h5 class="panel-title">Clients</h5>
+        <div class="heading-elements">
             <a href="@Url.Action("Create")" data-ajax="true" data-ajax-mode="replace" data-ajax-update="#popupmodals" data-success="popupsuccess" class="pull-left-sm btn btn-default">
                 <i class="glyphicon glyphicon-plus-sign"></i>
                 &nbsp;Client
             </a>
+            <a class="pull-left-sm btn btn-sm bg-blue panel-filter">
+                <i class="fa fa-filter"></i> Filters
+            </a>
+            <ul class="icons-list hide">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="search_filter_client" class="search-filter">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Company</span>
+                            @Html.TextBox("Company", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Full Name</span>
+                            @Html.TextBox("FullName", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Email</span>
+                            @Html.TextBox("Email", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Job Title</span>
+                            @Html.TextBox("JobTitle", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Business Phone</span>
+                            @Html.TextBox("BusinessPhone", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <button id="btnsearch" type="button" class="btn bg-teal btn-sm">Search</button>
+                    <button id="btnreset" type="button" class="btn btn-warning btn-sm">Clear Filters</button>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+</div>
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <div class="col-md-9">
+            <h3>
+                Client List
+            </h3>
+        </div>
+        <div class="heading-elements text-right col-md-3">
+            
             <ul class="icons-list pull-right">
                 <li><a data-action="collapse"></a></li>
             </ul>
@@ -21,30 +88,12 @@
         <div class="clearfix"></div>
     </div>
     <div class="panel-body">
-        <div id="search_filter" class="search-filter">
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <span class="input-group-addon">Search</span>
-                            @Html.TextBox("SearchValue", "", new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button id="btnsearch" type="button" class="btn btn-success btn-sm">Search</button>
-                        <button id="btnreset" type="button" class="btn btn-warning btn-sm">Reset</button>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        <div class="clearfix"></div>
         <div class="table-responsive">
             <table id="grid" data-sort-name="FirstName" data-sort-order="asc"
                    data-toggle="table"
                    data-url="@(ViewBag.ApiUrl+ "api/all/client/getall")"
                    data-queryparams="getSearchParam"
-                   data-searchselector="#search_filter"
+                   data-searchselector="#search_filter_client"
                    data-pagination="true" class="table"
                    cellspacing="0" width="100%">
                 <thead>
