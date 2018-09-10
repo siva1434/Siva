@@ -19,15 +19,23 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
         public GridData<MatterViewModel> GetAll(SearchModel model)
         {
             int total;
-            var newmodel = model.Clone();
             var query = Uow.MatterRepository.GetQuery<MatterViewModel>(x => !x.IsDeleted);
-            if (model.search.ContainsKey("SearchValue"))
-            {
-                var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
-                query = query.Where(x => x.ClientFullName.ToLower().Contains(value) || x.MatterName.ToLower().Contains(value) || x.Box.ToLower().Contains(value) ||
-                x.AspNetUsers.Any(i => i.FullName.Contains(value)) || x.AreaofLaw.ToLower().Contains(value) || x.WorkRateRateType.Contains(value) || x.Status.ToLower().Contains(value));
+            //if (model.search.ContainsKey("SearchValue"))
+            //{
+            //    var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
+            //    query = query.Where(x => x.ClientFullName.ToLower().Contains(value) || x.MatterName.ToLower().Contains(value) || x.Box.ToLower().Contains(value) ||
+            //    x.AspNetUsers.Any(i => i.FullName.Contains(value)) || x.AreaofLaw.ToLower().Contains(value) || x.WorkRateRateType.Contains(value) || x.Status.ToLower().Contains(value));
 
-                model.search.Remove("SearchValue");
+            //    model.search.Remove("SearchValue");
+            //}
+            if (model.search.ContainsKey("ConsultantIds"))
+            {
+                var ids = (model.search["ConsultantIds"] ?? string.Empty).Split(new[] { ',' },
+                    StringSplitOptions.RemoveEmptyEntries);
+                if (ids.Any())
+                    foreach (var id in ids)
+                        query = query.Where(x => x.AspNetUsers.Any(y => y.Id == id));
+                model.search.Remove("ConsultantIds");
             }
             var list = query.ApplyFilter(model, out total);
             var gridData = new GridData<MatterViewModel>(list, model, total, TimeZoneInterval);

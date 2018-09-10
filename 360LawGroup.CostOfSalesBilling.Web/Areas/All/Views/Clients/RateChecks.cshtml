@@ -1,6 +1,89 @@
 ﻿@{
     ViewBag.Title = "Client/Consultant Charge Rates";
 }
+<div class="panel panel-flat panel-collapsed">
+    <div class="panel-heading">
+        <h5 class="panel-title">Client Charge Rates</h5>
+        <div class="heading-elements">
+            <a class="pull-left-sm btn btn-sm bg-blue panel-filter">
+                <i class="fa fa-filter"></i> Filters
+            </a>
+            <ul class="icons-list hide">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="search_filter_clientrates" class="search-filter">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Company</span>
+                            @Html.TextBox("Company", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Full Name</span>
+                            @Html.TextBox("FullName", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Email</span>
+                            @Html.TextBox("Email", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Member</span>
+                            @Html.TextBox("MemberChargeRate", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Private Client</span>
+                            @Html.TextBox("PrivateClientChargeRate", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Litigation</span>
+                            @Html.TextBox("LitigationChargeRate", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Regulated</span>
+                            @Html.TextBox("RegulatedChargeRate", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-addon">Overseas</span>
+                        @Html.TextBox("OverseasCharge", "", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button id="btnsearch" type="button" class="btn bg-teal btn-sm">Search</button>
+                    <button id="btnreset" type="button" class="btn btn-warning btn-sm">Clear Filters</button>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
 <div class="panel panel-flat">
     <div class="panel-heading">
         <div class="col-md-9">
@@ -8,32 +91,21 @@
                 Client Charge Rates
             </h3>
         </div>
-    </div>
-    <div class="panel-body">
-        <div id="search_filter" class="search-filter">
-            <div class="row">
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <div class="input-group">
-                            <span class="input-group-addon">Search</span>
-                            @Html.TextBox("SearchValue", "", new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="col-md-2">
-                        <button id="btnsearch" type="button" class="btn btn-success btn-sm">Search</button>
-                        <button id="btnreset" type="button" class="btn btn-warning btn-sm">Reset</button>
-                    </div>
-                </div>
+        <div class="heading-elements text-right col-md-3">
 
-            </div>
+            <ul class="icons-list pull-right">
+                <li><a data-action="collapse"></a></li>
+            </ul>
         </div>
         <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
         <div class="table-responsive">
             <table id="gridsubscription" data-sort-name="Company" data-sort-order="asc"
                    data-toggle="table"
                    data-url="@(ViewBag.ApiUrl+ "api/all/client/getallclientcheckrates")"
                    data-queryparams="getSearchParam"
-                   data-searchselector="#search_filter"
+                   data-searchselector="#search_filter_clientrates"
                    data-pagination="true" class="table"
                    cellspacing="0" width="100%">
                 <thead>
@@ -55,6 +127,90 @@
 </div>
 
 
+<div class="panel panel-flat panel-collapsed">
+    <div class="panel-heading">
+        <h5 class="panel-title">Consultant Work Rates</h5>
+        <div class="heading-elements">
+            <a class="pull-left-sm btn btn-sm bg-blue panel-filter">
+                <i class="fa fa-filter"></i> Filters
+            </a>
+            <ul class="icons-list hide">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="search_filter_consultantworkrates" class="search-filter">
+            <div class="row">
+                <div class="form-group">
+                    
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Full Name</span>
+                            @Html.TextBox("FullName", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Email</span>
+                            @Html.TextBox("Email", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Subscription</span>
+                            @Html.TextBox("SubscriptionHourlyRate", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Member</span>
+                            @Html.TextBox("MemberHourlyRate", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Private Client</span>
+                            @Html.TextBox("PrivateClientHourlyRate", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Litigation</span>
+                            @Html.TextBox("LitigationHourlyRate", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <span class="input-group-addon">Regulated</span>
+                            @Html.TextBox("RegulatedHourlyRate", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="input-group">
+                        <span class="input-group-addon">Overseas</span>
+                        @Html.TextBox("OverseasHourlyRate", "", new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <button id="btnsearch" type="button" class="btn bg-teal btn-sm">Search</button>
+                    <button id="btnreset" type="button" class="btn btn-warning btn-sm">Clear Filters</button>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
 <div class="panel panel-flat">
     <div class="panel-heading">
         <div class="col-md-9">
@@ -86,7 +242,7 @@
                    data-toggle="table"
                    data-url="@(ViewBag.ApiUrl+ "api/all/client/getallconsaltantrates")"
                    data-queryparams="getSearchParam"
-                   data-searchselector="#search_filter"
+                   data-searchselector="#search_filter_consultantworkrates"
                    data-pagination="true" class="table"
                    cellspacing="0" width="100%">
                 <thead>

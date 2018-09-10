@@ -21,10 +21,9 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
         public GridData<ClientViewModel> GetAll(SearchModel model)
         {
             int total;
-            var newmodel = model.Clone();
             var query = Uow.ClientRepository.GetQuery<ClientViewModel>(x => !x.IsDeleted);
 
-            if (model.search.ContainsKey("SearchValue"))
+            /*if (model.search.ContainsKey("SearchValue"))
             {
                 var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
                 query = query.Where(x => x.FullName.ToLower().Replace(" ", "").Contains(value.Replace(" ", "")) || x.Company.ToLower().Contains(value)
@@ -32,7 +31,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
 
                 model.search.Remove("SearchValue");
 
-            }
+            }*/
             var list = query.ApplyFilter(model, out total);
             var gridData = new GridData<ClientViewModel>(list, model, total, TimeZoneInterval);
             return gridData;
@@ -103,10 +102,9 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
         public GridData<ClientViewModel> GetSClientCheckRates(SearchModel model)
         {
             int total;
-            var newmodel = model.Clone();
             var query = Uow.ClientRepository.GetQuery<ClientViewModel>(x => !x.IsDeleted);
 
-            if (model.search.ContainsKey("SearchValue"))
+            /*if (model.search.ContainsKey("SearchValue"))
             {
                 var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
                 //query = query.Where(x => x.FullName.ToLower().Replace(" ", "").Contains(value.Replace(" ", "")) || x.Company.ToLower().Contains(value)
@@ -114,7 +112,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
 
                 model.search.Remove("SearchValue");
 
-            }
+            }*/
             var list = query.ApplyFilter(model, out total);
             var gridData = new GridData<ClientViewModel>(list, model, total, TimeZoneInterval);
             return gridData;
@@ -124,19 +122,17 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
         public GridData<UserViewModel> GetConsultantCheckRates(SearchModel model)
         {
             int total;
-            var newmodel = model.Clone();
             var query = Uow.UserRepository.GetQuery<UserViewModel>(x => !x.IsDeleted && x.AspNetRoles.Any(i => i.Id == RoleExtension.Consultant) &&
                         x.UserStatus == UserStatus.Active && x.Email != "support@knack.com");
 
-            if (model.search.ContainsKey("SearchValue"))
+            /*if (model.search.ContainsKey("SearchValue"))
             {
                 var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
                 //query = query.Where(x => x.FullName.ToLower().Replace(" ", "").Contains(value.Replace(" ", "")) || x.Company.ToLower().Contains(value)
                 //|| x.Email.ToLower().Contains(value) || x.JobTitle.Contains(value) || x.BusinessPhone.ToLower().Contains(value));
 
                 model.search.Remove("SearchValue");
-
-            }
+            }*/
             var list = query.ApplyFilter(model, out total);
             var gridData = new GridData<UserViewModel>(list, model, total, TimeZoneInterval);
             return gridData;

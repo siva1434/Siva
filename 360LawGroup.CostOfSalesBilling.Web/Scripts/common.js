@@ -323,7 +323,7 @@ function BindSelect2Cascase(ele, url, cascadeSelector, options) {
     else dataBlank = true;
     var def = $(ele).attr("data-default");
     if (id !== "" || dataBlank) {
-        if (typeof id !== "undefined")            
+        if (typeof id !== "undefined")
             url = url + (url.indexOf('?') == -1 ? "?" : "&") + "id=" + id;
         $.ajax
             ({
@@ -614,10 +614,13 @@ function BindSearchReset(selector) {
                 if ($(this).is("select") && $(this).find("option[value='']").length > 0) {
                     if (typeof $(this).attr("data-value") !== "undefined")
                         $(this).val($(this).attr("data-value")).trigger("change");
-                    else
+                    else {
                         $(this).val("").trigger("change");
+                        $(this)[0].selectedIndex = -1;
+                    }
                 } else {
                     $(this).val("").trigger("change");
+                    $(this)[0].selectedIndex = -1;
                 }
             });
             var filterDiv = $(this).parents(".search-filter").attr("id");
