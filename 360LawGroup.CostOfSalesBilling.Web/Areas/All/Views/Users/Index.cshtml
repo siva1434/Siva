@@ -37,29 +37,26 @@
                             @Html.TextBox("Email", "", new { @class = "form-control" })
                         </div>
                     </div>
-                    @if (@Request["selectedRole"] == RoleExtension.Admin || @Request["selectedRole"] == RoleExtension.ClientUser)
-                    {
-                        <div class="col-md-4">
-                            <div class="input-group">
-                                <span class="input-group-addon">User Status</span>
-                                @Html.DropDownList("UserStatus",
-                   new List<SelectListItem>
-                   {
-                                                new SelectListItem { Text="All", Value="", Selected=true},
-                                                new SelectListItem { Text=UserStatus.Active, Value=UserStatus.Active},
-                                                new SelectListItem { Text=UserStatus.InActive, Value=UserStatus.InActive},
-                                                new SelectListItem { Text=UserStatus.PendingApproval, Value=UserStatus.PendingApproval}
-                   }, new { @class = "form-control", @data_keyboard = "false" })
-                            </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">User Status</span>
+                            @Html.DropDownList("UserStatus",
+                                        new List<SelectListItem>
+                                        {
+                                                                     new SelectListItem { Text="All", Value="", Selected=true},
+                                                                     new SelectListItem { Text=UserStatus.Active, Value=UserStatus.Active},
+                                                                     new SelectListItem { Text=UserStatus.InActive, Value=UserStatus.InActive},
+                                                                     new SelectListItem { Text=UserStatus.PendingApproval, Value=UserStatus.PendingApproval}
+                                        }, new { @class = "form-control", @data_keyboard = "false" })
                         </div>
-                    }
+                    </div>
 
                     <div class="clearfix"></div>
                 </div>
             </div>
             <div class="row">
                 <div class="form-group">
-                    @if (@Request["selectedRole"] == RoleExtension.Consultant || @Request["selectedRole"] == RoleExtension.Admin)
+                    @if (@Request["selectedRole"] == RoleExtension.Admin)
                     {
                         <div class="col-md-4">
                             <div class="input-group">
@@ -70,6 +67,12 @@
                     }
                     @if (@Request["selectedRole"] == RoleExtension.Consultant)
                     {
+                        <div class="col-md-4">
+                            <div class="input-group">
+                                <span class="input-group-addon">Consultant Company</span>
+                                @Html.TextBox("ConsultantName", "", new { @class = "form-control" })
+                            </div>
+                        </div>
                         <div class="col-md-4">
                             <div class="input-group">
                                 <span class="input-group-addon">Area of Law</span>
@@ -98,7 +101,7 @@
             </div>
             <div class="form-group">
                 <div class="row">
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                         <button id="btnsearch" type="button" class="btn bg-teal btn-sm">Search</button>
                         <button id="btnreset" type="button" class="btn btn-warning btn-sm">Clear Filters</button>
                     </div>
@@ -170,7 +173,7 @@
 @section scripts{
     <script type="text/javascript">
         $(document).ready(function () {
-            $('#btnsearch2').on('click', function () {                
+            $('#btnsearch2').on('click', function () {
                 if ($.trim($("#SearchValue").val()) == "") {
                     AlertNotify("Validations!", "Please enter search text", "bg-warning")
                     return;
