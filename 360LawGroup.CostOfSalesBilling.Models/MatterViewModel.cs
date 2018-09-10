@@ -98,6 +98,7 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         public virtual decimal? CheckCost_inclSub { get; set; }
         public virtual decimal? CheckCost_exclSub { get; set; }
         public virtual decimal? DisbursementAmount { get; set; }
+        public virtual decimal? TotalCharge_exclSub { get; set; }
 
         public virtual decimal? MemberCharge { get; set; }
         public virtual string ClientFullName { get; set; }

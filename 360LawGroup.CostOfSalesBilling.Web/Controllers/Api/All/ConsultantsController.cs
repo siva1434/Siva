@@ -21,16 +21,17 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             var newmodel = model.Clone();
             var query = Uow.ConsultantHourRepository.GetQuery<ConsultantHourViewModel>(x => !x.IsDeleted);
 
-            //if (model.search.ContainsKey("SearchValue"))
-            //{
-            //    var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
-            //    query = query.Where(x => x.AspNetUser2FullName.ToLower().Replace(" ", "").Contains(value.Replace(" ", ""))
-            //    ||  x.ClientFullName.ToLower().Contains(value) ||
-            //    x.Description.Contains(value) || x.BusinessPhone.ToLower().Contains(value));
+            if (model.search.ContainsKey("SearchValue"))
+            {
+                var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
+                query = query.Where(x => x.AspNetUser2FullName.ToLower().Replace(" ", "").Contains(value.Replace(" ", ""))
+                || x.ClientFullName.ToLower().Contains(value) ||
+                x.Description.Contains(value));
+                //|| x.BusinessPhone.ToLower().Contains(value));
 
-            //    model.search.Remove("SearchValue");
+                model.search.Remove("SearchValue");
 
-            //}
+            }
             var list = query.ApplyFilter(model, out total);
             var gridData = new GridData<ConsultantHourViewModel>(list, model, total, TimeZoneInterval);
             return gridData;
@@ -147,6 +148,26 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
                 status.SetErrorMessages(this);
             }
             return status;
+        }
+
+        [Route("getconsultantcostsdata"), HttpPost]
+        public GridData<ConsultantCostViewModel> GetConsultantsData(SearchModel model)
+        {
+            int total;
+            var query = Uow.ConsultantCostRepository.GetQuery<ConsultantCostViewModel>();
+            //if (model.search.ContainsKey("SearchValue"))
+            //{
+            //    var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
+            //    query = query.Where(x => x..ToLower().Contains(value)
+            //    || x.Status.ToLower().Contains(value) || x.WorkRateRateType.Contains(value));
+
+            //    model.search.Remove("SearchValue");
+
+            //}
+            //query = query.Where(x => x.WorkHours > 0);
+            var list = query.ApplyFilter(model, out total);
+            var gridData = new GridData<ConsultantCostViewModel>(list, model, total, TimeZoneInterval);
+            return gridData;
         }
     }
 }

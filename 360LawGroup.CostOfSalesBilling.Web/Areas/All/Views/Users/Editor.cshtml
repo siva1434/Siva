@@ -58,6 +58,14 @@
                                 @Html.ValidationMessageFor(model => model.Email)
                             </div>
                             <div class="col-md-4">
+                                @Html.RequiredLabelFor(m => m.PhoneNumber, new { @class = "control-label text-bold" })
+                                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @placeholder = "" })
+                                @Html.ValidationMessageFor(model => model.PhoneNumber)
+                            </div>                            
+
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-4">
                                 @Html.RequiredLabelFor(m => m.UserStatus, new { @class = "control-label text-bold" })
                                 @Html.DropDownListFor(model => model.UserStatus,
                                                             new List<SelectListItem>
@@ -69,10 +77,6 @@
                                                 , new { @class = "form-control", @data_keyboard = "false", @data_value = Model.UserStatus })
                                 @Html.ValidationMessageFor(model => model.UserStatus)
                             </div>
-
-                        </div>
-                        <div class="form-group">
-
                             <div class="col-md-4">
                                 @Html.LabelFor(m => m.RoleId, new { @class = "control-label text-bold" })
                                 @Html.TextBoxFor(model => model.RoleId, new { @class = "form-control", @readonly = "readonly" })
@@ -83,6 +87,9 @@
                                 @Html.DropDownListFor(m => m.ConsultantUserId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/common/getallconsultant", @placeholder = "Select Consultant", @data_value = Model.ConsultantUserId })
                                 @Html.ValidationMessageFor(model => model.ConsultantUserId)
                             </div>
+                                                      
+                        </div>
+                        <div class="form-group">
                             <div class="col-md-4">
                                 @Html.RequiredLabelFor(m => m.IsSendAnEmailIntro, new { @class = "control-label text-bold" })
                                 @Html.DropDownListFor(model => model.IsSendAnEmailIntro,
@@ -94,12 +101,6 @@
                                                 , new { @class = "form-control", @data_keyboard = "false", @data_value = Model.IsSendAnEmailIntro })
                                 @Html.ValidationMessageFor(model => model.IsSendAnEmailIntro)
                             </div>
-                            @if (string.IsNullOrEmpty(Model.Id))
-                            {
-
-                            }
-                        </div>
-                        <div class="form-group">
                             @if (string.IsNullOrEmpty(Model.Id))
                             {
                                 <div class="col-md-4">
@@ -275,9 +276,9 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-4">
-                                @Html.RequiredLabelFor(m => m.MobilePhone, new { @class = "control-label text-bold" })
-                                @Html.TextBoxFor(model => model.MobilePhone, new { @class = "form-control" })
-                                @Html.ValidationMessageFor(model => model.MobilePhone)
+                                @Html.RequiredLabelFor(m => m.PhoneNumber, new { @class = "control-label text-bold" })
+                                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.PhoneNumber)
                             </div>
 
                             <div class="col-md-4">
@@ -330,6 +331,14 @@
                                 @Html.ValidationMessageFor(model => model.Email)
                             </div>
                             <div class="col-md-4">
+                                @Html.RequiredLabelFor(m => m.PhoneNumber, new { @class = "control-label text-bold" })
+                                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @placeholder = "" })
+                                @Html.ValidationMessageFor(model => model.PhoneNumber)
+                            </div>                            
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-md-4">
                                 @Html.RequiredLabelFor(m => m.UserStatus, new { @class = "control-label text-bold" })
                                 @Html.DropDownListFor(model => model.UserStatus,
                                                             new List<SelectListItem>
@@ -341,10 +350,6 @@
                                                 , new { @class = "form-control", @data_keyboard = "false", @data_value = Model.UserStatus })
                                 @Html.ValidationMessageFor(model => model.UserStatus)
                             </div>
-                        </div>
-
-                        <div class="form-group">
-
                             <div class="col-md-4">
                                 @Html.RequiredLabelFor(m => m.ClientId, new { @class = "control-lable text-bold" })
                                 @Html.DropDownListFor(m => m.ClientId, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/common/getallclient", @placeholder = "Select Client", @data_value = Model.ClientId })
@@ -354,7 +359,9 @@
                                 @Html.LabelFor(m => m.RoleId, new { @class = "control-label text-bold" })
                                 @Html.TextBoxFor(model => model.RoleId, new { @class = "form-control", @readonly = "readonly" })
                                 @Html.ValidationMessageFor(model => model.RoleId)
-                            </div>
+                            </div>                            
+                        </div>
+                        <div class="form-group">
                             <div class="col-md-4">
                                 @Html.RequiredLabelFor(m => m.IsSendAnEmailIntro, new { @class = "control-label text-bold" })
                                 @Html.DropDownListFor(model => model.IsSendAnEmailIntro,
@@ -366,8 +373,6 @@
                                                 , new { @class = "form-control", @data_keyboard = "false", @data_value = Model.IsSendAnEmailIntro })
                                 @Html.ValidationMessageFor(model => model.IsSendAnEmailIntro)
                             </div>
-                        </div>
-                        <div class="form-group">
                             @if (string.IsNullOrEmpty(Model.Id))
                             {
                                 <div class="col-md-4">

@@ -46,5 +46,17 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.All.Controllers
             }
             return PartialView("Editor", model);
         }
+
+        [HttpGet]
+        public ActionResult ConsultantCosts()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult CurrentConsultantMatters()
+        {
+            return View();
+        }
     }
 }

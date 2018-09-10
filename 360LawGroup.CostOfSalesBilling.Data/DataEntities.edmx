@@ -90,7 +90,6 @@
           <Property Name="AreaofLaw" Type="nvarchar" MaxLength="255" />
           <Property Name="BusinessPhone" Type="nvarchar(max)" />
           <Property Name="HomePhone" Type="nvarchar(max)" />
-          <Property Name="MobilePhone" Type="nvarchar(max)" />
           <Property Name="JurisdictionsCovered" Type="nvarchar" MaxLength="255" />
           <Property Name="Notes" Type="nvarchar(max)" />
           <Property Name="Attachments" Type="nvarchar(max)" />
@@ -498,6 +497,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ConsultantCosts_ConsultantHours">
+          <End Role="ConsultantHours" Type="Self.ConsultantHours" Multiplicity="1" />
+          <End Role="ConsultantCosts" Type="Self.ConsultantCosts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsultantHours">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantCosts">
+              <PropertyRef Name="Matter_Consultant_WorkPeriod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ConsultantCosts_Matter">
           <End Role="Matters" Type="Self.Matters" Multiplicity="1" />
           <End Role="ConsultantCosts" Type="Self.ConsultantCosts" Multiplicity="*" />
@@ -780,6 +791,10 @@
             <End Role="Clients" EntitySet="Clients" />
             <End Role="ConsultantCosts" EntitySet="ConsultantCosts" />
           </AssociationSet>
+          <AssociationSet Name="FK_ConsultantCosts_ConsultantHours" Association="Self.FK_ConsultantCosts_ConsultantHours">
+            <End Role="ConsultantHours" EntitySet="ConsultantHours" />
+            <End Role="ConsultantCosts" EntitySet="ConsultantCosts" />
+          </AssociationSet>
           <AssociationSet Name="FK_ConsultantCosts_Matter" Association="Self.FK_ConsultantCosts_Matter">
             <End Role="Matters" EntitySet="Matters" />
             <End Role="ConsultantCosts" EntitySet="ConsultantCosts" />
@@ -949,6 +964,10 @@
             <End Role="Client" EntitySet="Clients" />
             <End Role="Matter" EntitySet="Matters" />
           </AssociationSet>
+          <AssociationSet Name="FK_ConsultantCosts_ConsultantHours" Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_ConsultantHours">
+            <End Role="ConsultantHour" EntitySet="ConsultantHours" />
+            <End Role="ConsultantCost" EntitySet="ConsultantCosts" />
+          </AssociationSet>
           <AssociationSet Name="FK_ConsultantCosts_Matter" Association="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_Matter">
             <End Role="Matter" EntitySet="Matters" />
             <End Role="ConsultantCost" EntitySet="ConsultantCosts" />
@@ -1058,7 +1077,6 @@
           <Property Name="AreaofLaw" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="BusinessPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="HomePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="MobilePhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="JurisdictionsCovered" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Attachments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1233,6 +1251,7 @@
           <Property Name="DisbursementAmount" Type="Decimal" Precision="19" Scale="4" />
           <Property Name="RateUsed" Type="Decimal" Precision="38" Scale="23" annotation:StoreGeneratedPattern="Computed" />
           <NavigationProperty Name="Client" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_Client" FromRole="ConsultantCost" ToRole="Client" />
+          <NavigationProperty Name="ConsultantHour" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_ConsultantHours" FromRole="ConsultantCost" ToRole="ConsultantHour" />
           <NavigationProperty Name="Matter" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_Matter" FromRole="ConsultantCost" ToRole="Matter" />
           <NavigationProperty Name="WorkRate" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_WorkRates" FromRole="ConsultantCost" ToRole="WorkRate" />
         </EntityType>
@@ -1279,6 +1298,7 @@
           <NavigationProperty Name="AspNetUser1" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_AspNetUsers1" FromRole="ConsultantHour" ToRole="AspNetUser" />
           <NavigationProperty Name="AspNetUser2" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_AspNetUsers2" FromRole="ConsultantHour" ToRole="AspNetUser" />
           <NavigationProperty Name="Client" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Client" FromRole="ConsultantHour" ToRole="Client" />
+          <NavigationProperty Name="ConsultantCosts" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantCosts_ConsultantHours" FromRole="ConsultantHour" ToRole="ConsultantCost" />
           <NavigationProperty Name="Matter" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_Matter" FromRole="ConsultantHour" ToRole="Matter" />
           <NavigationProperty Name="ResetNewMonth" Relationship="LawGroup.CostOfSalesBillingModel.FK_ConsultantHours_ResetNewMonth" FromRole="ConsultantHour" ToRole="ResetNewMonth" />
         </EntityType>
@@ -1619,6 +1639,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_ConsultantCosts_ConsultantHours">
+          <End Type="LawGroup.CostOfSalesBillingModel.ConsultantHour" Role="ConsultantHour" Multiplicity="1" />
+          <End Type="LawGroup.CostOfSalesBillingModel.ConsultantCost" Role="ConsultantCost" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ConsultantHour">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ConsultantCost">
+              <PropertyRef Name="Matter_Consultant_WorkPeriod" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_ConsultantCosts_Matter">
           <End Type="LawGroup.CostOfSalesBillingModel.Matter" Role="Matter" Multiplicity="1" />
           <End Type="LawGroup.CostOfSalesBillingModel.ConsultantCost" Role="ConsultantCost" Multiplicity="*" />
@@ -1747,7 +1779,6 @@
                 <ScalarProperty Name="Attachments" ColumnName="Attachments" />
                 <ScalarProperty Name="Notes" ColumnName="Notes" />
                 <ScalarProperty Name="JurisdictionsCovered" ColumnName="JurisdictionsCovered" />
-                <ScalarProperty Name="MobilePhone" ColumnName="MobilePhone" />
                 <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
                 <ScalarProperty Name="BusinessPhone" ColumnName="BusinessPhone" />
                 <ScalarProperty Name="AreaofLaw" ColumnName="AreaofLaw" />

@@ -105,6 +105,7 @@ namespace _360LawGroup.CostOfSalesBilling.Data
                 .ForMember(x => x.WorkHours, y => y.MapFrom(z => z.ConsultantHours.Sum(i => i.WorkHours)))
                 .ForMember(x => x.SubscriptionCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 1) ? (i.WorkHours * i.AspNetUser2.SubscriptionHourlyRate) : 0)))
                 .ForMember(x => x.MemberCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 2) ? (i.WorkHours * i.AspNetUser2.MemberHourlyRate) : 0)))
+                .ForMember(x => x.MemberCharge, y => y.MapFrom(z => z.WorkRate.RateId == 2 ? (z.ConsultantHours.Sum(i => i.WorkHours) * z.Client.MemberChargeRate) : 0))
                 .ForMember(x => x.PrivateClientCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 3 ? i.WorkHours : 0))))
                 .ForMember(x => x.PrivateClientCharge, y => y.MapFrom(z => z.WorkRate.RateId == 3 ? (z.ConsultantHours.Sum(i => i.WorkHours) * z.Client.PrivateClientChargeRate) : 0))
                 .ForMember(x => x.LitigationCost, y => y.MapFrom(z => z.ConsultantHours.Sum(i => (i.WorkRateId == 4) ? (i.WorkHours * i.AspNetUser2.LitigationHourlyRate) : 0)))
@@ -124,7 +125,12 @@ namespace _360LawGroup.CostOfSalesBilling.Data
                                     ((i.WorkRateId == 4) ? (i.WorkHours * i.AspNetUser2.LitigationHourlyRate) : 0) +
                                     ((i.WorkRateId == 5) ? (i.WorkHours * i.AspNetUser2.RegulatedHourlyRate) : 0) +
                                     ((i.WorkRateId == 6) ? (i.WorkHours * i.AspNetUser2.OverseasHourlyRate) : 0)))))
-                .ForMember(x => x.DisbursementAmount, y => y.MapFrom(z => z.ConsultantHours.Sum(i => i.DisbursementAmount)));
+                .ForMember(x => x.DisbursementAmount, y => y.MapFrom(z => z.ConsultantHours.Sum(i => i.DisbursementAmount)))
+                .ForMember(x => x.TotalCharge_exclSub, y => y.MapFrom(z => (z.WorkRate.RateId == 2 ? (z.ConsultantHours.Sum(i => i.WorkHours) * z.Client.MemberChargeRate) : 0) +
+                             (z.WorkRate.RateId == 3 ? (z.ConsultantHours.Sum(i => i.WorkHours) * z.Client.PrivateClientChargeRate) : 0) +
+                             (z.WorkRate.RateId == 4 ? (z.ConsultantHours.Sum(i => i.WorkHours) * z.Client.LitigationChargeRate) : 0) +
+                             (z.WorkRate.RateId == 5 ? (z.ConsultantHours.Sum(i => i.WorkHours) * z.Client.RegulatedChargeRate) : 0) +
+                             (z.WorkRate.RateId == 6 ? (z.ConsultantHours.Sum(i => i.WorkHours) * z.OverseasChargeRate) : 0)));                
                 cfg.CreateMap<MatterViewModel, Matter>(MemberList.None);
             });
             Mapper.AssertConfigurationIsValid();

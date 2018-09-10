@@ -91,6 +91,10 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
 
             }
             var list = query.ApplyFilter(model, out total);
+            foreach(var item in list)
+            {
+                item.TotalMonthlySubscrptionForAll = list.Sum(x => x.MonthlySubscription);
+            }
             var gridData = new GridData<ClientViewModel>(list, model, total, TimeZoneInterval);
             return gridData;
         }

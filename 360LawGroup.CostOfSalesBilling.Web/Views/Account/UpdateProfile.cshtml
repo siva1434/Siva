@@ -26,7 +26,7 @@
                     <div class="form-group">
                         @Html.RequiredLabelFor(m => m.PhoneNumber, new { @class = "col-md-12 control-label" })
                         <div class="col-md-12">
-                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control", @readonly = "readonly" })
+                            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
                             @Html.ValidationMessageFor(m => m.PhoneNumber)
                         </div>
                     </div>

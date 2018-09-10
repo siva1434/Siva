@@ -39,6 +39,7 @@ namespace _360LawGroup.CostOfSalesBilling.Data
         public Nullable<decimal> RateUsed { get; set; }
     
         public virtual Client Client { get; set; }
+        public virtual ConsultantHour ConsultantHour { get; set; }
         public virtual Matter Matter { get; set; }
         public virtual WorkRate WorkRate { get; set; }
     }

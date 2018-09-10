@@ -71,7 +71,18 @@
             });
 
             $("#gridsubscription").on("load-success.bs.table", function (e, data) {
-                search_filter["total"] = data.total;
+                var nextnode = "";
+                var newidx = 0;
+                var idx = Number($("#gridsubscription tbody").find("tr:last").attr("data-index"));
+                if (isNaN)
+                    newidx = idx + 1;
+                var lastnode = $("#gridsubscription tbody").find("tr:last").attr("data-child");
+                if (lastnode == "odd")
+                    nextnode = "even";
+                else
+                    nextnode = "odd";
+                var totalcost = data.rows[0].TotalMonthlySubscrptionForAll;
+                $('#gridsubscription tbody').append('<tr data-child="' + nextnode + '" data-index="' + newidx + '"><td></td><td style="text-align: right;"><b>Total</b></td><td style="text-align: center;"><b>£' + totalcost + '</b></td><td></td><td></td><td></td><td></td></tr>');
             })
         });
 

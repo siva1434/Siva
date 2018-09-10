@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewBag.Title = "Consultant Costs";
+}
+
+<div class="table-responsive">
+    <table id="mattergrid" data-sort-name="Client_Matter" data-sort-order="asc"
+           data-toggle="table"
+           data-url="@(ViewBag.ApiUrl + "api/all/consultants/getconsultantcostsdata")"
+           data-queryparams="getSearchParam"
+           data-searchselector="#search_filter"
+           data-pagination="true" class="table"
+           cellspacing="0" width="100%">
+        <thead>
+            <tr>
+                <th data-field="AspNetUsers" data-sortable="false" data-formatter="consultantlist">Consultant</th>
+                <th data-field="MonNum" data-sortable="true">Mon</th>                
+                @*<th data-field="" data-sortable="true">Client Work Period</th>*@
+                <th data-field="DisbursementDescription" data-sortable="true">Decsription</th>
+                <th data-field="Hours" data-sortable="true">Hours</th>
+                <th data-field="WorkRateRateType" data-sortable="true">Work Rate</th>
+                <th data-field="SubscriptionCost" data-sortable="true">Subscription</th>
+                <th data-field="MemberCost" data-sortable="true">Member</th>
+                <th data-field="PrivateClientCost" data-sortable="true">Private</th>
+                <th data-field="LitigationCost" data-sortable="true">Litigation</th>
+                <th data-field="RegulatedCost" data-sortable="true">Regulated</th>
+                <th data-field="OverseasCost" data-sortable="true">Overseas</th>
+                <th data-field="Cost_excl_Sub" data-sortable="true">Total(exc Sub)</th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+                function consultantlist(value) {
+                    var namelist = "";
+                    $(value).each(function (i, item) {
+                        if (namelist != "") namelist += ", ";
+                        namelist += item.FullName;
+                    });
+                    return namelist;
+                }
+    </script>
+}
+
+
