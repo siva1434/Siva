@@ -266,6 +266,7 @@
     <Compile Include="Areas\All\Controllers\MattersController.cs" />
     <Compile Include="Areas\All\Controllers\UsersController.cs" />
     <Compile Include="Areas\Consultant\ConsultantAreaRegistration.cs" />
+    <Compile Include="Areas\Consultant\Controllers\CurrentMattersController.cs" />
     <Compile Include="Areas\Consultant\Controllers\HomeController.cs" />
     <Compile Include="Areas\SuperAdmin\AppointmentsController.cs" />
     <Compile Include="Areas\SuperAdmin\Controllers\AdminSettingsController.cs" />
@@ -2988,7 +2989,7 @@
     <Content Include="Areas\All\Views\Clients\RateChecks.cshtml" />
     <Content Include="Areas\All\Views\Matters\GridCurrentMatter.cshtml" />
     <Content Include="Areas\All\Views\Consultants\ConsultantCosts.cshtml" />
-    <Content Include="Areas\All\Views\Consultants\CurrentConsultantMatters.cshtml" />
+    <Content Include="Areas\Consultant\Views\CurrentMatters\CurrentConsultantMatters.cshtml" />
     <None Include="Properties\PublishProfiles\dev-healthfreak - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\qa-hf - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />

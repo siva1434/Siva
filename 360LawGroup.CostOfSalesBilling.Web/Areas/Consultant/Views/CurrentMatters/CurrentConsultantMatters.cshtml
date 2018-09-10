@@ -1,0 +1,173 @@
+﻿@{
+    ViewBag.Title = "Current Consultant Matters";
+}
+
+
+@{    
+    var areaoflaw = ViewBag.AreaOfList as List<string>;
+}
+<div class="panel panel-flat panel-collapsed">
+    <div class="panel-heading">
+        <h3>Current Consultant Matters</h3>
+        <div class="heading-elements">
+            <a class="pull-left-sm btn btn-sm bg-blue panel-filter">
+                <i class="fa fa-filter"></i> Filters
+            </a>
+            <ul class="icons-list hide">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="search_filter_currentconsultant_matter" class="search-filter">
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Client</span>
+                            
+                            @Html.DropDownList("ClientId", new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/common/getallclient", @data_default = "All", @data_keyboard = "false" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Matter</span>
+                            @Html.TextBox("MatterName", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Contact Email</span>
+                            @Html.TextBox("ClientMatter_ContactEmail", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Area of Law</span>
+                            @*@Html.TextBox("AreaofLaw", "", new { @class = "form-control" })*@
+                            @{
+                                string x = (!string.IsNullOrEmpty(Model.AreaofLaw) ? Newtonsoft.Json.JsonConvert.SerializeObject(Model.AreaofLaw.Split(',')) : default(string));
+                            }                               
+                            @Html.DropDownList("AreaofLaw", new SelectList(areaoflaw), new { @class = "form-control target-value", @data_tags = "true", @data_value = x, @data_keyboard = "false" })                           
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Consultant</span>                            
+                            @Html.DropDownList("ConsultantIds", new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/common/getallconsultant", @data_placeholder ="Select Consultant", @data_keyboard = "false",@multiple="multiple" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Work Rate</span>
+                            @Html.TextBox("WorkRate", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">Box</span>
+                            @Html.TextBox("Box", "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group">
+                            <span class="input-group-addon">User Status</span>
+                            @Html.DropDownList("Status",
+                                      new List<SelectListItem>
+                                      {
+                                                new SelectListItem { Text="All", Value="", Selected=true},
+                                                new SelectListItem { Text="Active", Value="Active"},
+                                                new SelectListItem { Text="Pending", Value="Pending"},
+                                                new SelectListItem { Text="Completed", Value="Completed"}
+                                      }, new { @class = "form-control", @data_keyboard = "false" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <button id="btnsearch" type="button" class="btn bg-teal btn-sm">Search</button>
+                            <button id="btnreset" type="button" class="btn btn-warning btn-sm">Clear Filters</button>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<div class="panel panel-flat">
+    <div class="panel-heading">
+        <div class="col-md-9">
+        </div>
+        <div class="heading-elements text-right col-md-3">
+
+            <ul class="icons-list pull-right">
+                <li><a data-action="collapse"></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+            <table id="mattergrid" data-sort-name="FirstName" data-sort-order="asc"
+                   data-toggle="table"
+                   data-url="@(ViewBag.ApiUrl + "api/all/matter/getcurrentconsultantbymatters")"
+                   data-queryparams="getSearchParam"
+                   data-searchselector="#search_filter_currentconsultant_matter"
+                   data-pagination="true" class="table"
+                   cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th data-field="ClientFullName" data-sortable="true">Client</th>
+                        <th data-field="MatterName" data-sortable="true">Matter</th>
+                        <th data-field="ClientMatter_ContactEmail" data-sortable="true">Contact Email</th>
+                        <th data-field="Date" data-sortable="true" data-formatter="dateformatter">Date</th>
+                        <th data-field="AreaofLaw" data-sortable="true">Area of Law</th>
+                        <th data-field="AspNetUsers" data-sortable="true" data-formatter="consultantlist">Consultant</th>
+                        <th data-field="WorkRateRateType" data-sortable="true">Work Rate</th>
+                        <th data-field="Box" data-sortable="true">Box</th>
+                        <th data-field="Status" data-sortable="true">Status</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#btnsearch2').on('click', function () {
+                if ($.trim($("#SearchValue").val()) == "") {
+                    AlertNotify("Validations!", "Please enter search text", "bg-warning")
+                    return;
+                }
+                if (typeof $('#mattergrid').attr('data-toggle') === 'undefined') {
+                    $('#mattergrid').attr('data-toggle', 'table');
+                    BindBtTable('body');
+                } else {
+                    $('#search_filter_currentconsultant_matter #btnsearch').click();
+                }
+                $('#mattergrid').removeClass('hide');
+            });
+        });
+        function consultantlist(value) {
+            var namelist = "";
+            $(value).each(function (i, item) {
+                if (namelist != "") namelist += ", ";
+                namelist += item.FullName;
+            });
+            return namelist;
+        }
+    </script>
+}

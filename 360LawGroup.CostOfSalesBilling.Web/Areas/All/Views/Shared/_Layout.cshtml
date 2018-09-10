@@ -68,9 +68,10 @@
                                     <li><a href="@Url.Action("Index", "Consultants", new { Area = "All"})"><i class="fa fa-clock-o"></i> <span>Consultant Hours</span></a></li>
                                     <li><a href="@Url.Action("ConsultantCosts", "Consultants", new { Area = "All"})"><i class="fa fa-gbp"></i> <span>Consultant Costs</span></a></li>
                                     <li><a href="@Url.Action("GridCurrentMatter", "Matters", new { Area = "All"})"><i class="fa fa-empire"></i> <span>Current Matters</span></a></li>
-                                    <li><a href="@Url.Action("CurrentConsultantMatters", "Consultants", new { Area = "All" })"><i class="fa fa-bars"></i> <span>Current Consultant Matters</span></a></li>
+                                    
                                 </ul>
                             </li>
+                            <li><a href="@Url.Action("CurrentConsultantMatters", "CurrentMatters", new { Area = "Consultant" })"><i class="fa fa-bars"></i> <span>Current Consultant Matters</span></a></li>
                         }
                     </ul>
                 </div>
