@@ -207,6 +207,11 @@ $(document).ready(function () {
     $('[data-popup="lightbox"]').fancybox({
         padding: 3
     });
+    $(document).on("click", ".panel-filter", function () {
+        $(this).toggleClass("bg-blue-800");
+        $(this).toggleClass("bg-blue");
+        $(this).parent().find("[data-action='collapse']").click();
+    });
     $(document).on("keypress", ".search-filter input", function (e) {
         if (e.keyCode == 13) {
             var btnsearch = $(this).parents(".search-filter").find("#btnsearch2");

@@ -11,7 +11,7 @@ using System.Web.Http;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.Common
 {
-    [RoutePrefix("api/common/common")]
+    [RoutePrefix("api/common")]
     public class _CommonApiController : BaseApiController
     {
         [AllowAnonymous, HttpGet, Route("getnotification")]
@@ -84,6 +84,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.Common
                 Data = list
             };
         }
+
         [ApiAuth, HttpGet, Route("getallclient")]
         public GenericResponse<List<KeyValuePair<Guid, string>>> GetAllClient()
         {

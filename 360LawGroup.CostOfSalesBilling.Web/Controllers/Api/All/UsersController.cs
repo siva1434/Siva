@@ -21,20 +21,19 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
         public GridData<UserViewModel> GetAll(SearchModel model, string roleId)
         {
             int total;
-            var newmodel = model.Clone();
             var mainquery = Uow.UserRepository.GetQuery<UserViewModel>(x => !x.IsDeleted && x.AspNetRoles.Any(y => y.Id == roleId));
-            if (model.search.ContainsKey("SearchValue"))
-            {
-                var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
-                mainquery = mainquery.Where(x => x.FullName.ToLower().Replace(" ", "").Contains(value.Replace(" ", "")) ||
-                  x.Email.ToLower().Contains(value) || x.ConsultantName.Contains(value) || x.AreaofLaw.ToLower().Contains(value)
-                  || x.JurisdictionsCovered.ToLower().Contains(value) || x.AspNetUser2FullName.ToLower().Contains(value) ||
-                  x.UserStatus.ToLower().Contains(value)
-                  );
-                model.search.Remove("SearchValue");
-            }
+            /* if (model.search.ContainsKey("SearchValue"))
+             {
+                 var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
+                 mainquery = mainquery.Where(x => x.FullName.ToLower().Replace(" ", "").Contains(value.Replace(" ", "")) ||
+                   x.Email.ToLower().Contains(value) || x.ConsultantName.Contains(value) || x.AreaofLaw.ToLower().Contains(value)
+                   || x.JurisdictionsCovered.ToLower().Contains(value) || x.AspNetUser2FullName.ToLower().Contains(value) ||
+                   x.UserStatus.ToLower().Contains(value)
+                   );
+                 model.search.Remove("SearchValue");
+             }*/
             var list = mainquery.ApplyFilter(model, out total);
-            var gridData = new GridData<UserViewModel>(list, newmodel, total, TimeZoneInterval);
+            var gridData = new GridData<UserViewModel>(list, model, total, TimeZoneInterval);
             return gridData;
         }
 
