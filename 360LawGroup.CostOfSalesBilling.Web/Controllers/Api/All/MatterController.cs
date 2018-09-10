@@ -159,5 +159,19 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             var gridData = new GridData<MatterViewModel>(list, model, total, TimeZoneInterval);
             return gridData;
         }
+
+        [Route("getcurrentconsultantbymatters"), HttpPost]
+        public GridData<MatterViewModel> GetCurrentConsultantByMatters(SearchModel model)
+        {
+            int total;
+            var query = Uow.MatterRepository.GetQuery<MatterViewModel>(x => !x.IsDeleted && x.Status != "Completed");
+            if (UserIsInRole(RoleExtension.Consultant)) 
+            {
+                query = query.Where(x => x.AspNetUsers.Any(i => i.Id == LoggedInUser.Id));
+            }                 
+            var list = query.ApplyFilter(model, out total);
+            var gridData = new GridData<MatterViewModel>(list, model, total, TimeZoneInterval);
+            return gridData;
+        }
     }
 }

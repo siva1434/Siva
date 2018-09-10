@@ -37,6 +37,7 @@
                         @if (Html.UserIsInRole(RoleExtension.Consultant))
                         {
                             <li><a href="@Url.Action("Index", "Home", new { Area = "Consultant" })"><i class="icon-home4"></i> <span>Dashboard</span></a></li>
+                            <li><a href="@Url.Action("CurrentConsultantMatters", "Consultants", new { Area = "All" })"><i class="fa fa-bars"></i> <span>Current Consultant Matters</span></a></li>
                         }
 
                         @if (Html.UserIsInRole(RoleExtension.SuperAdmin) || Html.UserIsInRole(RoleExtension.Admin))
@@ -65,8 +66,9 @@
                                     <li><a href="@Url.Action("RateChecks", "Clients", new { Area = "All"})"><i class="fa fa-gears"></i> <span>Rate Checks</span></a></li>
                                     <li><a href="@Url.Action("SubscriptionClient", "Clients", new { Area = "All"})"><i class="fa fa-key"></i> <span>Subscription Clients</span></a></li>
                                     <li><a href="@Url.Action("Index", "Consultants", new { Area = "All"})"><i class="fa fa-clock-o"></i> <span>Consultant Hours</span></a></li>
-                                    @*<li><a href="@Url.Action("ConsultantCosts", "Consultants", new { Area = "All"})"><i class="fa fa-gbp"></i> <span>Consultant Costs</span></a></li>*@
+                                    <li><a href="@Url.Action("ConsultantCosts", "Consultants", new { Area = "All"})"><i class="fa fa-gbp"></i> <span>Consultant Costs</span></a></li>
                                     <li><a href="@Url.Action("GridCurrentMatter", "Matters", new { Area = "All"})"><i class="fa fa-empire"></i> <span>Current Matters</span></a></li>
+                                    <li><a href="@Url.Action("CurrentConsultantMatters", "Consultants", new { Area = "All" })"><i class="fa fa-bars"></i> <span>Current Consultant Matters</span></a></li>
                                 </ul>
                             </li>
                         }

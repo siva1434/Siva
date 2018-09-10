@@ -21,16 +21,17 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             var newmodel = model.Clone();
             var query = Uow.ConsultantHourRepository.GetQuery<ConsultantHourViewModel>(x => !x.IsDeleted);
 
-            //if (model.search.ContainsKey("SearchValue"))
-            //{
-            //    var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
-            //    query = query.Where(x => x.AspNetUser2FullName.ToLower().Replace(" ", "").Contains(value.Replace(" ", ""))
-            //    ||  x.ClientFullName.ToLower().Contains(value) ||
-            //    x.Description.Contains(value) || x.BusinessPhone.ToLower().Contains(value));
+            if (model.search.ContainsKey("SearchValue"))
+            {
+                var value = (model.search["SearchValue"] ?? string.Empty).ToLower();
+                query = query.Where(x => x.AspNetUser2FullName.ToLower().Replace(" ", "").Contains(value.Replace(" ", ""))
+                || x.ClientFullName.ToLower().Contains(value) ||
+                x.Description.Contains(value));
+                //|| x.BusinessPhone.ToLower().Contains(value));
 
-            //    model.search.Remove("SearchValue");
+                model.search.Remove("SearchValue");
 
-            //}
+            }
             var list = query.ApplyFilter(model, out total);
             var gridData = new GridData<ConsultantHourViewModel>(list, model, total, TimeZoneInterval);
             return gridData;

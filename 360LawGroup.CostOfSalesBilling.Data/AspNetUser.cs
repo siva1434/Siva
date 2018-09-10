@@ -71,7 +71,6 @@ namespace _360LawGroup.CostOfSalesBilling.Data
         public string AreaofLaw { get; set; }
         public string BusinessPhone { get; set; }
         public string HomePhone { get; set; }
-        public string MobilePhone { get; set; }
         public string JurisdictionsCovered { get; set; }
         public string Notes { get; set; }
         public string Attachments { get; set; }

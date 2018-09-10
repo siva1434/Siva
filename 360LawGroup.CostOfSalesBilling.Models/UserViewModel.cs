@@ -140,12 +140,7 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         [Display(Name = "Home Phone")]
         [StringLength(15, ErrorMessage = "Number must be between 10 to 15 only.", MinimumLength = 10)]
         [RegularExpression(Common.RegexNum, ErrorMessage = "Only numbers allowed.")]
-        public string HomePhone { get; set; }
-
-        [Display(Name = "Mobile Phone")]
-        [StringLength(15, ErrorMessage = "Number must be between 10 to 15 only.", MinimumLength = 10)]
-        [RegularExpression(Common.RegexNum, ErrorMessage = "Only numbers allowed.")]
-        public string MobilePhone { get; set; }
+        public string HomePhone { get; set; }        
 
         [Display(Name = "Address1")]
         public string Address1 { get; set; }

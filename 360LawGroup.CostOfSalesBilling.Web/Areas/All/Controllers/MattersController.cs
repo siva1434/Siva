@@ -59,6 +59,6 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Areas.All.Controllers
         public ActionResult GridCurrentMatter()
         {
             return View();
-        }
+        }        
     }
 }
