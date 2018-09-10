@@ -53,7 +53,7 @@
                             @{
                                 string x = (!string.IsNullOrEmpty(Model.AreaofLaw) ? Newtonsoft.Json.JsonConvert.SerializeObject(Model.AreaofLaw.Split(',')) : default(string));
                             }                               
-                            @Html.DropDownList("AreaofLaw", new SelectList(areaoflaw), new { @class = "form-control target-value", @data_tags = "true", @data_value = x, @data_keyboard = "false" })                           
+                            @Html.DropDownList("AreaofLaw", new SelectList(areaoflaw),"All",new { @class = "form-control target-value", @data_tags = "true", @data_value = x, @data_keyboard = "false"})                           
                         </div>
                     </div>
                     <div class="col-md-4">
