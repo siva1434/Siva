@@ -973,10 +973,10 @@ input.form-control:focus,
 }
 
 /*Generate Template*/
+/*
 @media (min-width: 769px){
 .bootbox .modal-dialog {
     width: 76%!important;
-    /* margin: 30px auto; */
     position: absolute!important;
     left: 0;
     right: 0;
@@ -991,13 +991,12 @@ input.form-control:focus,
     top: 0;
     margin: 2% 0%;
     overflow:  hidden;
-    /*min-height: 85vh;*/
 }
 .bootbox .modal-body {
     position: relative;
     padding: 20px;
-    /*min-height: 350px;*/
 }
+*/ 
 .boot-box form .form-group {
     margin: 0px 0px 16px 0px;
     float: left;

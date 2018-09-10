@@ -849,8 +849,8 @@
         },
         en: {
             OK: "OK",
-            CANCEL: "Cancel",
-            CONFIRM: "Accept"
+            CANCEL: "No",
+            CONFIRM: "Yes"
         },
         es: {
             OK: "OK",
