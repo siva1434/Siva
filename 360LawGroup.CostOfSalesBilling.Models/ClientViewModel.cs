@@ -165,5 +165,7 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         public virtual decimal? RegulatedCharge { get; set; }
 
         public virtual decimal? TotalMonthlySubscrptionForAll { get; set; }
+
+        public virtual string tempfileId { get; set; }
     }
 }

@@ -204,6 +204,19 @@
                         </div>
                         <div class="col-md-4">
                             @Html.RequiredLabelFor(m => m.Attechments, new { @class = "control-label text-bold" })
+                            <div>
+                                <span class="btn bg-indigo fileinput-button">
+                                    <i class="fa fa-plus"></i>
+                                    <span>Select Attachment</span>
+                                    <!-- The file input field used as target for the file upload widget -->
+                                    <input class="fileupload" id="attachment_upload" type="file" name="logofile" data-filetypes="" />
+                                </span>
+                                @Html.HiddenFor(m => m.tempfileId)
+                            </div>
+
+                        </div>
+                        <div class="col-md-4">
+                            @Html.RequiredLabelFor(m => m.Attechments, new { @class = "control-label text-bold" })
                             <input class="input is-file" id="field_212_upload" value="" type="file" name="files" data-url="https://eu-api.knack.com/v1/applications/5b7545f8af8d387ae632df83/assets/file/upload">
                             <div class="kn-spinner" style="display:none;"></div>
                         </div>
@@ -219,10 +232,20 @@
     $(document).ready(function () {
         $('.Dateofcal').datePicker({
             min: true
-            
+
         });
         $('.Dateofcal').attr("readonly", true);
         ShowModal("#AddEditModal", function () {
+            BindFileUpload("@ViewBag.ApiUrl" + "api/common/common/uploadfileforbase64", ".fileupload", {},
+            function (data) {
+                if (data.result.StatusCode === 200) {
+                    AlertNotify("Success!", data.result.Messages, "bg-success");
+                    $("#tempfileId").val(data.result.Data[0]);
+                    //$("#AttachmentsBase64").val(data.result.Data[1]);
+                } else {
+                    AlertNotify("Error", data.result.Messages, "bg-danger");
+                }
+            });
         });
     });
 

@@ -140,7 +140,7 @@ namespace _360LawGroup.CostOfSalesBilling.Models
         [Display(Name = "Home Phone")]
         [StringLength(15, ErrorMessage = "Number must be between 10 to 15 only.", MinimumLength = 10)]
         [RegularExpression(Common.RegexNum, ErrorMessage = "Only numbers allowed.")]
-        public string HomePhone { get; set; }        
+        public string HomePhone { get; set; }
 
         [Display(Name = "Address1")]
         public string Address1 { get; set; }
@@ -193,6 +193,9 @@ namespace _360LawGroup.CostOfSalesBilling.Models
 
         public virtual string ClientFullName { get; set; }
         public virtual string AspNetUser2FullName { get; set; }
+
+        public virtual string tempfileId { get; set; }
+        //public virtual string AttachmentsFileName { get; set; }
 
     }
 

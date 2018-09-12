@@ -723,8 +723,11 @@ function BindFileUpload(url, selector, formData, callback, startCallback) {
     $(selector).fileupload({
         add: function (e, data) {
             $(selector).attr("data-file-count", Number($(selector).attr("data-file-count")) + 1);
-            if (fileTypes != "") {
-                var uploadErrors = [];
+            var uploadErrors = [];
+            if (data.originalFiles[0]["size"].length && data.originalFiles[0]["size"] > 25600) {
+                uploadErrors.push("Filesize is too big(Maximum file size 25Mb)");
+            }
+            if (fileTypes != "") {                
                 var acceptFileTypes = new RegExp(fileTypes, "i");
                 if (data.originalFiles[0]["type"].length && !acceptFileTypes.test(data.originalFiles[0]["type"])) {
                     if (fileTypes.indexOf("image") >= 0) {
@@ -737,16 +740,13 @@ function BindFileUpload(url, selector, formData, callback, startCallback) {
                     } else {
                         uploadErrors.push('Not an accepted file type (only "' + fileTypes + '" file types accepted)');
                     }
-                }
-                if (data.originalFiles[0]["size"].length && data.originalFiles[0]["size"] > 5000000) {
-                    uploadErrors.push("Filesize is too big(Maximum file size 5Mb)");
-                }
-                if (uploadErrors.length > 0) {
-                    bootbox.alert({ title: "Error", message: uploadErrors });
-                } else {
-                    uploadFormDatafn = formData;
-                    data.submit();
-                }
+                }                
+            }
+            if (uploadErrors.length > 0) {
+                bootbox.alert({ title: "Error", message: uploadErrors });
+            } else {
+                uploadFormDatafn = formData;
+                data.submit();
             }
         },
         sequentialUploads: true,

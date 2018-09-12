@@ -60,16 +60,16 @@
                         </div>
                         <div class="col-md-4">
                             @Html.RequiredLabelFor(m => m.ConsultantIds, new { @class = "control-label text-bold" })
-                            @Html.DropDownListFor(m => m.ConsultantIds, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/common/getallconsultant", @placeholder = "Select Consultant", @multiple="multiple",@data_value = Newtonsoft.Json.JsonConvert.SerializeObject(Model.ConsultantIds) })
+                            @Html.DropDownListFor(m => m.ConsultantIds, new SelectList(new List<string>()), new { @class = "form-control", @data_url = ViewBag.ApiUrl + "api/common/common/getallconsultant", @placeholder = "Select Consultant", @multiple = "multiple", @data_value = Newtonsoft.Json.JsonConvert.SerializeObject(Model.ConsultantIds) })
                             @Html.ValidationMessageFor(model => model.ConsultantIds)
                         </div>
                         <div class="col-md-4">
                             @{
                                 string v = (!string.IsNullOrEmpty(Model.OverseasCountry) ? Newtonsoft.Json.JsonConvert.SerializeObject(Model.OverseasCountry.Split(',')) : default(string));
                             }
-                            @Html.RequiredLabelFor(m => m.OverseasCountry, new { @class = "control-label text-bold" })                            
+                            @Html.RequiredLabelFor(m => m.OverseasCountry, new { @class = "control-label text-bold" })
                             @Html.DropDownListFor(m => m.OverseasCountry, new SelectList(overseascountrylist), new { @class = "form-control target-value", @data_tags = "true", @data_value = v, @data_keyboard = "false" })
-                            @Html.ValidationMessageFor(model => model.OverseasCountry)                            
+                            @Html.ValidationMessageFor(model => model.OverseasCountry)
                             <a href="#" class="text-danger" title="Add a new option" onclick="AddOverseasCountryList()">
                                 <i class="fa fa-plus-circle"></i> Add a new option
                             </a>
@@ -85,7 +85,7 @@
                                        new SelectListItem { Text="Completed", Value="Completed"},
                                        new SelectListItem{Text="Pending",Value="Pending"}
                                      }
-                                     , new { @class = "form-control", @data_keyboard = "false", @data_value = Model.Status}
+                                     , new { @class = "form-control", @data_keyboard = "false", @data_value = Model.Status }
                                      )
                             @Html.ValidationMessageFor(model => model.Status)
                         </div>
@@ -103,12 +103,16 @@
                             @Html.ValidationMessageFor(model => model.OverseasChargeRate)
                         </div>
                     </div>
-                    <div class="form-group">                        
+                    <div class="form-group">
                         <div class="col-md-4">
-                            @Html.RequiredLabelFor(m => m.Box, new { @class = "control-label text-bold" })
-                            @Html.TextBoxFor(model => model.Box, new { @class = "form-control" })
+                            @Html.RequiredLabelFor(m => m.Box, "Documents", new { @class = "control-label text-bold" })
+                            @if (!string.IsNullOrEmpty(Model.Box))
+                            {
+                                <a href="@Model.Box" target="_blank">View</a>
+                            }
+                            @Html.HiddenFor(model => model.Box, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.Box)
-                        </div>                       
+                        </div>
                         <div class="col-md-4">
                             @Html.RequiredLabelFor(m => m.ClientMatterContact, new { @class = "control-label text-bold" })
                             @Html.TextBoxFor(model => model.ClientMatterContact, new { @class = "form-control" })
@@ -124,39 +128,39 @@
                     <button type="submit" class="btn btn-primary">Save</button>
                     <button type="submit" class="btn btn-default" data-dismiss="modal">Close</button>
 
-                </div>                    
-              }
+                </div>
+                                }
         </div>
     </div>
 </div>
 <script type="text/javascript">
     $(document).ready(function () {
         $('.Dateofcal').datePicker({
-            min: true            
+            min: true
         });
         $('.Dateofcal').attr("readonly", true);
-        ShowModal("#AddEditModal", function () {            
+        ShowModal("#AddEditModal", function () {
         });
     });
 
     function AddOverseasCountryList() {
         $("#AddEditModal").modal('hide');
-           bootbox.prompt({
-               title: "Enter Country", callback: function (value) {
-                   if (value !== null) {
-                        if ($.trim(value) === "") {
-                            AlertNotify("Overseas Country", "Please enter country.", "bg-danger");
-                            ShowModal("#AddEditModal");
-                        } else {                            
-                            apiCall("api/superadmin/adminsettings/addadminsettings",
+        bootbox.prompt({
+            title: "Enter Country", callback: function (value) {
+                if (value !== null) {
+                    if ($.trim(value) === "") {
+                        AlertNotify("Overseas Country", "Please enter country.", "bg-danger");
+                        ShowModal("#AddEditModal");
+                    } else {
+                        apiCall("api/superadmin/adminsettings/addadminsettings",
                             "get",
                             {
                                 paramName: "CLIENTMATTER_OVERSEAS_COUNTRY", paramValue: value
                             },
-                            function (data) {                                
-                                if (data.StatusCode === 200) {                                    
+                            function (data) {
+                                if (data.StatusCode === 200) {
                                     var newOption = "<option value='" + value + "'>" + value + "</option>";
-                                    $(newOption).insertAfter($("#OverseasCountry option:last")); //add new option 
+                                    $(newOption).insertAfter($("#OverseasCountry option:last")); //add new option
                                     $("#OverseasCountry").val(value);
                                     ShowModal("#AddEditModal");
                                 }
@@ -164,15 +168,15 @@
                                     AlertNotify("Validations!", data.Messages, "bg-danger");
                                     ShowModal("#AddEditModal");
                                 }
-                            });                           
-                        }
-                   }
-                   else {
-                       ShowModal("#AddEditModal");
-                   }
+                            });
+                    }
                 }
-            })
-        }
+                else {
+                    ShowModal("#AddEditModal");
+                }
+            }
+        })
+    }
 
     function MatterDataSuccess(data) {
         if (data.StatusCode === 200) {

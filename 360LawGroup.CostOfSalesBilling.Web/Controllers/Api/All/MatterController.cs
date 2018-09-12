@@ -81,6 +81,9 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             var isError = false;
             ModelState.Remove("model.CreatedBy");
             ModelState.Remove("model.CreatedOn");
+            Matter instance = null;
+            var oldShareEmailList = new List<string>();
+            var newShareEmailList = new List<string>();
             if (ModelState.IsValid)
             {
                 if (Uow.MatterRepository.GetQuery(x => x.Id != model.Id && x.MatterName.Equals(model.MatterName, StringComparison.OrdinalIgnoreCase)).Any())
@@ -90,7 +93,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
                 }
                 else if (model.Id == Guid.Empty) //create   
                 {
-                    var instance = model.To<Matter>(-TimeZoneInterval);
+                    instance = model.To<Matter>(-TimeZoneInterval);
                     instance.Id = Guid.NewGuid();
                     instance.CreatedBy = LoggedInUser.Id;
                     instance.CreatedOn = DateTime.UtcNow;
@@ -99,10 +102,14 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
                     instance.IsActive = true;
                     foreach (var id in model.ConsultantIds)
                     {
-                        instance.AspNetUsers.Add(Uow.UserRepository.GetById(id));
+                        var consult = Uow.UserRepository.GetById(id);
+                        instance.AspNetUsers.Add(consult);
+                        newShareEmailList.Add(consult.Email);
                     }
-
                     Uow.MatterRepository.Insert(instance);
+                    //var client = Uow.ClientRepository.GetById(model.ClientId);
+                    //if (client != null) newShareEmailList.Add(client.Email);
+                    newShareEmailList.Add(LoggedInUser.Email);
                     isError = Uow.Save(this) == 0;
                     model = instance.To<MatterViewModel>(TimeZoneInterval);
                 }
@@ -117,17 +124,28 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
 
                     var createdBy = extMatter.CreatedBy;
                     var createdOn = extMatter.CreatedOn;
+
+                    foreach (var o in extMatter.AspNetUsers)
+                        oldShareEmailList.Add(o.Email);
+                    oldShareEmailList.Add(extMatter.AspNetUser.Email);
+                    //oldShareEmailList.Add(extMatter.Client.Email);
+
                     extMatter.AspNetUsers.Clear();
-                    var matter = model.To(extMatter, -TimeZoneInterval);
-                    matter.CreatedBy = createdBy;
-                    matter.CreatedOn = createdOn;
-                    matter.ModifiedOn = DateTime.UtcNow;
-                    matter.ModifiedBy = LoggedInUser.Id;
-                    matter.IsActive = true;
+                    instance = model.To(extMatter, -TimeZoneInterval);
+                    instance.CreatedBy = createdBy;
+                    instance.CreatedOn = createdOn;
+                    instance.ModifiedOn = DateTime.UtcNow;
+                    instance.ModifiedBy = LoggedInUser.Id;
+                    instance.IsActive = true;
                     foreach (var id in model.ConsultantIds)
                     {
-                        matter.AspNetUsers.Add(Uow.UserRepository.GetById(id));
+                        var consult = Uow.UserRepository.GetById(id);
+                        instance.AspNetUsers.Add(consult);
+                        newShareEmailList.Add(consult.Email);
                     }
+                    //var client = Uow.ClientRepository.GetById(model.ClientId);
+                    //if (client != null) newShareEmailList.Add(client.Email);
+                    newShareEmailList.Add(LoggedInUser.Email);
                     Uow.MatterRepository.Update(extMatter);
                     isError = Uow.Save(this) == 0;
                 }
@@ -140,7 +158,17 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             }
             if (!isError)
             {
+                var matterFolder = OneDriveHelper.CreateClientMatterFolderIfNotExist(instance.MatterName);
+                instance.Box = matterFolder.WebUrl;
+                Uow.MatterRepository.Update(instance);
                 Uow.Save(this);
+                // share permission logic
+                var oldPermissionDeleteList = oldShareEmailList.Where(x => !newShareEmailList.Contains(x)).ToList();
+                var newPermissionAddList = newShareEmailList.Where(x => !oldPermissionDeleteList.Contains(x)).ToList();
+
+                // update permision for folder
+                matterFolder.UpdateFolderPermissions(newPermissionAddList);
+
                 return new DefaultResponse(HttpStatusCode.OK, "matter successfully saved.");
             }
             var res = new DefaultResponse();

@@ -10,6 +10,9 @@ using _360LawGroup.CostOfSalesBilling.Data.Common;
 using _360LawGroup.CostOfSalesBilling.Models;
 using _360LawGroup.CostOfSalesBilling.Utilities;
 using Microsoft.AspNet.Identity;
+using System.Web;
+using System.IO;
+using Microsoft.Graph;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
 {
@@ -36,7 +39,6 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             var gridData = new GridData<UserViewModel>(list, model, total, TimeZoneInterval);
             return gridData;
         }
-
 
         [Route("getbyid"), HttpGet]
         public GenericResponse<UserViewModel> GetById(string id)
@@ -87,7 +89,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
                 EmailAddress_PrivateClientLaw = u.EmailAddress_PrivateClientLaw,
                 City = u.City,
                 Country = u.Country,
-                HomePhone = u.HomePhone,                
+                HomePhone = u.HomePhone,
                 Notes = u.Notes,
                 Attachments = u.Attachments,
                 SubscriptionHourlyRate = u.SubscriptionHourlyRate,
@@ -166,6 +168,11 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
                     else
                         user.ClientId = null;
                     user.ConsultantUserId = !string.IsNullOrEmpty(model.ConsultantUserId) ? model.ConsultantUserId : null;
+                    if (model.RoleId == RoleExtension.Consultant && !string.IsNullOrEmpty(model.tempfileId))
+                    {
+                        DriveItem attachmentfile = OneDriveHelper.UploadConsultantAttachment(model.tempfileId, null);
+                        user.Attachments = attachmentfile.WebUrl.ToString();
+                    }
                     var result = UserManager.CreateAsync(user, model.Password).Result;
                     if (result.Succeeded)
                     {
@@ -196,9 +203,11 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
                     var userName = extUser.UserName;
                     var emailConfirmed = extUser.EmailConfirmed;
                     var passwordhash = extUser.PasswordHash;
+                    var attachments = extUser.Attachments;
                     var user = model.To(extUser, -TimeZoneInterval);
                     user.PasswordHash = passwordhash;
                     user.UserName = userName;
+                    user.Attachments = attachments;
                     user.UserStatus = model.UserStatus;
                     if (model.ClientId != Guid.Empty)
                         user.ClientId = model.ClientId;
@@ -211,12 +220,17 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
                     user.IsActive = true;
                     user.AddresslLine1 = model.AddresslLine1;
                     user.Region = model.Region;
-                    user.Attachments = model.Attachments;
                     user.ModifiedOn = DateTime.UtcNow;
                     user.ModifiedBy = LoggedInUser.Id;
                     user.EmailConfirmed = emailConfirmed;
                     user.AspNetRoles.Clear();
                     Uow.UserRepository.Update(user);
+                    if (model.RoleId == RoleExtension.Consultant && !string.IsNullOrEmpty(model.tempfileId))
+                    {
+                        DriveItem attachmentfile = OneDriveHelper.UploadConsultantAttachment(model.tempfileId, Path.GetFileName(user.Attachments));
+                        user.Attachments = attachmentfile.WebUrl.ToString();
+                    }
+
                     isError = Uow.Save(this) == 0;
                     if (!isError)
                     {
@@ -331,5 +345,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             res.SetErrorMessages(this);
             return res;
         }
+
+
     }
 }

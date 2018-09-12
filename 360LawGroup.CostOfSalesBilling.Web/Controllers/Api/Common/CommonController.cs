@@ -1,5 +1,6 @@
 ﻿using _360LawGroup.CostOfSalesBilling.Models;
 using _360LawGroup.CostOfSalesBilling.Utilities;
+using Microsoft.Graph;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -109,7 +110,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.Common
             };
         }
 
-        
+
 
         [Route("getbase64"), HttpPost]
         public DefaultResponse GetFileBase64()
@@ -168,6 +169,45 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.Common
                 Data = list.Distinct().Select(x =>
                         new KeyValuePair<string, string>(x.MatterName, x.MatterName)).ToList()
             };
+        }
+
+        [HttpPost, Route("uploadfileforbase64")]
+        public GenericResponse<string[]> UploadFiles()
+        {
+            if (HttpContext.Current.Request.Files.Count != 1)
+                throw new HttpRequestValidationException(
+                    "Attempt to upload chunked file containing more than one fragment per request");
+            var status = new GenericResponse<string[]>
+            {
+                StatusCode = HttpStatusCode.OK
+            };
+            for (int i = 0; i < HttpContext.Current.Request.Files.Count; i++)
+            {
+                HttpPostedFile file = HttpContext.Current.Request.Files[i];
+                using (var ms = new MemoryStream())
+                {
+                    var buffer = new byte[1024];
+                    var l = file.InputStream.Read(buffer, 0, 1024);
+                    while (l > 0)
+                    {
+                        ms.Write(buffer, 0, l);
+                        l = file.InputStream.Read(buffer, 0, 1024);
+                    }
+                    using (var thumbms = new MemoryStream())
+                    {
+                        var imgBytes = ms.ToArray();
+                        DriveItem tempfile = OneDriveHelper.UploadTempFile(imgBytes, file.FileName, file.FileName);
+                        //string commentbase64 = Convert.ToBase64String(imgBytes);
+                        status.Data = new[] { tempfile.Id };
+                        status.SetCustomMessages(HttpStatusCode.OK, "Uploaded successfully.");
+                        thumbms.Flush();
+                        thumbms.Close();
+                    }
+                    ms.Flush();
+                    ms.Close();
+                }
+            }
+            return status;
         }
     }
 }

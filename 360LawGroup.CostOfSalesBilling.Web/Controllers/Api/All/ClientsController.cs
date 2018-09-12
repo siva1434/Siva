@@ -10,6 +10,8 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Microsoft.Graph;
+using System.IO;
 
 namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
 {
@@ -54,7 +56,6 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             return clients;
         }
 
-
         [Route("getclientrenewalslist"), HttpGet]
         public List<EventObject<ClientViewModel>> GetClientRenewalsData(DateTime start, DateTime end)
         {
@@ -90,7 +91,7 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
 
             }
             var list = query.ApplyFilter(model, out total);
-            foreach(var item in list)
+            foreach (var item in list)
             {
                 item.TotalMonthlySubscrptionForAll = list.Sum(x => x.MonthlySubscription);
             }
@@ -138,7 +139,6 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
             return gridData;
         }
 
-
         [Route("create"), HttpPost]
         public DefaultResponse Create(ClientViewModel model)
         {
@@ -150,7 +150,6 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
         {
             return ValidateAndSave(model);
         }
-
 
         private DefaultResponse ValidateAndSave(ClientViewModel model)
         {
@@ -174,6 +173,11 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
                     instance.ModifiedBy = null;
                     instance.ModifiedOn = null;
                     instance.IsActive = true;
+                    if (!string.IsNullOrEmpty(model.tempfileId))
+                    {
+                        DriveItem attachmentfile = OneDriveHelper.UploadClientAttachment(model.tempfileId, null);
+                        instance.Attechments = attachmentfile.WebUrl.ToString();
+                    }
                     Uow.ClientRepository.Insert(instance);
                     isError = Uow.Save(this) == 0;
                     model = instance.To<ClientViewModel>(TimeZoneInterval);
@@ -188,13 +192,20 @@ namespace _360LawGroup.CostOfSalesBilling.Web.Controllers.Api.All
                     }
                     var createdBy = extClient.CreatedBy;
                     var createdOn = extClient.CreatedOn;
+                    var attachment = extClient.Attechments;
                     var client = model.To(extClient, -TimeZoneInterval);
+                    client.Attechments = attachment;
                     client.CreatedBy = createdBy;
                     client.CreatedOn = createdOn;
                     client.ModifiedOn = DateTime.UtcNow;
                     client.ModifiedBy = LoggedInUser.Id;
                     client.IsActive = true;
                     Uow.ClientRepository.Update(extClient);
+                    if (!string.IsNullOrEmpty(model.tempfileId))
+                    {
+                        DriveItem attachmentfile = OneDriveHelper.UploadClientAttachment(model.tempfileId, Path.GetFileName(client.Attechments));
+                        client.Attechments = attachmentfile.WebUrl.ToString();
+                    }
                     isError = Uow.Save(this) == 0;
                 }
             }
